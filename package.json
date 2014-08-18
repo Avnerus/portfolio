@@ -1,0 +1,25 @@
+{
+  "name": "portfolio",
+  "version": "0.0.1",
+  "description": "portfolio =========",
+  "main": "index.html",
+  "devDependencies": {
+    "beefy": "^2.1.0",
+    "browserify": "^5.10.0"
+  },
+  "dependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "beefy js/index.js:js/bundle.js 8080"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Avnerus/portfolio"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Avnerus/portfolio/issues"
+  },
+  "homepage": "https://github.com/Avnerus/portfolio"
+}
