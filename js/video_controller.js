@@ -18,7 +18,8 @@ VideoController.prototype.loadVideos = function (container) {
     this.VIDEOS = {
         waiting: { 
             'd': { path :'stubs/d.webm' },
-            'blink': {path: 'stubs/blink.webm'} 
+            'blink': {path: 'stubs/blink.webm'},
+            'e': {path: 'stubs/e.webm'} 
         }   
     }
     
@@ -42,17 +43,28 @@ VideoController.prototype.loadVideo = function (id, video, container) {
     videoElement.src = 'videos/' + video.path;
     videoElement.id = id;
     videoElement.style.display = "none";
+    video.element = videoElement;
 
     var self = this;
 
     videoElement.oncanplaythrough = function(event) {
-        console.log("Video can play through!", event.target);
-        self.VIDEOS.waiting[event.target.id].loaded = true;
-        self.checkLoaded();
+        self.videoCanPlayThrough(event.target);
+    }
+
+    videoElement.onended = function(event) {
+        self.videoEnded(event.target);
     }
 
     container.append(videoElement);
 
+}
+
+VideoController.prototype.videoCanPlayThrough = function(video) {
+    if (!this.VIDEOS.waiting[video.id].loaded) {
+        console.log("Video can play through!", video);
+        this.VIDEOS.waiting[video.id].loaded = true;
+        this.checkLoaded();
+    }
 }
 
 
@@ -71,6 +83,20 @@ VideoController.prototype.checkLoaded = function() {
 }
 
 VideoController.prototype.playWaiting = function() {
+    this.playRandomWaiting();
 
 }
 
+VideoController.prototype.playRandomWaiting = function() {
+    var keys = Object.keys(this.VIDEOS.waiting);
+    var index = Math.floor(Math.random() * (keys.length)); 
+    var video = this.VIDEOS.waiting[keys[index]];
+    console.log("Playing ", video);
+    video.element.style.display = "block";
+    video.element.play();
+}
+
+VideoController.prototype.videoEnded = function(video) {
+   video.style.display = "none";
+   this.playRandomWaiting();
+}
