@@ -56,6 +56,7 @@ VideoController.prototype.loadVideo = function (id, video, container) {
     }
 
     container.append(videoElement);
+    videoElement.preload = "auto";
 
 }
 
