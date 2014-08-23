@@ -13,30 +13,36 @@ function VideoController(opts) {
     console.log("Video Controller started");
 }
 
-VideoController.prototype.loadVideos = function (container) {
+VideoController.prototype.loadVideos = function (container, scrollHeight) {
 
     this.VIDEOS = {
         waiting: { 
             'd': { path :'stubs/d.webm' },
             'blink': {path: 'stubs/blink.webm'},
             'e': {path: 'stubs/e.webm'} 
-        }   
+        },
+        enter: {path: 'stubs/hat.webm', duration: 6.76 }
     }
-    
+
     this.eventEmitter = require('./event_manager').getEmitter();
 
+    this.scrollHeight = scrollHeight;
 
-    console.log("Preloading all videos into ", container);
+    console.log("Preloading all videos into ", container , " scroll height: " + scrollHeight);
     var keys = Object.keys(this.VIDEOS.waiting);
 
     for (var i = 0; i < keys.length; i++) {
         var id = keys[i];
         this.loadVideo(id, this.VIDEOS.waiting[id], container);
     }
+    this.loadVideo('enter', this.VIDEOS.enter, container);
+
+    this.nowPlaying = null;
 }
 
 VideoController.prototype.loadVideo = function (id, video, container) {
     video.loaded = false;
+    video.id = id;
     console.log("Loading " + video.path);
 
     var videoElement = document.createElement("VIDEO"); 
@@ -55,19 +61,32 @@ VideoController.prototype.loadVideo = function (id, video, container) {
         self.videoEnded(event.target);
     }
 
+    videoElement.onloadedmetadata = function(event) {
+        self.videoLoadedMetadata(event.target);
+    }
+
     container.append(videoElement);
     videoElement.preload = "auto";
 
 }
 
 VideoController.prototype.videoCanPlayThrough = function(video) {
-    if (!this.VIDEOS.waiting[video.id].loaded) {
+    var videoData;
+    if (video.id == 'enter') {
+        videoData = this.VIDEOS.enter;
+    } else {
+        videoData = this.VIDEOS.waiting[video.id];
+    }
+    if (!videoData.loaded) {
         console.log("Video can play through!", video);
-        this.VIDEOS.waiting[video.id].loaded = true;
+        videoData.loaded = true;
         this.checkLoaded();
     }
 }
 
+
+VideoController.prototype.videoLoadedMetadata = function(video) {
+}
 
 VideoController.prototype.checkLoaded = function() {
     var allLoaded = true;
@@ -77,7 +96,7 @@ VideoController.prototype.checkLoaded = function() {
         var id = keys[i];
         allLoaded = this.VIDEOS.waiting[id].loaded;
     }
-    if (allLoaded) {
+    if (allLoaded && this.VIDEOS.enter.loaded) {
         console.log("All videos are loaded!");
         this.eventEmitter.emit('videos_loaded');
     }
@@ -92,12 +111,50 @@ VideoController.prototype.playRandomWaiting = function() {
     var keys = Object.keys(this.VIDEOS.waiting);
     var index = Math.floor(Math.random() * (keys.length)); 
     var video = this.VIDEOS.waiting[keys[index]];
-    console.log("Playing ", video);
-    video.element.style.display = "block";
+
+    //console.log("Playing ", video);
+    
+    if (this.nowPlaying && video.id != this.nowPlaying.id) {
+        this.hideVideo(this.nowPlaying);
+    }
+
+    this.showVideo(video);
     video.element.play();
+
+    this.nowPlaying = video;
 }
 
 VideoController.prototype.videoEnded = function(video) {
-   video.style.display = "none";
-   this.playRandomWaiting();
+    if (this.nowPlaying.id != 'enter') {
+        this.playRandomWaiting();
+    }
+}
+
+VideoController.prototype.pageScroll = function(offset) {
+    if (!this.VIDEOS) {
+        return;
+    }
+    if (offset > 0) {
+       this.showEnterAt((offset / this.scrollHeight) * this.VIDEOS.enter.duration); 
+    } 
+    else {
+        this.playRandomWaiting();
+    }
+}
+
+VideoController.prototype.showEnterAt = function(time) {
+    if (this.nowPlaying && this.nowPlaying.id != 'enter') {
+        this.hideVideo(this.nowPlaying);
+        this.showVideo(this.VIDEOS.enter);
+        this.nowPlaying = this.VIDEOS.enter;
+    }
+    this.VIDEOS.enter.element.currentTime = time;
+}
+
+
+VideoController.prototype.hideVideo = function (video) {
+  video.element.style.display = "none";
+}
+VideoController.prototype.showVideo = function (video) {
+  video.element.style.display = "block";  
 }

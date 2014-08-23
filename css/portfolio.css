@@ -1,5 +1,7 @@
 #video-container {
     width: 1280px;
+    position: fixed;
+    left: 20%;
 }
 
 #loading-container {
@@ -8,4 +10,9 @@
   top: 0; left: 0; bottom: 0; right: 0;
   height: 272px;
   width: 259px;
+}
+
+
+#main-container {
+    height: 10000px;
 }
