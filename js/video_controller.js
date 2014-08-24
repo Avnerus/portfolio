@@ -135,6 +135,7 @@ VideoController.prototype.pageScroll = function(offset) {
         return;
     }
     if (offset > 0) {
+       console.log(offset, "-->",(offset / this.scrollHeight) * this.VIDEOS.enter.duration)
        this.showEnterAt((offset / this.scrollHeight) * this.VIDEOS.enter.duration); 
     } 
     else {
