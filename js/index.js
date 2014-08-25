@@ -9,11 +9,19 @@ window.onload = function() {
     videoContoller.loadVideos($('#video-container'),$('#main-container').height());
 }
 
-window.onscroll = function(event) {
+/*window.onscroll = function(event) {
     videoContoller.pageScroll(window.pageYOffset);
-};
+};*/
 
 eventEmitter.on('videos_loaded', function() {
     $('#loading-container').hide();
     videoContoller.playWaiting();
 });
+
+
+function loop() {
+    videoContoller.loop();
+    requestAnimationFrame(loop);
+}
+
+loop();

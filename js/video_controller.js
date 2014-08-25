@@ -143,6 +143,21 @@ VideoController.prototype.pageScroll = function(offset) {
     }
 }
 
+VideoController.prototype.loop = function() {
+    if (!this.VIDEOS) {
+        return;
+    }
+    var offset = window.pageYOffset;
+    if (offset > 0) {
+       this.showEnterAt((offset / this.scrollHeight) * this.VIDEOS.enter.duration); 
+    } 
+    else {
+        if (this.nowPlaying && this.nowPlaying.id == this.VIDEOS.enter.id) {
+            this.playRandomWaiting();
+        }
+    }
+}
+
 VideoController.prototype.showEnterAt = function(time) {
     if (this.nowPlaying && this.nowPlaying.id != 'enter') {
         this.hideVideo(this.nowPlaying);
