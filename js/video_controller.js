@@ -20,9 +20,9 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
     //        'd': { path :'stubs/d.webm' },
       //      'blink': {path: 'stubs/blink.webm'},
         //    'e': {path: 'stubs/e.webm'} 
-            'facebook' : {path: 'fun/facebook.webm'}
+            'facebook' : {paths: ['fun/facebook.mp4', 'fun/facebook.webm']}
         },
-        enter: {path: 'stubs/hat.webm', duration: 6.76 }
+        //enter: {path: 'stubs/hat.webm', duration: 6.76 }
     }
 
     this.eventEmitter = require('./event_manager').getEmitter();
@@ -36,7 +36,7 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
         var id = keys[i];
         this.loadVideo(id, this.VIDEOS.waiting[id], container);
     }
-    this.loadVideo('enter', this.VIDEOS.enter, container);
+    //this.loadVideo('enter', this.VIDEOS.enter, container);
 
     this.nowPlaying = null;
 }
@@ -44,30 +44,31 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
 VideoController.prototype.loadVideo = function (id, video, container) {
     video.loaded = false;
     video.id = id;
-    console.log("Loading " + video.path);
+    console.log("Loading " + video.id);
 
     var videoElement = document.createElement("VIDEO"); 
-    videoElement.src = 'videos/' + video.path;
     videoElement.id = id;
     videoElement.style.display = "none";
     video.element = videoElement;
 
+    for (var i = 0; i < video.paths.length; i++) {
+        var sourceElement = document.createElement("SOURCE"); 
+        sourceElement.src = 'videos/' + video.paths[i];
+        videoElement.appendChild(sourceElement);
+    }
+
     var self = this;
 
-    videoElement.oncanplaythrough = function(event) {
+    /*videoElement.oncanplaythrough = function(event) {
         self.videoCanPlayThrough(event.target);
-    }
+    }*/
 
-    videoElement.onended = function(event) {
-        self.videoEnded(event.target);
-    }
-
-    videoElement.onloadedmetadata = function(event) {
-        self.videoLoadedMetadata(event.target);
-    }
+    videoElement.addEventListener("canplaythrough",function(event) {self.videoCanPlayThrough(event.target)}, false);
+    videoElement.addEventListener("ended",function(event) {self.videoEnded(event.target)}, false);
 
     container.append(videoElement);
     videoElement.preload = "auto";
+    videoElement.play();
 
 }
 
@@ -87,6 +88,7 @@ VideoController.prototype.videoCanPlayThrough = function(video) {
 
 
 VideoController.prototype.videoLoadedMetadata = function(video) {
+    console.log("Loaded metadata");
 }
 
 VideoController.prototype.checkLoaded = function() {
@@ -97,7 +99,8 @@ VideoController.prototype.checkLoaded = function() {
         var id = keys[i];
         allLoaded = this.VIDEOS.waiting[id].loaded;
     }
-    if (allLoaded && this.VIDEOS.enter.loaded) {
+    //if (allLoaded && this.VIDEOS.enter.loaded) {
+    if (allLoaded) {
         console.log("All videos are loaded!");
         this.eventEmitter.emit('videos_loaded');
     }
