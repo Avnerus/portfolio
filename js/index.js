@@ -27,7 +27,7 @@ eventEmitter.on('videos_loaded', function() {
 });
 
 
-var loader = new PIXI.AssetLoader(["assets/pops/amit.png"]);
+var loader = new PIXI.AssetLoader(["assets/pops/amit.json"]);
 loader.onComplete = function() {
     assetsLoaded = true;
     console.log("Assets loaded!");
@@ -40,6 +40,7 @@ loader.load();
 
 function start() {
    $('#loading-container').hide();
+   popper.init();
    videoContoller.playWaiting();
 }
 
