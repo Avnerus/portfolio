@@ -1,7 +1,6 @@
 // VIDEO PART
 //
 var VideoController = require('./video_controller');
-var Popper = require('./popper');
 var videoContoller = new VideoController();
 var eventEmitter = require('./event_manager').getEmitter();
 
@@ -15,7 +14,7 @@ window.onload = function() {
 };*/
 
 var videosLoaded = false
-var assetsLoaded = false;
+var assetsLoaded = true;
 
 eventEmitter.on('videos_loaded', function() {
     console.log("Videos loaded!");
@@ -27,7 +26,7 @@ eventEmitter.on('videos_loaded', function() {
 });
 
 
-var loader = new PIXI.AssetLoader(["assets/pops/amit.json"]);
+var loader = new PIXI.AssetLoader([]);
 loader.onComplete = function() {
     assetsLoaded = true;
     console.log("Assets loaded!");
@@ -40,7 +39,6 @@ loader.load();
 
 function start() {
    $('#loading-container').hide();
-   popper.init();
    videoContoller.playWaiting();
 }
 
@@ -60,14 +58,13 @@ var gameOpts = {
     stageHeight: 720,
 }
 var stage = new PIXI.Stage(0xFFFFFF);
-var popper = new Popper(stage, gameOpts);
 var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHeight, null, true);
 document.body.appendChild(renderer.view);
 
 
 function animate() {
-    popper.update();
     renderer.render(stage);
+    videoContoller.loop();
     requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
