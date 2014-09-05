@@ -37,3 +37,9 @@ MathUtil.hitTest = function(x1, y1, w1, h1,
 
     return false;
 }
+
+MathUtil.pad = function (n, width, z) {
+  z = z || '0';
+  n = n + '';
+  return n.length >= width ? n : new Array(width - n.length + 1).join(z) + n;
+}

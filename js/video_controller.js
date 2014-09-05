@@ -21,7 +21,14 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
             'blink': {paths: ['stubs/blink.webm']},
             'e': {paths: [ 'stubs/e.webm' ]} 
         },
-        enter: {paths: ['stubs/hat.webm'], duration: 6.76 }
+        enter: {
+           // paths: ['stubs/hat.webm'], 
+            frames: {
+                path: 'stubs/hat',
+                count: 138
+            },
+            duration: 6.76 
+        }
     }
 
     this.eventEmitter = require('./event_manager').getEmitter();
@@ -43,31 +50,63 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
 VideoController.prototype.loadVideo = function (id, video, container) {
     video.loaded = false;
     video.id = id;
-    console.log("Loading " + video.id);
-
-    var videoElement = document.createElement("VIDEO"); 
-    videoElement.id = id;
-    videoElement.style.display = "none";
-    video.element = videoElement;
-
-    for (var i = 0; i < video.paths.length; i++) {
-        var sourceElement = document.createElement("SOURCE"); 
-        sourceElement.src = 'videos/' + video.paths[i];
-        videoElement.appendChild(sourceElement);
-    }
 
     var self = this;
 
-    /*videoElement.oncanplaythrough = function(event) {
-        self.videoCanPlayThrough(event.target);
-    }*/
+    if (video.frames) {
+        console.log("Loading " + video.id + "(Regular video element)");
+        video.frames.images = [];
+        video.frames.loaded = 0;
+        for (var i = 1; i <= video.frames.count; i++) {
+            var image = new Image();
+            image.src = "videos/" + video.frames.path + "/frame_" + MathUtil.pad(i,4) + ".jpg";
+            console.log("Loading image: " + image.src);
+            image.addEventListener("load",function(event) {self.videoFrameLoaded(event.target)}, false);
+            image.name = video.id;
+            video.frames.images.push(image);
+        }
+        // Place holder image
+        var placeholderImage = new Image();
+        placeholderImage.src ="images/blank.jpg";
+        placeholderImage.id = video.id;
+        container.append(placeholderImage);
+        video.element = placeholderImage;
+        video.frames.current = 0;
+    } else {
+        console.log("Loading " + video.id + "(Regular video element)");
+        var videoElement = document.createElement("VIDEO"); 
+        videoElement.id = id;
+        videoElement.style.display = "none";
+        video.element = videoElement;
 
-    videoElement.addEventListener("canplaythrough",function(event) {self.videoCanPlayThrough(event.target)}, false);
-    videoElement.addEventListener("ended",function(event) {self.videoEnded(event.target)}, false);
+        for (var i = 0; i < video.paths.length; i++) {
+            var sourceElement = document.createElement("SOURCE"); 
+            sourceElement.src = 'videos/' + video.paths[i];
+            videoElement.appendChild(sourceElement);
+        }
 
-    container.append(videoElement);
-    videoElement.preload = "auto";
-    videoElement.load();
+
+        /*videoElement.oncanplaythrough = function(event) {
+            self.videoCanPlayThrough(event.target);
+        }*/
+
+        videoElement.addEventListener("canplaythrough",function(event) {self.videoCanPlayThrough(event.target)}, false);
+        videoElement.addEventListener("ended",function(event) {self.videoEnded(event.target)}, false);
+
+        container.append(videoElement);
+        videoElement.preload = "auto";
+        videoElement.load();
+    }
+}
+
+VideoController.prototype.videoFrameLoaded = function(image) {
+    var video = this.VIDEOS[image.name];
+    video.frames.loaded++;
+    console.log("Video frame loaded!", image, "Now loaded " + video.frames.loaded + " images");
+    if (video.frames.count == video.frames.loaded && !video.loaded) {
+        video.loaded = true;
+        this.checkLoaded();
+    }
 }
 
 VideoController.prototype.videoCanPlayThrough = function(video) {
@@ -132,26 +171,13 @@ VideoController.prototype.videoEnded = function(video) {
     }
 }
 
-VideoController.prototype.pageScroll = function(offset) {
-    if (!this.VIDEOS) {
-        return;
-    }
-    if (offset > 0) {
-       console.log(offset, "-->",(offset / this.scrollHeight) * this.VIDEOS.enter.duration)
-       this.showEnterAt((offset / this.scrollHeight) * this.VIDEOS.enter.duration); 
-    } 
-    else {
-        this.playRandomWaiting();
-    }
-}
-
 VideoController.prototype.loop = function() {
     if (!this.VIDEOS) {
         return;
     }
     var offset = window.pageYOffset;
     if (offset > 0) {
-       this.showEnterAt((offset / this.scrollHeight) * this.VIDEOS.enter.duration); 
+       this.showVideoAt(this.VIDEOS.enter, (offset / this.scrollHeight)); 
     } 
     else {
         if (this.nowPlaying && this.nowPlaying.id == this.VIDEOS.enter.id) {
@@ -160,13 +186,25 @@ VideoController.prototype.loop = function() {
     }
 }
 
-VideoController.prototype.showEnterAt = function(time) {
-    if (this.nowPlaying && this.nowPlaying.id != 'enter') {
+VideoController.prototype.showVideoAt = function(video, offsetPercentage) {
+    if (this.nowPlaying && this.nowPlaying.id != video.id) {
         this.hideVideo(this.nowPlaying);
-        this.showVideo(this.VIDEOS.enter);
-        this.nowPlaying = this.VIDEOS.enter;
+        this.showVideo(video);
+        this.nowPlaying = video;
     }
-    this.VIDEOS.enter.element.currentTime = time;
+    var time;
+    if (video.frames) {
+        // It's a frames video - show the appropiate frame
+        var frameNumber =  Math.max( Math.round( offsetPercentage * video.frames.count), 1);
+        if (frameNumber != video.frames.current) {
+            video.element.src = video.frames.images[frameNumber - 1].src;
+            video.frames.current = frameNumber;
+        }
+    } else {
+        // It's a real video - set currentTime
+        time = offsetPercentage * this.VIDEOS.enter.duration;
+        this.VIDEOS.enter.element.currentTime = time;
+    }
 }
 
 
