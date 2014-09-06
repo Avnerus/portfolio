@@ -1,12 +1,21 @@
+var gameOpts = {
+    stageWidth: 1280,
+    stageHeight: 720,
+    zoomHeight: 1500
+}
+
+gameOpts.scrollHeight = console.log(gameOpts);
+
+// 
 // VIDEO PART
 //
 var VideoController = require('./video_controller');
-var videoContoller = new VideoController();
+var videoContoller = new VideoController(gameOpts);
 var eventEmitter = require('./event_manager').getEmitter();
 
 window.onload = function() {
     window.scroll(0, 0);
-    videoContoller.loadVideos($('#video-container'),$('#main-container').height());
+    videoContoller.loadVideos($('#video-container'), $('#main-container').height());
 }
 
 /*window.onscroll = function(event) {

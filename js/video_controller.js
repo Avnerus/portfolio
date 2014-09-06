@@ -10,6 +10,11 @@ module.exports.VideoController = VideoController;
 function VideoController(opts) {
     if (!(this instanceof VideoController)) return new VideoController(opts)
 
+    this.scrollHeight = opts.scrollHeight;
+    this.zoomHeight = opts.zoomHeight;
+    this.stageWidth = opts.stageWidth;
+    this.stageHeight = opts.stageHeight;
+
     console.log("Video Controller started");
 }
 
@@ -32,10 +37,9 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
     }
 
     this.eventEmitter = require('./event_manager').getEmitter();
-
     this.scrollHeight = scrollHeight;
 
-    console.log("Preloading all videos into ", container , " scroll height: " + scrollHeight);
+    console.log("Preloading all videos into ", container , " scroll height: " + this.scrollHeight, " zoom height: " , this.zoomHeight);
     var keys = Object.keys(this.VIDEOS.waiting);
 
     for (var i = 0; i < keys.length; i++) {
@@ -69,6 +73,7 @@ VideoController.prototype.loadVideo = function (id, video, container) {
         var placeholderImage = new Image();
         placeholderImage.src ="images/blank.jpg";
         placeholderImage.id = video.id;
+        placeholderImage.style.position = "relative";
         container.append(placeholderImage);
         video.element = placeholderImage;
         video.frames.current = 0;
@@ -176,14 +181,30 @@ VideoController.prototype.loop = function() {
         return;
     }
     var offset = window.pageYOffset;
-    if (offset > 0) {
-       this.showVideoAt(this.VIDEOS.enter, (offset / this.scrollHeight)); 
+    var zoomStart = this.scrollHeight - this.zoomHeight;
+
+    if (offset > 0 && offset <= zoomStart) {
+       this.showVideoAt(this.VIDEOS.enter, (offset / zoomStart)); 
     } 
+    else if (offset > zoomStart) {
+        // Zoom
+        var zoomMultiplyer = 1 + ((offset - zoomStart) / this.zoomHeight  * 7);
+        this.zoomVideo(zoomMultiplyer);
+    }
     else {
         if (this.nowPlaying && this.nowPlaying.id == this.VIDEOS.enter.id) {
             this.playRandomWaiting();
         }
     }
+}
+
+VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
+    var video = this.nowPlaying;
+    video.element.style.height = this.stageHeight * zoomMultiplyer + "px";
+    video.element.style.width  = this.stageWidth * zoomMultiplyer + "px";
+    video.element.style.bottom = (-this.stageHeight / 2 + this.stageHeight * zoomMultiplyer / 2) + "px";
+    video.element.style.right = (-this.stageWidth / 2 + this.stageWidth * zoomMultiplyer / 2) + "px";
+    console.log(video.element);
 }
 
 VideoController.prototype.showVideoAt = function(video, offsetPercentage) {
@@ -195,9 +216,11 @@ VideoController.prototype.showVideoAt = function(video, offsetPercentage) {
     var time;
     if (video.frames) {
         // It's a frames video - show the appropiate frame
-        var frameNumber =  Math.max( Math.round( offsetPercentage * video.frames.count), 1);
+        var frameNumber =  Math.min(Math.max( Math.round( offsetPercentage * video.frames.count), 1),video.frames.count);
         if (frameNumber != video.frames.current) {
             video.element.src = video.frames.images[frameNumber - 1].src;
+            video.element.style.width = this.stageWidth;
+            video.element.style.height = this.stageHeight;
             video.frames.current = frameNumber;
         }
     } else {
