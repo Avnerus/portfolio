@@ -184,6 +184,8 @@ VideoController.prototype.loop = function() {
     var zoomStart = this.scrollHeight - this.zoomHeight;
 
     if (offset > 0 && offset <= zoomStart) {
+      
+       this.zoomVideo(1);
        this.showVideoAt(this.VIDEOS.enter, (offset / zoomStart)); 
     } 
     else if (offset > zoomStart) {
@@ -204,7 +206,6 @@ VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
     video.element.style.width  = this.stageWidth * zoomMultiplyer + "px";
     video.element.style.bottom = (-this.stageHeight / 2 + this.stageHeight * zoomMultiplyer / 2) + "px";
     video.element.style.right = (-this.stageWidth / 2 + this.stageWidth * zoomMultiplyer / 2) + "px";
-    console.log(video.element);
 }
 
 VideoController.prototype.showVideoAt = function(video, offsetPercentage) {

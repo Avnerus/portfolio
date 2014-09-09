@@ -22,6 +22,5 @@
 
 canvas {
     position: fixed;
-    left: 15%;
     z-index: 1;
 }

@@ -6,6 +6,26 @@ var gameOpts = {
 
 gameOpts.scrollHeight = console.log(gameOpts);
 
+
+// GAME PART
+
+
+var BrainController = require('./brain_controller');
+var brainController = new BrainController(gameOpts);
+
+var gameOpts = {
+    stageWidth: 1280,
+    stageHeight: 720,
+}
+var stage = new PIXI.Stage(0xFFFFFF);
+var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHeight, null, true);
+renderer.view.style.position = "absolute"
+renderer.view.style.width = window.innerWidth + "px";
+renderer.view.style.height = window.innerHeight + "px";
+renderer.view.style.display = "block";
+document.body.appendChild(renderer.view);
+
+
 // 
 // VIDEO PART
 //
@@ -23,7 +43,7 @@ window.onload = function() {
 };*/
 
 var videosLoaded = false
-var assetsLoaded = true;
+var assetsLoaded = false;
 
 eventEmitter.on('videos_loaded', function() {
     console.log("Videos loaded!");
@@ -35,10 +55,17 @@ eventEmitter.on('videos_loaded', function() {
 });
 
 
-var loader = new PIXI.AssetLoader([]);
+var loader = new PIXI.AssetLoader([
+  "assets/brain/bg.jpg",
+  "assets/brain/tile_neurons.png",
+  "assets/brain/displacement_map.png"
+]);
 loader.onComplete = function() {
     assetsLoaded = true;
     console.log("Assets loaded!");
+
+    brainController.init(stage);
+
     if (videosLoaded) {
         start();
     }
@@ -51,29 +78,11 @@ function start() {
    videoContoller.playWaiting();
 }
 
-/*
-function loop() {
-    videoContoller.loop();
-    requestAnimationFrame(loop);
-}
-
-loop();*/
-
-
-// GAME PART
-
-var gameOpts = {
-    stageWidth: 1280,
-    stageHeight: 720,
-}
-var stage = new PIXI.Stage(0xFFFFFF);
-var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHeight, null, true);
-document.body.appendChild(renderer.view);
-
 
 function animate() {
-    renderer.render(stage);
+    brainController.update();
     videoContoller.loop();
+    renderer.render(stage);
     requestAnimationFrame(animate);
 }
 requestAnimationFrame(animate);
