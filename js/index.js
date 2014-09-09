@@ -23,7 +23,6 @@ renderer.view.style.position = "absolute"
 renderer.view.style.width = window.innerWidth + "px";
 renderer.view.style.height = window.innerHeight + "px";
 renderer.view.style.display = "block";
-document.body.appendChild(renderer.view);
 
 
 // 
@@ -74,8 +73,10 @@ loader.load();
 
 
 function start() {
-   $('#loading-container').hide();
-   videoContoller.playWaiting();
+  // $('#loading-container').hide();
+   //$('#pixi-container').append(renderer.view);
+   //videoContoller.playWaiting();
+   requestAnimationFrame(animate);
 }
 
 
@@ -85,4 +86,3 @@ function animate() {
     renderer.render(stage);
     requestAnimationFrame(animate);
 }
-requestAnimationFrame(animate);
