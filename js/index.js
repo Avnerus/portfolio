@@ -55,9 +55,10 @@ eventEmitter.on('videos_loaded', function() {
 
 
 var loader = new PIXI.AssetLoader([
-  "assets/brain/bg.jpg",
-  "assets/brain/tile_neurons.png",
-  "assets/brain/displacement_map.png"
+    "assets/brain/bg.jpg",
+    "assets/brain/tile_neurons.png",
+    "assets/brain/displacement_map.png",
+    "works/pulse.png"
 ]);
 loader.onComplete = function() {
     assetsLoaded = true;
@@ -73,9 +74,9 @@ loader.load();
 
 
 function start() {
-  // $('#loading-container').hide();
-   //$('#pixi-container').append(renderer.view);
-   //videoContoller.playWaiting();
+   $('#loading-container').hide();
+   $('#pixi-container').append(renderer.view);
+   videoContoller.playWaiting();
    requestAnimationFrame(animate);
 }
 

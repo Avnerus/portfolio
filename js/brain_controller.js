@@ -6,6 +6,8 @@ module.exports = function(opts) {
 
 module.exports.BrainController = BrainController;
 
+var WORKS = require('./works');
+
 
 function BrainController(opts) {
     if (!(this instanceof BrainController)) return new BrainController(opts)
@@ -18,6 +20,8 @@ function BrainController(opts) {
 BrainController.prototype.init = function (stage) {
 
     console.log("Brain Controller initializing");
+
+    this.stage = stage;
 
 	var bgContainer = new PIXI.DisplayObjectContainer();
 	stage.addChild(bgContainer);
@@ -35,9 +39,19 @@ BrainController.prototype.init = function (stage) {
     this.displacementFilter.scale.x = 50;
     this.displacementFilter.scale.y = 50;
 
-    bgContainer.filters = [this.displacementFilter];
+
+	this.twistFilter = new PIXI.TwistFilter();
+    this.twistFilter.angle = 5;
+    this.twistFilter.radius = 0.5;
+    this.twistFilter.offset.x = 0.5;
+    this.twistFilter.offset.y = 0.5;
+
+    bgContainer.filters = [this.twistFilter, this.displacementFilter];
 
     this.counter = 0;
+
+
+    this.spawnWork();
 }
 
 BrainController.prototype.update = function () {
@@ -46,4 +60,20 @@ BrainController.prototype.update = function () {
     this.overlay.tilePosition.y = this.counter * -5;
 	this.displacementFilter.offset.x = this.counter * 10;
 	this.displacementFilter.offset.y = this.counter * 10;
+    this.pulse.rotation += 0.1;
+}
+
+BrainController.prototype.spawnWork = function () {
+    // Choose a work to spawn
+    var work = WORKS[MathUtil.rndIntRange(0, WORKS.length -1)];
+    console.log("Spawning work ", work)
+
+    var sprite = PIXI.Sprite.fromFrame("works/" + work.image);
+    sprite.position.x = this.opts.stageWidth / 2;
+    sprite.position.y = this.opts.stageHeight / 2;
+    sprite.anchor.x = 0.5;
+    sprite.anchor.y = 0.5;
+    this.pulse = sprite;
+    this.stage.addChild(sprite);
+
 }
