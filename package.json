@@ -7,7 +7,9 @@
     "beefy": "^2.1.0",
     "browserify": "^5.10.0"
   },
-  "dependencies": {},
+  "dependencies": {
+    "tween.js": "^0.14.0"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "beefy js/index.js:js/bundle.js 8080"

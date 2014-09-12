@@ -7,6 +7,7 @@ module.exports = function(opts) {
 module.exports.BrainController = BrainController;
 
 var WORKS = require('./works');
+var TWEEN = require('tween.js');
 
 
 function BrainController(opts) {
@@ -46,21 +47,28 @@ BrainController.prototype.init = function (stage) {
     this.twistFilter.offset.x = 0.5;
     this.twistFilter.offset.y = 0.5;
 
-    bgContainer.filters = [this.twistFilter, this.displacementFilter];
+    bgContainer.filters = [
+   //     this.twistFilter, 
+        this.displacementFilter
+    ];
 
     this.counter = 0;
 
-
-    this.spawnWork();
+    var self = this;
+    setTimeout(function() {
+        self.spawnWork();
+    },3000);
 }
 
 BrainController.prototype.update = function () {
     this.counter += 0.1;
     this.overlay.tilePosition.x = this.counter * -5;
     this.overlay.tilePosition.y = this.counter * -5;
-	this.displacementFilter.offset.x = this.counter * 10;
-	this.displacementFilter.offset.y = this.counter * 10;
-    this.pulse.rotation += 0.1;
+/*	this.displacementFilter.offset.x = this.counter * 10;
+	this.displacementFilter.offset.y = this.counter * 10;*/
+    if (this.spawningSprite) {
+        this.spawningSprite.rotation += 0.1;
+    }
 }
 
 BrainController.prototype.spawnWork = function () {
@@ -73,7 +81,21 @@ BrainController.prototype.spawnWork = function () {
     sprite.position.y = this.opts.stageHeight / 2;
     sprite.anchor.x = 0.5;
     sprite.anchor.y = 0.5;
-    this.pulse = sprite;
+    sprite.scale.x = 0.1;
+    sprite.scale.y = 0.1;
+
+
+    var spawnTween = new TWEEN.Tween(sprite.scale)
+        .to({x:1, y: 1} , 7000)
+        .easing(TWEEN.Easing.Cubic.InOut)
+
+    spawnTween.onComplete(function() {
+    });
+    spawnTween.start();
+
+    this.spawningSprite = sprite;
+
     this.stage.addChild(sprite);
+
 
 }

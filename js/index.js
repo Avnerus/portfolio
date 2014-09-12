@@ -9,7 +9,7 @@ gameOpts.scrollHeight = console.log(gameOpts);
 
 // GAME PART
 
-
+var TWEEN = require('tween.js');
 var BrainController = require('./brain_controller');
 var brainController = new BrainController(gameOpts);
 
@@ -83,7 +83,8 @@ function start() {
 
 function animate() {
     brainController.update();
-    videoContoller.loop();
+    TWEEN.update();
+//    videoContoller.loop();
     renderer.render(stage);
     requestAnimationFrame(animate);
 }
