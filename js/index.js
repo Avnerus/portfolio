@@ -4,8 +4,6 @@ var gameOpts = {
     zoomHeight: 1500
 }
 
-gameOpts.scrollHeight = console.log(gameOpts);
-
 
 // GAME PART
 
@@ -13,10 +11,6 @@ var TWEEN = require('tween.js');
 var BrainController = require('./brain_controller');
 var brainController = new BrainController(gameOpts);
 
-var gameOpts = {
-    stageWidth: 1280,
-    stageHeight: 720,
-}
 var stage = new PIXI.Stage(0xFFFFFF);
 var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHeight, null, true);
 renderer.view.style.position = "absolute"
@@ -84,7 +78,7 @@ function start() {
 function animate() {
     brainController.update();
     TWEEN.update();
-//    videoContoller.loop();
+    videoContoller.loop();
     renderer.render(stage);
     requestAnimationFrame(animate);
 }

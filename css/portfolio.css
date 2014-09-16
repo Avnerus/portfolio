@@ -20,7 +20,7 @@
     width: 100%;
 }
 
-canvas {
+#pixi-container {
     position: fixed;
     z-index: 1;
 }

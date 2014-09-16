@@ -24,16 +24,16 @@ BrainController.prototype.init = function (stage) {
 
     this.stage = stage;
 
-	var bgContainer = new PIXI.DisplayObjectContainer();
-	stage.addChild(bgContainer);
+	this.bgContainer = new PIXI.DisplayObjectContainer();
+	stage.addChild(this.bgContainer);
 
 
 	var bg = PIXI.Sprite.fromFrame("assets/brain/bg.jpg");
-	bgContainer.addChild(bg);
+	this.bgContainer.addChild(bg);
 
 	this.overlay = new PIXI.TilingSprite(PIXI.Texture.fromFrame("assets/brain/tile_neurons.png"), this.opts.stageWidth, this.opts.stageHeight);
 	this.overlay.alpha = 0.15;
-	bgContainer.addChild(this.overlay);
+	this.bgContainer.addChild(this.overlay);
 
 	var displacementTexture = PIXI.Texture.fromFrame("assets/brain/displacement_map.png");
 	this.displacementFilter = new PIXI.DisplacementFilter(displacementTexture);
@@ -47,27 +47,50 @@ BrainController.prototype.init = function (stage) {
     this.twistFilter.offset.x = 0.5;
     this.twistFilter.offset.y = 0.5;
 
-    bgContainer.filters = [
-   //     this.twistFilter, 
+
+    this.mask = new PIXI.Graphics();
+    this.mask.beginFill();
+    this.mask.drawEllipse(606, 208, 70, 30);
+    this.mask.endFill();
+    this.bgContainer.mask = this.mask;
+
+    this.bgContainer.visible = false;
+
+/*    this.bgContainer.filters = [
+        this.twistFilter, 
         this.displacementFilter
-    ];
+    ];*/
 
     this.counter = 0;
 
+
+    this.loaded = true;
+
     var self = this;
     setTimeout(function() {
-        self.spawnWork();
+///        self.spawnWork();
     },3000);
 }
 
 BrainController.prototype.update = function () {
-    this.counter += 0.1;
-    this.overlay.tilePosition.x = this.counter * -5;
-    this.overlay.tilePosition.y = this.counter * -5;
-/*	this.displacementFilter.offset.x = this.counter * 10;
-	this.displacementFilter.offset.y = this.counter * 10;*/
-    if (this.spawningSprite) {
-        this.spawningSprite.rotation += 0.1;
+    if (this.loaded) {
+
+
+        var offset = window.pageYOffset;
+        if (offset > 120) {
+            this.bgContainer.visible = true;
+        } else {
+            this.bgContainer.visible = false;
+        }
+
+        this.counter += 0.1;
+        this.overlay.tilePosition.x = this.counter * -10;
+        this.overlay.tilePosition.y = this.counter * -10;
+    /*	this.displacementFilter.offset.x = this.counter * 10;
+        this.displacementFilter.offset.y = this.counter * 10;*/
+        if (this.spawningSprite) {
+            this.spawningSprite.rotation += 0.1;
+        }
     }
 }
 
