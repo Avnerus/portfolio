@@ -209,8 +209,13 @@ VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
     var video = this.nowPlaying;
     video.element.style.height = this.stageHeight * zoomMultiplyer + "px";
     video.element.style.width  = this.stageWidth * zoomMultiplyer + "px";
-    video.element.style.bottom = (-this.stageHeight / 2 + this.stageHeight * zoomMultiplyer / 2) + "px";
-    video.element.style.right = (-this.stageWidth / 2 + this.stageWidth * zoomMultiplyer / 2) + "px";
+    if (zoomMultiplyer != 1) {
+        video.element.style.bottom = (-this.stageHeight / 2 + (this.stageHeight + 210) * zoomMultiplyer / 2) + "px";
+        video.element.style.right = (-this.stageWidth / 2 + this.stageWidth * zoomMultiplyer / 2) + "px";
+    } else {
+        video.element.style.bottom = (-this.stageHeight / 2 + this.stageHeight * zoomMultiplyer / 2) + "px";
+        video.element.style.right = (-this.stageWidth / 2 + this.stageWidth * zoomMultiplyer / 2) + "px";
+    }
 }
 
 VideoController.prototype.showVideoAt = function(video, offsetPercentage) {
