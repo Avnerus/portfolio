@@ -16,7 +16,7 @@ var TWEEN = require('tween.js');
 
 var MASK_VALUES = [];
 for (var i = 0; i < 25; i++) {
-    MASK_VALUES.push([905, 260, 113, 43]);
+    MASK_VALUES.push([905, 261, 111, 44]);
 }
 
 MASK_VALUES.push([905, 260, 113, 44]);
@@ -37,13 +37,13 @@ MASK_VALUES.push([905, 288, 113, 59]); //40
 MASK_VALUES.push([905, 295, 113, 63]);
 MASK_VALUES.push([905, 302, 113, 65]);
 MASK_VALUES.push([905, 311, 113, 69]);
-MASK_VALUES.push([905, 317, 113, 72]);
-MASK_VALUES.push([905, 327, 113, 77]);
-MASK_VALUES.push([905, 337, 113, 81]);
-MASK_VALUES.push([905, 347, 113, 88]); // 47
-MASK_VALUES.push([905, 357, 113, 88]);
+MASK_VALUES.push([905, 317, 113, 70]);
+MASK_VALUES.push([905, 325, 113, 72]);
+MASK_VALUES.push([905, 328, 113, 81]);
+MASK_VALUES.push([905, 328, 113, 94]); // 47
+MASK_VALUES.push([905, 348, 113, 97]);
 MASK_VALUES.push([905, 363, 113, 88]);
-MASK_VALUES.push([905, 388, 113, 88]); // 50
+MASK_VALUES.push([905, 370, 113, 95]); // 50
 MASK_VALUES.push([905, 375, 113, 88]);
 MASK_VALUES.push([905, 381, 113, 88]);
 MASK_VALUES.push([905, 387, 113, 88]);
