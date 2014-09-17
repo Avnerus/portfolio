@@ -1,7 +1,7 @@
 "use strict"
 
-module.exports = function(opts) {
-    return new BrainController(opts)
+module.exports = function(opts, videoContoller) {
+    return new BrainController(opts, videoContoller)
 }
 
 module.exports.BrainController = BrainController;
@@ -10,22 +10,111 @@ var WORKS = require('./works');
 var TWEEN = require('tween.js');
 
 
-function BrainController(opts) {
-    if (!(this instanceof BrainController)) return new BrainController(opts)
+// MASK VALUES
+// **********
+
+
+var MASK_VALUES = [];
+for (var i = 0; i < 25; i++) {
+    MASK_VALUES.push([905, 260, 112, 43]);
+}
+
+MASK_VALUES.push([905, 260, 112, 43]);
+MASK_VALUES.push([905, 261, 112, 43]);
+MASK_VALUES.push([905, 262, 112, 43]);
+MASK_VALUES.push([905, 263, 112, 43]);
+MASK_VALUES.push([905, 264, 112, 43]);
+MASK_VALUES.push([905, 265, 112, 43]);
+MASK_VALUES.push([905, 267, 112, 43]);
+MASK_VALUES.push([905, 269, 112, 45]);
+MASK_VALUES.push([905, 273, 112, 47]); // 34
+MASK_VALUES.push([905, 273, 112, 49]);
+MASK_VALUES.push([905, 275, 112, 51]);
+MASK_VALUES.push([905, 277, 112, 53]);
+MASK_VALUES.push([905, 280, 112, 55]);
+MASK_VALUES.push([905, 283, 112, 57]);
+MASK_VALUES.push([905, 288, 112, 59]); //40
+MASK_VALUES.push([905, 295, 112, 63]);
+MASK_VALUES.push([905, 302, 112, 65]);
+MASK_VALUES.push([905, 311, 112, 69]);
+MASK_VALUES.push([905, 317, 112, 72]);
+MASK_VALUES.push([905, 327, 112, 77]);
+MASK_VALUES.push([905, 337, 112, 81]);
+MASK_VALUES.push([905, 347, 112, 88]); // 47
+MASK_VALUES.push([905, 357, 112, 88]);
+MASK_VALUES.push([905, 363, 112, 88]);
+MASK_VALUES.push([905, 388, 112, 88]); // 50
+MASK_VALUES.push([905, 375, 112, 88]);
+MASK_VALUES.push([905, 381, 112, 88]);
+MASK_VALUES.push([905, 387, 112, 88]);
+MASK_VALUES.push([905, 393, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+MASK_VALUES.push([905, 399, 112, 88]);
+//
+
+
+function BrainController(opts, videoContoller) {
+    if (!(this instanceof BrainController)) return new BrainController(opts, videoContoller)
 
     this.opts = opts;
+    this.videoContoller = videoContoller;
 
     console.log("Brain Controller started");
 }
 
-BrainController.prototype.init = function (stage) {
+BrainController.prototype.init = function (stage, ratio) {
 
     console.log("Brain Controller initializing");
 
     this.stage = stage;
+    this.ratio = ratio;
 
 	this.bgContainer = new PIXI.DisplayObjectContainer();
-	stage.addChild(this.bgContainer);
+    this.maskContainer = new PIXI.DisplayObjectContainer();
+    this.maskContainer.addChild(this.bgContainer);
+
+	stage.addChild(this.maskContainer);
 
 
 	var bg = PIXI.Sprite.fromFrame("assets/brain/bg.jpg");
@@ -49,17 +138,20 @@ BrainController.prototype.init = function (stage) {
 
 
     this.mask = new PIXI.Graphics();
+    this.mask.cacheAsBitmap = true;
     this.mask.beginFill();
     this.mask.drawEllipse(606, 208, 70, 30);
     this.mask.endFill();
-    this.bgContainer.mask = this.mask;
+
+
+    this.maskContainer.mask = this.mask;
 
     this.bgContainer.visible = false;
 
-/*    this.bgContainer.filters = [
-        this.twistFilter, 
-        this.displacementFilter
-    ];*/
+    this.bgContainer.filters = [
+        this.twistFilter
+     //   this.displacementFilter
+    ];
 
     this.counter = 0;
 
@@ -76,12 +168,7 @@ BrainController.prototype.update = function () {
     if (this.loaded) {
 
 
-        var offset = window.pageYOffset;
-        if (offset > 120) {
-            this.bgContainer.visible = true;
-        } else {
-            this.bgContainer.visible = false;
-        }
+        this.setMaskByOffset();
 
         this.counter += 0.1;
         this.overlay.tilePosition.x = this.counter * -10;
@@ -93,6 +180,23 @@ BrainController.prototype.update = function () {
         }
     }
 }
+
+BrainController.prototype.setMaskByOffset = function() {
+    var offset = window.pageYOffset;
+    var currentFrame = this.videoContoller.VIDEOS.enter.frames.current;
+    console.log(currentFrame)
+    if (currentFrame == 0) {
+        this.bgContainer.visible = false;
+    } else {
+        this.bgContainer.visible = true;
+        var values = MASK_VALUES[currentFrame - 1];
+        this.mask.clear();
+        this.mask.beginFill();
+        this.mask.drawEllipse(values[0] * 1/this.ratio.x, values[1] * 1 / this.ratio.y, values[2] * 1/this.ratio.x, values[3] * 1/this.ratio.y);
+        this.mask.endFill();
+    }
+}
+
 
 BrainController.prototype.spawnWork = function () {
     // Choose a work to spawn

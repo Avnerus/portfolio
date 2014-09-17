@@ -5,20 +5,6 @@ var gameOpts = {
 }
 
 
-// GAME PART
-
-var TWEEN = require('tween.js');
-var BrainController = require('./brain_controller');
-var brainController = new BrainController(gameOpts);
-
-var stage = new PIXI.Stage(0xFFFFFF);
-var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHeight, null, true);
-renderer.view.style.position = "absolute"
-renderer.view.style.width = window.innerWidth + "px";
-renderer.view.style.height = window.innerHeight + "px";
-renderer.view.style.display = "block";
-
-
 // 
 // VIDEO PART
 //
@@ -30,6 +16,25 @@ window.onload = function() {
     window.scroll(0, 0);
     videoContoller.loadVideos($('#video-container'), $('#main-container').height());
 }
+
+// GAME PART
+
+var TWEEN = require('tween.js');
+var BrainController = require('./brain_controller');
+var brainController = new BrainController(gameOpts, videoContoller);
+
+var stage = new PIXI.Stage(0xFFFFFF);
+var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHeight, null, true);
+//renderer.resize(window.innerWidth, window.innerHeight)
+renderer.view.style.width = window.innerWidth + "px";
+renderer.view.style.height = window.innerHeight + "px";
+
+var container = new PIXI.DisplayObjectContainer();
+
+var ratio = { x: window.innerWidth / gameOpts.stageWidth, y : window.innerHeight / gameOpts.stageHeight};
+
+stage.addChild(container);
+
 
 /*window.onscroll = function(event) {
     videoContoller.pageScroll(window.pageYOffset);
@@ -58,7 +63,7 @@ loader.onComplete = function() {
     assetsLoaded = true;
     console.log("Assets loaded!");
 
-    brainController.init(stage);
+    brainController.init(container, ratio);
 
     if (videosLoaded) {
         start();

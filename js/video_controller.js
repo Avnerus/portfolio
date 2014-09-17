@@ -201,6 +201,7 @@ VideoController.prototype.loop = function() {
         if (this.nowPlaying && this.nowPlaying.id == this.VIDEOS.enter.id) {
             this.playRandomWaiting();
         }
+        this.VIDEOS.enter.frames.current = 0;
     }
 }
 
