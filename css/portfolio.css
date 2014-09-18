@@ -2,6 +2,7 @@
     width: 1280px;
     position: fixed;
     left: 15%;
+    z-index: 1;
 }
 
 #loading-container {
@@ -22,5 +23,5 @@
 
 #pixi-container {
     position: fixed;
-    z-index: 1;
+    z-index: 0;
 }

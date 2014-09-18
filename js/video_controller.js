@@ -67,7 +67,8 @@ VideoController.prototype.loadVideo = function (id, video, container) {
         video.frames.loaded = 0;
         for (var i = 0; i < video.frames.count; i++) {
             var image = new Image();
-            image.src = "videos/" + video.frames.path + "/_" + MathUtil.pad(i + 269,5) + ".jpg";
+            // image.src = "videos/" + video.frames.path + "/_" + MathUtil.pad(i + 269,5) + ".jpg";
+            image.src = "videos/" + video.frames.path + "/test000.png";
             console.log("Loading image: " + image.src);
             image.addEventListener("load",function(event) {self.videoFrameLoaded(event.target)}, false);
             image.name = video.id;
@@ -210,10 +211,7 @@ VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
     video.element.style.height = this.stageHeight * zoomMultiplyer + "px";
     video.element.style.width  = this.stageWidth * zoomMultiplyer + "px";
     if (zoomMultiplyer != 1) {
-        video.element.style.bottom = (-this.stageHeight / 2 + (this.stageHeight + 210) * zoomMultiplyer / 2) + "px";
-        video.element.style.right = (-this.stageWidth / 2 + this.stageWidth * zoomMultiplyer / 2) + "px";
-    } else {
-        video.element.style.bottom = (-this.stageHeight / 2 + this.stageHeight * zoomMultiplyer / 2) + "px";
+        video.element.style.bottom = (-this.stageHeight / 2 + (this.stageHeight) * zoomMultiplyer / 2) + "px";
         video.element.style.right = (-this.stageWidth / 2 + this.stageWidth * zoomMultiplyer / 2) + "px";
     }
 }

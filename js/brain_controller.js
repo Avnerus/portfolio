@@ -9,81 +9,6 @@ module.exports.BrainController = BrainController;
 var WORKS = require('./works');
 var TWEEN = require('tween.js');
 
-
-// MASK VALUES
-// **********
-
-
-var MASK_VALUES = [];
-for (var i = 0; i < 25; i++) {
-    MASK_VALUES.push([905, 261, 111, 44]);
-}
-
-MASK_VALUES.push([905, 260, 113, 44]);
-MASK_VALUES.push([905, 261, 113, 44]);
-MASK_VALUES.push([905, 262, 113, 45]);
-MASK_VALUES.push([905, 263, 113, 45]);
-MASK_VALUES.push([905, 264, 113, 45]); //30
-MASK_VALUES.push([905, 265, 113, 45]);
-MASK_VALUES.push([905, 267, 113, 45]);
-MASK_VALUES.push([905, 269, 113, 46]);
-MASK_VALUES.push([905, 273, 113, 47]); // 34
-MASK_VALUES.push([905, 273, 113, 49]);
-MASK_VALUES.push([905, 275, 113, 51]);
-MASK_VALUES.push([905, 277, 113, 53]);
-MASK_VALUES.push([905, 280, 113, 55]);
-MASK_VALUES.push([905, 283, 113, 57]);
-MASK_VALUES.push([905, 288, 113, 59]); //40
-MASK_VALUES.push([905, 295, 113, 63]);
-MASK_VALUES.push([905, 302, 113, 65]);
-MASK_VALUES.push([905, 312, 113, 70]);
-MASK_VALUES.push([905, 312, 113, 70]);
-MASK_VALUES.push([905, 320, 113, 75]);
-MASK_VALUES.push([905, 325, 113, 85]);
-MASK_VALUES.push([905, 328, 113, 94]); // 47
-MASK_VALUES.push([905, 348, 113, 95]);
-MASK_VALUES.push([905, 348, 113, 95]);
-MASK_VALUES.push([905, 370, 113, 95]); // 50
-MASK_VALUES.push([905, 370, 113, 95]); // 51
-MASK_VALUES.push([905, 383, 113, 115]);
-MASK_VALUES.push([905, 390, 113, 115]);
-MASK_VALUES.push([905, 410, 113, 115]);
-MASK_VALUES.push([905, 415, 113, 115]);
-MASK_VALUES.push([905, 420, 113, 115]);
-MASK_VALUES.push([905, 425, 113, 115]);
-MASK_VALUES.push([905, 425, 113, 115]);
-MASK_VALUES.push([905, 445, 113, 115]);
-MASK_VALUES.push([905, 460, 113, 120]); //60
-MASK_VALUES.push([905, 460, 113, 130]); 
-MASK_VALUES.push([905, 468, 113, 130]);
-MASK_VALUES.push([905, 480, 113, 140]);
-MASK_VALUES.push([905, 480, 113, 140]);
-MASK_VALUES.push([908, 490, 130, 140]); //65
-MASK_VALUES.push([908, 490, 130, 140]); 
-MASK_VALUES.push([908, 495, 120, 140]); 
-MASK_VALUES.push([908, 500, 120, 140]); 
-MASK_VALUES.push([915, 513, 122, 141]);  
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-MASK_VALUES.push([915, 513, 122, 141]);  // 70
-
-//
-
-
 function BrainController(opts, videoContoller) {
     if (!(this instanceof BrainController)) return new BrainController(opts, videoContoller)
 
@@ -134,7 +59,7 @@ BrainController.prototype.init = function (stage, ratio) {
     this.mask.endFill();
 
 
-    this.maskContainer.mask = this.mask;
+//    this.maskContainer.mask = this.mask;
 
     this.bgContainer.visible = false;
 
@@ -179,11 +104,11 @@ BrainController.prototype.setMaskByOffset = function() {
         this.bgContainer.visible = false;
     } else {
         this.bgContainer.visible = true;
-        var values = MASK_VALUES[currentFrame - 1];
+/*        var values = MASK_VALUES[currentFrame - 1];
         this.mask.clear();
         this.mask.beginFill();
         this.mask.drawEllipse(values[0] * 1/this.ratio.x, values[1] * 1 / this.ratio.y, values[2] * 1/this.ratio.x, values[3] * 1/this.ratio.y);
-        this.mask.endFill();
+        this.mask.endFill();*/
     }
 }
 
