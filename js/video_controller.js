@@ -14,6 +14,7 @@ function VideoController(opts) {
     this.zoomHeight = opts.zoomHeight;
     this.stageWidth = opts.stageWidth;
     this.stageHeight = opts.stageHeight;
+    this.zoomMultiplyer = 1;
 
     console.log("Video Controller started", opts);
 }
@@ -22,19 +23,19 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
 
     this.VIDEOS = {
         waiting: { 
-            'tired_blink': { paths : ['final/tired_blink.webm'] },
+       /*     'tired_blink': { paths : ['final/tired_blink.webm'] },
             'shrink_lip': {paths: ['final/shrink_lip.webm']},
             'rollingEyes_openMouth': {paths: [ 'final/rollingEyes_openMouth.webm' ]},
             'rollingEyes_blink': {paths: [ 'final/rollingEyes_blink.webm' ]},
             'open_mouth': {paths: [ 'final/open_mouth.webm' ]},
             'neutral': {paths: [ 'final/neutral.webm' ]},
-            'blink02': {paths: [ 'final/blink02.webm' ]},
-            'blink01': {paths: [ 'final/blink01.webm' ]},
+            'blink02': {paths: [ 'final/blink02.webm' ]},*/
+            'blink01': {paths: [ 'final/blink01.webm' ]}
         },
         enter: {
             frames: {
                 path: 'final/enter',
-                count: 82
+                count: 43
             },
             duration: 6.76 
         }
@@ -67,8 +68,7 @@ VideoController.prototype.loadVideo = function (id, video, container) {
         video.frames.loaded = 0;
         for (var i = 0; i < video.frames.count; i++) {
             var image = new Image();
-            // image.src = "videos/" + video.frames.path + "/_" + MathUtil.pad(i + 269,5) + ".jpg";
-            image.src = "videos/" + video.frames.path + "/test000.png";
+             image.src = "videos/" + video.frames.path + "/avner_bevel_" + MathUtil.pad(i + 268,5) + "-fs8.png";
             console.log("Loading image: " + image.src);
             image.addEventListener("load",function(event) {self.videoFrameLoaded(event.target)}, false);
             image.name = video.id;
@@ -79,6 +79,8 @@ VideoController.prototype.loadVideo = function (id, video, container) {
         placeholderImage.src ="images/blank.jpg";
         placeholderImage.id = video.id;
         placeholderImage.style.position = "relative";
+//        placeholderImage.style.top = "0px";
+  //      placeholderImage.style.bottom = "0px";
         container.append(placeholderImage);
         video.element = placeholderImage;
         video.frames.current = 0;
@@ -195,13 +197,14 @@ VideoController.prototype.loop = function() {
     } 
     else if (offset > zoomStart) {
         // Zoom
-        var zoomMultiplyer = 1 + ((offset - zoomStart) / this.zoomHeight  * 7);
-        this.zoomVideo(zoomMultiplyer);
+        this.zoomMultiplyer = 1 + ((offset - zoomStart) / this.zoomHeight  * 15);
+        this.zoomVideo(this.zoomMultiplyer);
     }
     else {
         if (this.nowPlaying && this.nowPlaying.id == this.VIDEOS.enter.id) {
             this.playRandomWaiting();
         }
+        this.zoomMultiplyer = 1;
         this.VIDEOS.enter.frames.current = 0;
     }
 }
@@ -211,8 +214,12 @@ VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
     video.element.style.height = this.stageHeight * zoomMultiplyer + "px";
     video.element.style.width  = this.stageWidth * zoomMultiplyer + "px";
     if (zoomMultiplyer != 1) {
-        video.element.style.bottom = (-this.stageHeight / 2 + (this.stageHeight) * zoomMultiplyer / 2) + "px";
+        var top = ((-this.stageHeight / 2 + (this.stageHeight) * zoomMultiplyer / 2) - 15 * zoomMultiplyer * zoomMultiplyer);
+        video.element.style.top = top + "px";
         video.element.style.right = (-this.stageWidth / 2 + this.stageWidth * zoomMultiplyer / 2) + "px";
+    } else {
+        video.element.style.top = "0px";
+        video.element.style.right = "0px";
     }
 }
 

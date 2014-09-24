@@ -1,7 +1,7 @@
 var gameOpts = {
     stageWidth: 1280,
     stageHeight: 720,
-    zoomHeight: 1500
+    zoomHeight: 2500
 }
 
 

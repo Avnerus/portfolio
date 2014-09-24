@@ -1,9 +1,15 @@
 #video-container {
     width: 1280px;
     position: fixed;
-    left: 15%;
+    left: 50%;
+    margin-left: -640px;
     z-index: 1;
+    bottom: 0;
+    display: block;
+    font-size: 0px;
+
 }
+
 
 #loading-container {
   margin: auto;

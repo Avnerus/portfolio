@@ -30,5 +30,6 @@ RAW
 #vim 
 *.swp
 *.swo
+*.swn
 
 bundle.js

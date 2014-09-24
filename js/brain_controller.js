@@ -53,15 +53,14 @@ BrainController.prototype.init = function (stage, ratio) {
 
 
     this.mask = new PIXI.Graphics();
-    this.mask.cacheAsBitmap = true;
     this.mask.beginFill();
-    this.mask.drawEllipse(606, 208, 70, 30);
+    this.mask.drawRect(this.opts.stageWidth / 4 , this.opts.stageHeight / 4, this.opts.stageWidth / 2, this.opts.stageHeight);
     this.mask.endFill();
 
 
-//    this.maskContainer.mask = this.mask;
+    this.maskContainer.mask = this.mask;
 
-    this.bgContainer.visible = false;
+    this.bgContainer.visible = true;
 
     this.bgContainer.filters = [
         this.twistFilter
@@ -82,7 +81,6 @@ BrainController.prototype.init = function (stage, ratio) {
 BrainController.prototype.update = function () {
     if (this.loaded) {
 
-
         this.setMaskByOffset();
 
         this.counter += 0.1;
@@ -99,16 +97,23 @@ BrainController.prototype.update = function () {
 BrainController.prototype.setMaskByOffset = function() {
     var offset = window.pageYOffset;
     var currentFrame = this.videoContoller.VIDEOS.enter.frames.current;
-    console.log(currentFrame)
-    if (currentFrame == 0) {
-        this.bgContainer.visible = false;
-    } else {
-        this.bgContainer.visible = true;
-/*        var values = MASK_VALUES[currentFrame - 1];
+    var multi = this.videoContoller.zoomMultiplyer;
+    if (multi != 1) {
+
         this.mask.clear();
         this.mask.beginFill();
-        this.mask.drawEllipse(values[0] * 1/this.ratio.x, values[1] * 1 / this.ratio.y, values[2] * 1/this.ratio.x, values[3] * 1/this.ratio.y);
-        this.mask.endFill();*/
+        this.mask.drawRect(
+            this.opts.stageWidth / 4 - multi * multi * 8,
+            this.opts.stageHeight / 4 - multi * multi * 8,
+            this.opts.stageWidth  + multi * multi * 6,
+            this.opts.stageHeight + multi * multi * 6
+        );
+        this.mask.endFill();
+    } else {
+        this.mask.clear();
+        this.mask.beginFill();
+        this.mask.drawRect(this.opts.stageWidth / 4 , this.opts.stageHeight / 4, this.opts.stageWidth / 2, this.opts.stageHeight);
+        this.mask.endFill();
     }
 }
 
