@@ -23,13 +23,13 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
 
     this.VIDEOS = {
         waiting: { 
-       /*     'tired_blink': { paths : ['final/tired_blink.webm'] },
+            'tired_blink': { paths : ['final/tired_blink.webm'] },
             'shrink_lip': {paths: ['final/shrink_lip.webm']},
             'rollingEyes_openMouth': {paths: [ 'final/rollingEyes_openMouth.webm' ]},
             'rollingEyes_blink': {paths: [ 'final/rollingEyes_blink.webm' ]},
             'open_mouth': {paths: [ 'final/open_mouth.webm' ]},
             'neutral': {paths: [ 'final/neutral.webm' ]},
-            'blink02': {paths: [ 'final/blink02.webm' ]},*/
+            'blink02': {paths: [ 'final/blink02.webm' ]},
             'blink01': {paths: [ 'final/blink01.webm' ]}
         },
         enter: {
@@ -68,22 +68,33 @@ VideoController.prototype.loadVideo = function (id, video, container) {
         video.frames.loaded = 0;
         for (var i = 0; i < video.frames.count; i++) {
             var image = new Image();
-             image.src = "videos/" + video.frames.path + "/avner_bevel_" + MathUtil.pad(i + 268,5) + "-fs8.png";
+            image.src = "./videos/" + video.frames.path + "/avner_bevel_" + MathUtil.pad(i + 268,5) + "-fs8.png";
             console.log("Loading image: " + image.src);
             image.addEventListener("load",function(event) {self.videoFrameLoaded(event.target)}, false);
-            image.name = video.id;
+            image.name = video.id + "_" + i;
+            image.id = video.id + "_" + i;
+            image.style.position = "fixed";
+            image.style.left = "-9999em";
+            image.style.display = "block !important";
             video.frames.images.push(image);
+            container.parent().append(image);
         }
         // Place holder image
         var placeholderImage = new Image();
         placeholderImage.src ="images/blank.jpg";
+        placeholderImage.alt = "";
         placeholderImage.id = video.id;
+        placeholderImage.name = video.id;
         placeholderImage.style.position = "relative";
 //        placeholderImage.style.top = "0px";
   //      placeholderImage.style.bottom = "0px";
         container.append(placeholderImage);
         video.element = placeholderImage;
         video.frames.current = 0;
+        video.rect = {
+            width: this.stageWidth,
+            height: this.stageHeight
+        }
     } else {
         console.log("Loading " + video.id + "(Regular video element)");
         var videoElement = document.createElement("VIDEO"); 
@@ -112,7 +123,7 @@ VideoController.prototype.loadVideo = function (id, video, container) {
 }
 
 VideoController.prototype.videoFrameLoaded = function(image) {
-    var video = this.VIDEOS[image.name];
+    var video = this.VIDEOS.enter; //hack
     video.frames.loaded++;
     console.log("Video frame loaded!", image, "Now loaded " + video.frames.loaded + " images");
     if (video.frames.count == video.frames.loaded && !video.loaded) {
@@ -211,16 +222,22 @@ VideoController.prototype.loop = function() {
 
 VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
     var video = this.nowPlaying;
-    video.element.style.height = this.stageHeight * zoomMultiplyer + "px";
-    video.element.style.width  = this.stageWidth * zoomMultiplyer + "px";
-    if (zoomMultiplyer != 1) {
-        var top = ((-this.stageHeight / 2 + (this.stageHeight) * zoomMultiplyer / 2) - 15 * zoomMultiplyer * zoomMultiplyer);
-        video.element.style.top = top + "px";
-        video.element.style.right = (-this.stageWidth / 2 + this.stageWidth * zoomMultiplyer / 2) + "px";
-    } else {
-        video.element.style.top = "0px";
-        video.element.style.right = "0px";
+    video.rect = {
+        width: this.stageWidth * zoomMultiplyer ,
+        height: this.stageHeight * zoomMultiplyer
     }
+    if (zoomMultiplyer > 1) {
+        video.rect.bottom = ((this.stageHeight / 2 - (this.stageHeight) * zoomMultiplyer / 2) + 15 *  zoomMultiplyer * zoomMultiplyer - 20);
+        video.rect.left = (this.stageWidth / 2 - this.stageWidth * zoomMultiplyer / 2);
+    } else {
+        video.rect.bottom = 0;
+        video.rect.left = 0;
+    }
+
+    video.element.style.height = video.rect.height + "px";
+    video.element.style.width = video.rect.width + "px";
+    video.element.style.left = video.rect.left + "px";
+    video.element.style.bottom = video.rect.bottom + "px";
 }
 
 VideoController.prototype.showVideoAt = function(video, offsetPercentage) {

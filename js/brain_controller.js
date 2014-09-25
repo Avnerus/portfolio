@@ -1,7 +1,7 @@
 "use strict"
 
-module.exports = function(opts, videoContoller) {
-    return new BrainController(opts, videoContoller)
+module.exports = function(opts, videoController) {
+    return new BrainController(opts, videoController)
 }
 
 module.exports.BrainController = BrainController;
@@ -9,11 +9,11 @@ module.exports.BrainController = BrainController;
 var WORKS = require('./works');
 var TWEEN = require('tween.js');
 
-function BrainController(opts, videoContoller) {
-    if (!(this instanceof BrainController)) return new BrainController(opts, videoContoller)
+function BrainController(opts, videoController) {
+    if (!(this instanceof BrainController)) return new BrainController(opts, videoController)
 
     this.opts = opts;
-    this.videoContoller = videoContoller;
+    this.videoController = videoController;
 
     console.log("Brain Controller started");
 }
@@ -52,13 +52,12 @@ BrainController.prototype.init = function (stage, ratio) {
     this.twistFilter.offset.y = 0.5;
 
 
+
+
     this.mask = new PIXI.Graphics();
-    this.mask.beginFill();
-    this.mask.drawRect(this.opts.stageWidth / 4 , this.opts.stageHeight / 4, this.opts.stageWidth / 2, this.opts.stageHeight);
-    this.mask.endFill();
-
-
+    this.updateMaskbyVideoSize(1);
     this.maskContainer.mask = this.mask;
+    this.maskUpdated = true;
 
     this.bgContainer.visible = true;
 
@@ -94,26 +93,30 @@ BrainController.prototype.update = function () {
     }
 }
 
+BrainController.prototype.updateMaskbyVideoSize = function(multi) {
+    var ratioWidth = this.videoController.VIDEOS.enter.rect.width * (1 / this.ratio.x) - 100;
+    var ratioHeight = this.videoController.VIDEOS.enter.rect.height * (1 / this.ratio.y);
+    this.mask.clear();
+    this.mask.beginFill();
+    this.mask.drawRect(
+        Math.max(0, (this.opts.stageWidth - ratioWidth) / 2),
+        Math.max(0, (this.opts.stageHeight - ratioHeight) + 100 * multi),
+        Math.min(this.opts.stageWidth, ratioWidth),
+        Math.min(this.opts.stageHeight, ratioHeight)
+    );
+    this.mask.endFill();
+}
+
 BrainController.prototype.setMaskByOffset = function() {
     var offset = window.pageYOffset;
-    var currentFrame = this.videoContoller.VIDEOS.enter.frames.current;
-    var multi = this.videoContoller.zoomMultiplyer;
-    if (multi != 1) {
-
-        this.mask.clear();
-        this.mask.beginFill();
-        this.mask.drawRect(
-            this.opts.stageWidth / 4 - multi * multi * 8,
-            this.opts.stageHeight / 4 - multi * multi * 8,
-            this.opts.stageWidth  + multi * multi * 6,
-            this.opts.stageHeight + multi * multi * 6
-        );
-        this.mask.endFill();
-    } else {
-        this.mask.clear();
-        this.mask.beginFill();
-        this.mask.drawRect(this.opts.stageWidth / 4 , this.opts.stageHeight / 4, this.opts.stageWidth / 2, this.opts.stageHeight);
-        this.mask.endFill();
+    var currentFrame = this.videoController.VIDEOS.enter.frames.current;
+    var multi = this.videoController.zoomMultiplyer;
+    if (multi > 1) {
+        this.maskUpdated = true;
+        this.updateMaskbyVideoSize(multi);      
+    } else if (this.maskUpdated) {
+        this.updateMaskbyVideoSize(1);
+        this.maskUpdated = false;
     }
 }
 
@@ -143,6 +146,5 @@ BrainController.prototype.spawnWork = function () {
     this.spawningSprite = sprite;
 
     this.stage.addChild(sprite);
-
 
 }
