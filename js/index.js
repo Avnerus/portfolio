@@ -14,14 +14,15 @@ var eventEmitter = require('./event_manager').getEmitter();
 
 window.onload = function() {
     window.scroll(0, 0);
-    videoContoller.loadVideos($('#video-container'), $('#main-container').height());
+    gameOpts.scrollHeight = $('#main-container').height();
+    videoContoller.loadVideos($('#video-container'), gameOpts.scrollHeight);
 }
 
 // GAME PART
 
 var TWEEN = require('tween.js');
 var BrainController = require('./brain_controller');
-var brainController = new BrainController(gameOpts, videoContoller);
+var brainController = new BrainController(videoContoller);
 
 var stage = new PIXI.Stage(0xFFFFFF);
 var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHeight, null, true);
@@ -36,9 +37,9 @@ var ratio = { x: window.innerWidth / gameOpts.stageWidth, y : window.innerHeight
 stage.addChild(container);
 
 
-/*window.onscroll = function(event) {
-    videoContoller.pageScroll(window.pageYOffset);
-};*/
+window.onscroll = function(event) {
+    brainController.pageScroll(window.pageYOffset);
+}
 
 var videosLoaded = false
 var assetsLoaded = false;
@@ -71,7 +72,7 @@ loader.load();
 
 
 function start() {
-   brainController.init(container, ratio, renderer);
+   brainController.init(gameOpts,container, ratio, renderer);
    $('#loading-container').hide();
    $('#pixi-container').append(renderer.view);
    videoContoller.playWaiting();

@@ -1,7 +1,7 @@
 "use strict"
 
-module.exports = function(opts, videoController) {
-    return new BrainController(opts, videoController)
+module.exports = function(videoController) {
+    return new BrainController(videoController)
 }
 
 module.exports.BrainController = BrainController;
@@ -9,21 +9,21 @@ module.exports.BrainController = BrainController;
 var WORKS = require('./works');
 var TWEEN = require('tween.js');
 
-function BrainController(opts, videoController) {
-    if (!(this instanceof BrainController)) return new BrainController(opts, videoController)
+function BrainController(videoController) {
+    if (!(this instanceof BrainController)) return new BrainController(videoController)
 
-    this.opts = opts;
     this.videoController = videoController;
 
     console.log("Brain Controller started");
 }
 
-BrainController.prototype.init = function (stage, ratio, renderer) {
+BrainController.prototype.init = function (opts, stage, ratio, renderer) {
 
-    console.log("Brain Controller initializing");
+    console.log("Brain Controller initializing with opts", opts);
 
     this.stage = stage;
-    this.ratio = ratio;
+    this.ratio = ratio; 
+    this.opts = opts;
 
 	this.bgContainer = new PIXI.DisplayObjectContainer();
     this.maskContainer = new PIXI.DisplayObjectContainer();
@@ -95,6 +95,16 @@ BrainController.prototype.update = function () {
     }
 }
 
+
+BrainController.prototype.pageScroll = function (offset) {
+    if (!this.opts) {
+        return;
+    }
+    if (offset >= this.opts.scrollHeight - window.innerHeight) {
+        this.spawnWork();
+    }
+}
+
 BrainController.prototype.updateMaskbyVideoSize = function(multi) {
     var width = Math.min(window.innerWidth, this.opts.stageWidth * multi * 0.7);
     this.renderer.view.style.width = width + "px";
@@ -113,6 +123,7 @@ BrainController.prototype.setMaskByOffset = function() {
         this.setTwist(multi);
     } else if (this.maskUpdated) {
         this.updateMaskbyVideoSize(1);
+        this.setTwist(1);
         this.maskUpdated = false;
     }
 }
@@ -149,5 +160,4 @@ BrainController.prototype.spawnWork = function () {
     this.spawningSprite = sprite;
 
     this.stage.addChild(sprite);
-
 }
