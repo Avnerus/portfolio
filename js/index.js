@@ -26,8 +26,8 @@ var brainController = new BrainController(gameOpts, videoContoller);
 var stage = new PIXI.Stage(0xFFFFFF);
 var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHeight, null, true);
 //renderer.resize(window.innerWidth, window.innerHeight)
-renderer.view.style.width = window.innerWidth + "px";
-renderer.view.style.height = window.innerHeight + "px";
+//renderer.view.style.width = window.innerWidth + "px";
+//renderer.view.style.height = window.innerHeight + "px";
 
 var container = new PIXI.DisplayObjectContainer();
 
@@ -71,7 +71,7 @@ loader.load();
 
 
 function start() {
-   brainController.init(container, ratio);
+   brainController.init(container, ratio, renderer);
    $('#loading-container').hide();
    $('#pixi-container').append(renderer.view);
    videoContoller.playWaiting();

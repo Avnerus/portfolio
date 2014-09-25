@@ -18,7 +18,7 @@ function BrainController(opts, videoController) {
     console.log("Brain Controller started");
 }
 
-BrainController.prototype.init = function (stage, ratio) {
+BrainController.prototype.init = function (stage, ratio, renderer) {
 
     console.log("Brain Controller initializing");
 
@@ -28,6 +28,8 @@ BrainController.prototype.init = function (stage, ratio) {
 	this.bgContainer = new PIXI.DisplayObjectContainer();
     this.maskContainer = new PIXI.DisplayObjectContainer();
     this.maskContainer.addChild(this.bgContainer);
+
+    this.renderer = renderer;
 
 	stage.addChild(this.maskContainer);
 
@@ -46,17 +48,17 @@ BrainController.prototype.init = function (stage, ratio) {
 
 
 	this.twistFilter = new PIXI.TwistFilter();
-    this.twistFilter.angle = 5;
+    this.twistFilter.angle = 13;
     this.twistFilter.radius = 0.5;
     this.twistFilter.offset.x = 0.5;
-    this.twistFilter.offset.y = 0.5;
+    this.twistFilter.offset.y = 0.25;
 
 
 
 
     this.mask = new PIXI.Graphics();
     this.updateMaskbyVideoSize(1);
-    this.maskContainer.mask = this.mask;
+//    this.maskContainer.mask = this.mask;
     this.maskUpdated = true;
 
     this.bgContainer.visible = true;
@@ -94,17 +96,11 @@ BrainController.prototype.update = function () {
 }
 
 BrainController.prototype.updateMaskbyVideoSize = function(multi) {
-    var ratioWidth = this.videoController.VIDEOS.enter.rect.width * (1 / this.ratio.x) - 100;
-    var ratioHeight = this.videoController.VIDEOS.enter.rect.height * (1 / this.ratio.y);
-    this.mask.clear();
-    this.mask.beginFill();
-    this.mask.drawRect(
-        Math.max(0, (this.opts.stageWidth - ratioWidth) / 2),
-        Math.max(0, (this.opts.stageHeight - ratioHeight) + 100 * multi),
-        Math.min(this.opts.stageWidth, ratioWidth),
-        Math.min(this.opts.stageHeight, ratioHeight)
-    );
-    this.mask.endFill();
+    var width = Math.min(window.innerWidth, this.opts.stageWidth * multi * 0.7);
+    this.renderer.view.style.width = width + "px";
+    this.renderer.view.style.marginLeft = (width / -2) + "px";
+    var height = Math.min(window.innerHeight, this.opts.stageHeight * multi * 0.7);
+    this.renderer.view.style.height = height + "px";
 }
 
 BrainController.prototype.setMaskByOffset = function() {
@@ -114,11 +110,18 @@ BrainController.prototype.setMaskByOffset = function() {
     if (multi > 1) {
         this.maskUpdated = true;
         this.updateMaskbyVideoSize(multi);      
+        this.setTwist(multi);
     } else if (this.maskUpdated) {
         this.updateMaskbyVideoSize(1);
         this.maskUpdated = false;
     }
 }
+
+
+BrainController.prototype.setTwist = function(multi) {
+    this.twistFilter.angle = Math.max(0,13 * 1/ multi );
+}
+    
 
 
 BrainController.prototype.spawnWork = function () {

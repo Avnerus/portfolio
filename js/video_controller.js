@@ -203,13 +203,12 @@ VideoController.prototype.loop = function() {
 
     if (offset > 0 && offset <= zoomStart) {
       
-       this.zoomVideo(1);
+       this.zoomMultiplyer = 1;
        this.showVideoAt(this.VIDEOS.enter, (offset / zoomStart)); 
     } 
     else if (offset > zoomStart) {
         // Zoom
         this.zoomMultiplyer = 1 + ((offset - zoomStart) / this.zoomHeight  * 15);
-        this.zoomVideo(this.zoomMultiplyer);
     }
     else {
         if (this.nowPlaying && this.nowPlaying.id == this.VIDEOS.enter.id) {
@@ -218,6 +217,7 @@ VideoController.prototype.loop = function() {
         this.zoomMultiplyer = 1;
         this.VIDEOS.enter.frames.current = 0;
     }
+    this.zoomVideo(this.zoomMultiplyer);
 }
 
 VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
