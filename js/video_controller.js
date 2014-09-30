@@ -74,11 +74,15 @@ VideoController.prototype.loadVideo = function (id, video, container) {
             image.name = video.id + "_" + i;
             image.id = video.id + "_" + i;
             image.style.position = "fixed";
-            image.style.left = "-9999em";
+            image.style.left = "-75em";
+            //image.style.left = "-9999em";
             image.style.display = "block !important";
+            image.style.zIndex = 0;
             video.frames.images.push(image);
             container.parent().append(image);
         }
+
+
         // Place holder image
         var placeholderImage = new Image();
         placeholderImage.src ="images/blank.jpg";

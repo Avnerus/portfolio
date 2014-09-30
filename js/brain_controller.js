@@ -48,7 +48,7 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer) {
 
 
 	this.twistFilter = new PIXI.TwistFilter();
-    this.twistFilter.angle = 2;
+    this.twistFilter.angle = 10; 
     this.twistFilter.radius = 0.5;
     this.twistFilter.offset.x = 0.5;
     this.twistFilter.offset.y = 0.25;
@@ -63,10 +63,10 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer) {
 
     this.bgContainer.visible = true;
 
-/*    this.bgContainer.filters = [
+    this.bgContainer.filters = [
        this.twistFilter
        //this.displacementFilter
-    ];*/
+    ];
 
     this.counter = 0;
 
@@ -130,7 +130,7 @@ BrainController.prototype.setMaskByOffset = function() {
 
 
 BrainController.prototype.setTwist = function(multi) {
-    this.twistFilter.angle = Math.max(0,2 - multi /2 );
+    this.twistFilter.angle = Math.max(0,10 - multi  * 2 );
 }
     
 

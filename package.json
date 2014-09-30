@@ -4,11 +4,11 @@
   "description": "portfolio =========",
   "main": "index.html",
   "devDependencies": {
-    "beefy": "^2.1.0",
-    "browserify": "^5.10.0"
+    "beefy": "*",
+    "browserify": "*"
   },
   "dependencies": {
-    "tween.js": "^0.14.0"
+    "tween.js": "*"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
