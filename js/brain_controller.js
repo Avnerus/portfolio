@@ -37,9 +37,9 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer) {
 	var bg = PIXI.Sprite.fromFrame("assets/brain/bg.jpg");
 	this.bgContainer.addChild(bg);
 
-	this.overlay = new PIXI.TilingSprite(PIXI.Texture.fromFrame("assets/brain/tile_neurons.png"), this.opts.stageWidth, this.opts.stageHeight);
-	this.overlay.alpha = 0.15;
-	this.bgContainer.addChild(this.overlay);
+	this.overlay = new PIXI.TilingSprite(PIXI.Texture.fromFrame("assets/brain/neurons_tile.png"), this.opts.stageWidth, this.opts.stageHeight);
+	this.overlay.alpha = 0.1;
+//	this.bgContainer.addChild(this.overlay);
 
 	var displacementTexture = PIXI.Texture.fromFrame("assets/brain/displacement_map.png");
 	this.displacementFilter = new PIXI.DisplacementFilter(displacementTexture);
@@ -48,7 +48,7 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer) {
 
 
 	this.twistFilter = new PIXI.TwistFilter();
-    this.twistFilter.angle = 13;
+    this.twistFilter.angle = 2;
     this.twistFilter.radius = 0.5;
     this.twistFilter.offset.x = 0.5;
     this.twistFilter.offset.y = 0.25;
@@ -63,10 +63,10 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer) {
 
     this.bgContainer.visible = true;
 
-    this.bgContainer.filters = [
-        this.twistFilter
-     //   this.displacementFilter
-    ];
+/*    this.bgContainer.filters = [
+       this.twistFilter
+       //this.displacementFilter
+    ];*/
 
     this.counter = 0;
 
@@ -130,7 +130,7 @@ BrainController.prototype.setMaskByOffset = function() {
 
 
 BrainController.prototype.setTwist = function(multi) {
-    this.twistFilter.angle = Math.max(0,13 * 1/ multi );
+    this.twistFilter.angle = Math.max(0,2 - multi /2 );
 }
     
 
