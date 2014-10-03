@@ -136,22 +136,23 @@ BrainController.prototype.setTwist = function(multi) {
 
 
 BrainController.prototype.spawnWork = function () {
+    
     // Choose a work to spawn
     var work = WORKS[MathUtil.rndIntRange(0, WORKS.length -1)];
     console.log("Spawning work ", work)
 
     var sprite = PIXI.Sprite.fromFrame("works/" + work.image);
-    sprite.position.x = this.opts.stageWidth / 2;
-    sprite.position.y = this.opts.stageHeight / 2;
+    sprite.position.x = this.opts.stageWidth;
+    sprite.position.y = 50 
     sprite.anchor.x = 0.5;
     sprite.anchor.y = 0.5;
-    sprite.scale.x = 0.1;
-    sprite.scale.y = 0.1;
+    sprite.scale.y = 0.5;
+    sprite.scale.x = 0.5;
 
-
-    var spawnTween = new TWEEN.Tween(sprite.scale)
-        .to({x:1, y: 1} , 7000)
-        .easing(TWEEN.Easing.Cubic.InOut)
+    var spawnTween = new TWEEN.Tween(sprite.position)
+        .to({x:[0], y:[300, 50]} , 20000)
+        .interpolation(TWEEN.Interpolation.Bezier)
+        .easing(TWEEN.Easing.Linear.None).repeat();
 
     spawnTween.onComplete(function() {
     });

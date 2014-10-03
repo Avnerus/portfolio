@@ -64,6 +64,8 @@ VideoController.prototype.loadVideo = function (id, video, container) {
 
     if (video.frames) {
         console.log("Loading " + video.id + "(Regular video element)");
+        var FF = (typeof window.mozInnerScreenX != 'undefined');
+        console.log("Running on FF?", FF);
         video.frames.images = [];
         video.frames.loaded = 0;
         for (var i = 0; i < video.frames.count; i++) {
@@ -74,8 +76,11 @@ VideoController.prototype.loadVideo = function (id, video, container) {
             image.name = video.id + "_" + i;
             image.id = video.id + "_" + i;
             image.style.position = "fixed";
-            image.style.left = "-75em";
-            //image.style.left = "-9999em";
+            if (FF) {
+                image.style.left = "-75em";
+            } else {
+                image.style.display = "none";
+            }
             image.style.display = "block !important";
             image.style.zIndex = 0;
             video.frames.images.push(image);

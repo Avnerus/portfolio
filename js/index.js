@@ -81,9 +81,9 @@ function start() {
 
 
 function animate() {
-    brainController.update();
     TWEEN.update();
     videoContoller.loop();
+    brainController.update();
     renderer.render(stage);
     requestAnimationFrame(animate);
 }
