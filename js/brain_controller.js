@@ -37,8 +37,9 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer) {
 	var bg = PIXI.Sprite.fromFrame("assets/brain/bg.jpg");
 	this.bgContainer.addChild(bg);
 
-	this.overlay = new PIXI.TilingSprite(PIXI.Texture.fromFrame("assets/brain/neurons_tile.png"), this.opts.stageWidth, this.opts.stageHeight);
-	this.overlay.alpha = 0.1;
+	this.overlay = new PIXI.TilingSprite(PIXI.Texture.fromFrame("assets/brain/tile_neurons.png"), this.opts.stageWidth, this.opts.stageHeight / 2);
+	this.overlay.alpha = 0.4;
+    this.overlay.tilePosition.y = - 120;
 	this.bgContainer.addChild(this.overlay);
 
 	var displacementTexture = PIXI.Texture.fromFrame("assets/brain/displacement_map.png");
@@ -97,8 +98,8 @@ BrainController.prototype.update = function () {
         this.setMaskByOffset();
 
         this.counter += 0.1;
-        this.overlay.tilePosition.x = this.counter * -10;
-        this.overlay.tilePosition.y = this.counter * -10;
+        this.overlay.tilePosition.x = this.counter * -3;
+//        this.overlay.tilePosition.y = this.counter * -10;
     /*	this.displacementFilter.offset.x = this.counter * 10;
         this.displacementFilter.offset.y = this.counter * 10;*/
 

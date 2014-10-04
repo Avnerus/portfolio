@@ -56,7 +56,7 @@ eventEmitter.on('videos_loaded', function() {
 
 var loader = new PIXI.AssetLoader([
     "assets/brain/bg.jpg",
-    "assets/brain/neurons_tile.png",
+    "assets/brain/tile_neurons.png",
     "assets/brain/displacement_map.png",
     "assets/works/pulse.png"
 ]);

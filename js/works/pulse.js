@@ -20,8 +20,8 @@ Pulse.prototype.init = function (opts, stage) {
     this.opts = opts;
 
     this.sprite1 = PIXI.Sprite.fromFrame("assets/works/pulse.png");
-    this.sprite1.position.x = this.opts.stageWidth / 2 + 200;
-    this.sprite1.position.y = 100 
+    this.sprite1.position.x = 650;
+    this.sprite1.position.y = 100
     this.sprite1.anchor.x = 0.5;
     this.sprite1.anchor.y = 0.5;
     this.sprite1.scale.y = 0.5;
@@ -29,7 +29,7 @@ Pulse.prototype.init = function (opts, stage) {
     this.sprite1.buttonMode = true;
 
     this.sprite2 = PIXI.Sprite.fromFrame("assets/works/pulse.png");
-    this.sprite2.position.x = this.opts.stageWidth / 2 - 200;
+    this.sprite2.position.x = 650
     this.sprite2.position.y = 100 
     this.sprite2.anchor.x = 0.5;
     this.sprite2.anchor.y = 0.5;
@@ -59,8 +59,11 @@ Pulse.prototype.init = function (opts, stage) {
 Pulse.prototype.fly = function() {
     var self = this;
 
-    TweenMax.to(this.sprite1.position, 5, {repeat: -1, yoyo: true, x:(this.opts.stageWidth / 2 - 200), ease:Power0.easeInOut});
-    TweenMax.to(this.sprite2.position, 5, {repeat: -1, yoyo: true, x:(this.opts.stageWidth / 2 + 200), ease:Power0.easeInOut});
+//    TweenMax.to(this.sprite1.position, 20, {repeat: -1, yoyo: true, x:(this.opts.stageWidth + this.sprite1.width), ease:Power0.easeInOut});
+  //  TweenMax.to(this.sprite2.position, 20, {repeat: -1, yoyo: true, x:(-this.sprite2.width), ease:Power0.easeInOut});
+    TweenMax.to(this.sprite1.position , 7, {ease: Linear.easeNone, repeat: -1, bezier:{curviness:1.5, values:[{x:750, y:200}, {x:650, y:300}, {x:550, y:100}, {x:650, y: 100}]}});
+    TweenMax.to(this.sprite2.position , 7, {ease: Linear.easeNone, repeat: -1, bezier:{curviness:1.5, values:[{x:550, y:200}, {x:650, y:300}, {x:750, y:100}, {x:650, y: 100}]}});
+//TweenMax.to([div1,div2,div3], 2, {bezier:{curviness:1.5, values:[{x:100, y:100}, {x:0, y:200}, {x:-100, y:100}, {x:0, y:0}]}
 }
 
 Pulse.prototype.update = function () {
