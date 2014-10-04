@@ -39,7 +39,7 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer) {
 
 	this.overlay = new PIXI.TilingSprite(PIXI.Texture.fromFrame("assets/brain/neurons_tile.png"), this.opts.stageWidth, this.opts.stageHeight);
 	this.overlay.alpha = 0.1;
-//	this.bgContainer.addChild(this.overlay);
+	this.bgContainer.addChild(this.overlay);
 
 	var displacementTexture = PIXI.Texture.fromFrame("assets/brain/displacement_map.png");
 	this.displacementFilter = new PIXI.DisplacementFilter(displacementTexture);

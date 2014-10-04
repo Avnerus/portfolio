@@ -24,7 +24,7 @@ var TWEEN = require('tween.js');
 var BrainController = require('./brain_controller');
 var brainController = new BrainController(videoContoller);
 
-var stage = new PIXI.Stage(0xFFFFFF);
+var stage = new PIXI.Stage(0xFFFFFF, true);
 var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHeight, null, true);
 //renderer.resize(window.innerWidth, window.innerHeight)
 //renderer.view.style.width = window.innerWidth + "px";

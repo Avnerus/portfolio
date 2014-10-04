@@ -26,6 +26,7 @@ Pulse.prototype.init = function (opts, stage) {
     this.sprite1.anchor.y = 0.5;
     this.sprite1.scale.y = 0.5;
     this.sprite1.scale.x = 0.5;
+    this.sprite1.buttonMode = true;
 
     this.sprite2 = PIXI.Sprite.fromFrame("assets/works/pulse.png");
     this.sprite2.position.x = this.opts.stageWidth / 2 - 200;
@@ -35,10 +36,17 @@ Pulse.prototype.init = function (opts, stage) {
     this.sprite2.scale.y = 0.5;
     this.sprite2.scale.x = 0.5;
     this.counter = 0;
+    this.sprite2.buttonMode = true;
 
+
+    this.sprite2.setInteractive(true);
+    this.sprite1.setInteractive(true);
 
     this.sprite2.tint = 0xEECC55;
 
+    this.sprite2.click = this.sprite1.click = function(mouseData){
+       console.log("CLICK");
+    }
     this.stage.addChild(this.sprite1);
     this.stage.addChild(this.sprite2);
     this.loaded = true;
@@ -51,8 +59,8 @@ Pulse.prototype.init = function (opts, stage) {
 Pulse.prototype.fly = function() {
     var self = this;
 
-    TweenMax.to(this.sprite1.position, 5, {repeat: -1, yoyo: true, x:(this.opts.stageWidth / 2 - 200), ease:Power0.easeIn});
-    TweenMax.to(this.sprite2.position, 5, {repeat: -1, yoyo: true, x:(this.opts.stageWidth / 2 + 200), ease:Power0.easeIn});
+    TweenMax.to(this.sprite1.position, 5, {repeat: -1, yoyo: true, x:(this.opts.stageWidth / 2 - 200), ease:Power0.easeInOut});
+    TweenMax.to(this.sprite2.position, 5, {repeat: -1, yoyo: true, x:(this.opts.stageWidth / 2 + 200), ease:Power0.easeInOut});
 }
 
 Pulse.prototype.update = function () {

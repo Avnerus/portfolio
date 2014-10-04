@@ -15,12 +15,14 @@ function VideoController(opts) {
     this.stageWidth = opts.stageWidth;
     this.stageHeight = opts.stageHeight;
     this.zoomMultiplyer = 1;
+    this.previousZoomMultiplyer = 1;
 
     console.log("Video Controller started", opts);
 }
 
 VideoController.prototype.loadVideos = function (container, scrollHeight) {
 
+    this.container = container;
     this.VIDEOS = {
         waiting: { 
             'tired_blink': { paths : ['final/tired_blink.webm'] },
@@ -229,11 +231,15 @@ VideoController.prototype.loop = function() {
         this.zoomMultiplyer = 1;
         this.VIDEOS.enter.frames.current = 0;
     }
-    this.zoomVideo(this.zoomMultiplyer);
+    if (this.zoomMultiplyer != this.previousZoomMultiplyer) {
+        this.zoomVideo(this.zoomMultiplyer);
+    }
+    this.previousZoomMultiplyer = this.zoomMultiplyer;
 }
 
 VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
     var video = this.nowPlaying;
+    console.log("Zoom : " + zoomMultiplyer);
     video.rect = {
         width: this.stageWidth * zoomMultiplyer ,
         height: this.stageHeight * zoomMultiplyer
@@ -250,6 +256,12 @@ VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
     video.element.style.width = video.rect.width + "px";
     video.element.style.left = video.rect.left + "px";
     video.element.style.bottom = video.rect.bottom + "px";
+
+    if (zoomMultiplyer > 8) {
+        this.container.css("zIndex",0);
+    } else {
+        this.container.css("zIndex",2);
+    }
 }
 
 VideoController.prototype.showVideoAt = function(video, offsetPercentage) {
