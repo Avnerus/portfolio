@@ -72,7 +72,7 @@ loader.load();
 
 
 function start() {
-   brainController.init(gameOpts,container, ratio, renderer);
+   brainController.init(gameOpts, container, ratio, renderer, $('#work-container'));
    $('#loading-container').hide();
    $('#pixi-container').append(renderer.view);
    videoContoller.playWaiting();

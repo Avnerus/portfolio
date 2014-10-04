@@ -7,6 +7,7 @@ module.exports = function(videoController) {
 module.exports.BrainController = BrainController;
 
 var TWEEN = require('tween.js');
+var eventEmitter = require('./event_manager').getEmitter();
 
 function BrainController(videoController) {
     if (!(this instanceof BrainController)) return new BrainController(videoController)
@@ -17,13 +18,14 @@ function BrainController(videoController) {
     console.log("Brain Controller started");
 }
 
-BrainController.prototype.init = function (opts, stage, ratio, renderer) {
+BrainController.prototype.init = function (opts, stage, ratio, renderer, workContainer) {
 
     console.log("Brain Controller initializing with opts", opts);
 
     this.stage = stage;
     this.ratio = ratio; 
     this.opts = opts;
+    this.workContainer = workContainer;
 
 	this.bgContainer = new PIXI.DisplayObjectContainer();
     this.maskContainer = new PIXI.DisplayObjectContainer();
@@ -76,9 +78,18 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer) {
     this.loaded = true;
 
     var self = this;
+
+    eventEmitter.on('work_clicked', function(work) {
+        self.workClicked(work);
+    });
 }
 
 
+BrainController.prototype.workClicked = function(work) {
+    console.log("Work clicked!", this,  work);
+    this.workContainer.css("height", "600px");
+    this.workContainer.css("opacity", 1);
+}
 
 BrainController.prototype.initWorks = function() {
     this.works = [
@@ -88,7 +99,7 @@ BrainController.prototype.initWorks = function() {
 
     for (var i = 0; i < this.works.length; i++) {
         var work = this.works[i];
-        work.init(this.opts, this.stage);
+        work.init(this.opts, this.stage, this.workClicked);
     }
 }
 

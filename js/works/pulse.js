@@ -13,7 +13,7 @@ function Pulse() {
     console.log("Pulse work constructed");
 }
 
-Pulse.prototype.init = function (opts, stage) {
+Pulse.prototype.init = function (opts, stage, clickHandler) {
 
     console.log("Pulse work initializing with opts", opts);
     this.stage = stage;
@@ -43,9 +43,13 @@ Pulse.prototype.init = function (opts, stage) {
     this.sprite1.setInteractive(true);
 
     this.sprite2.tint = 0xEECC55;
+    this.eventEmitter = require('../event_manager').getEmitter();
+
+    var self = this;
 
     this.sprite2.click = this.sprite1.click = function(mouseData){
-       console.log("CLICK");
+      console.log("PULSE CLICK");
+      self.eventEmitter.emit('work_clicked', self);
     }
     this.stage.addChild(this.sprite1);
     this.stage.addChild(this.sprite2);
