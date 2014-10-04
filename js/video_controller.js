@@ -184,19 +184,22 @@ VideoController.prototype.playRandomWaiting = function() {
     var index = Math.floor(Math.random() * (keys.length)); 
     var video = this.VIDEOS.waiting[keys[index]];
 
-    //console.log("Playing ", video);
+    console.log("Playing ", video);
     
     if (this.nowPlaying && video.id != this.nowPlaying.id) {
         this.hideVideo(this.nowPlaying);
     }
 
     this.showVideo(video);
+    video.element.pause();
+    video.element.currentTime = 0;
     video.element.play();
 
     this.nowPlaying = video;
 }
 
 VideoController.prototype.videoEnded = function(video) {
+    console.log("Video ended!");
     if (this.nowPlaying.id != 'enter') {
         this.eventEmitter.emit('video_ended');
         this.playRandomWaiting();

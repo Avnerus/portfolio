@@ -1,29 +1,64 @@
 "use strict"
 
 module.exports = function() {
-    return new BrainController()
+    return new Pulse()
 }
 
-module.exports.BrainController = BrainController;
+module.exports.Pulse = Pulse;
 
-var TWEEN = require('tween.js');
+function Pulse() {
+    if (!(this instanceof Pulse)) return new Pulse()
 
-function BrainController() {
-    if (!(this instanceof BrainController)) return new BrainController(videoController)
-
-    this.videoController = videoController;
-
-    console.log("Brain Controller started");
+    this.loaded = false;
+    console.log("Pulse work constructed");
 }
 
-BrainController.prototype.init = function (opts) {
+Pulse.prototype.init = function (opts, stage) {
 
-    console.log("Brain Controller initializing with opts", opts);
+    console.log("Pulse work initializing with opts", opts);
+    this.stage = stage;
+    this.opts = opts;
+
+    this.sprite1 = PIXI.Sprite.fromFrame("assets/works/pulse.png");
+    this.sprite1.position.x = this.opts.stageWidth / 2 + 200;
+    this.sprite1.position.y = 100 
+    this.sprite1.anchor.x = 0.5;
+    this.sprite1.anchor.y = 0.5;
+    this.sprite1.scale.y = 0.5;
+    this.sprite1.scale.x = 0.5;
+
+    this.sprite2 = PIXI.Sprite.fromFrame("assets/works/pulse.png");
+    this.sprite2.position.x = this.opts.stageWidth / 2 - 200;
+    this.sprite2.position.y = 100 
+    this.sprite2.anchor.x = 0.5;
+    this.sprite2.anchor.y = 0.5;
+    this.sprite2.scale.y = 0.5;
+    this.sprite2.scale.x = 0.5;
+    this.counter = 0;
+
+
+    this.sprite2.tint = 0xEECC55;
+
+    this.stage.addChild(this.sprite1);
+    this.stage.addChild(this.sprite2);
+    this.loaded = true;
+
+
+    this.fly();
 }
 
-BrainController.prototype.update = function () {
+
+Pulse.prototype.fly = function() {
+    var self = this;
+
+    TweenMax.to(this.sprite1.position, 5, {repeat: -1, yoyo: true, x:(this.opts.stageWidth / 2 - 200), ease:Power0.easeIn});
+    TweenMax.to(this.sprite2.position, 5, {repeat: -1, yoyo: true, x:(this.opts.stageWidth / 2 + 200), ease:Power0.easeIn});
+}
+
+Pulse.prototype.update = function () {
     if (this.loaded) {
-
+        this.sprite1.rotation += 0.05;
+        this.sprite2.rotation += 0.05;
     }
 }
 

@@ -58,7 +58,7 @@ var loader = new PIXI.AssetLoader([
     "assets/brain/bg.jpg",
     "assets/brain/neurons_tile.png",
     "assets/brain/displacement_map.png",
-    "works/pulse.png"
+    "assets/works/pulse.png"
 ]);
 loader.onComplete = function() {
     assetsLoaded = true;
@@ -81,7 +81,6 @@ function start() {
 
 
 function animate() {
-    TWEEN.update();
     videoContoller.loop();
     brainController.update();
     renderer.render(stage);

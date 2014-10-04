@@ -6,13 +6,13 @@ module.exports = function(videoController) {
 
 module.exports.BrainController = BrainController;
 
-var WORKS = require('./works');
 var TWEEN = require('tween.js');
 
 function BrainController(videoController) {
     if (!(this instanceof BrainController)) return new BrainController(videoController)
 
     this.videoController = videoController;
+    this.works = [];
 
     console.log("Brain Controller started");
 }
@@ -54,8 +54,6 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer) {
     this.twistFilter.offset.y = 0.25;
 
 
-
-
     this.mask = new PIXI.Graphics();
     this.updateMaskbyVideoSize(1);
 //    this.maskContainer.mask = this.mask;
@@ -71,12 +69,26 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer) {
     this.counter = 0;
 
 
+    this.initWorks();
+
+
     this.loaded = true;
 
     var self = this;
-    setTimeout(function() {
-///        self.spawnWork();
-    },3000);
+}
+
+
+
+BrainController.prototype.initWorks = function() {
+    this.works = [
+        new (require('./works/pulse'))()
+    ]
+
+
+    for (var i = 0; i < this.works.length; i++) {
+        var work = this.works[i];
+        work.init(this.opts, this.stage);
+    }
 }
 
 BrainController.prototype.update = function () {
@@ -89,9 +101,12 @@ BrainController.prototype.update = function () {
         this.overlay.tilePosition.y = this.counter * -10;
     /*	this.displacementFilter.offset.x = this.counter * 10;
         this.displacementFilter.offset.y = this.counter * 10;*/
-        if (this.spawningSprite) {
-            this.spawningSprite.rotation += 0.1;
+
+        for (var i = 0; i < this.works.length; i++) {
+            var work = this.works[i];
+            work.update();
         }
+
     }
 }
 
@@ -137,28 +152,4 @@ BrainController.prototype.setTwist = function(multi) {
 
 BrainController.prototype.spawnWork = function () {
     
-    // Choose a work to spawn
-    var work = WORKS[MathUtil.rndIntRange(0, WORKS.length -1)];
-    console.log("Spawning work ", work)
-
-    var sprite = PIXI.Sprite.fromFrame("works/" + work.image);
-    sprite.position.x = this.opts.stageWidth;
-    sprite.position.y = 50 
-    sprite.anchor.x = 0.5;
-    sprite.anchor.y = 0.5;
-    sprite.scale.y = 0.5;
-    sprite.scale.x = 0.5;
-
-    var spawnTween = new TWEEN.Tween(sprite.position)
-        .to({x:[0], y:[300, 50]} , 20000)
-        .interpolation(TWEEN.Interpolation.Bezier)
-        .easing(TWEEN.Easing.Linear.None).repeat();
-
-    spawnTween.onComplete(function() {
-    });
-    spawnTween.start();
-
-    this.spawningSprite = sprite;
-
-    this.stage.addChild(sprite);
 }
