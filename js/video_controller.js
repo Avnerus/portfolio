@@ -258,9 +258,9 @@ VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
     video.element.style.bottom = video.rect.bottom + "px";
 
     if (zoomMultiplyer > 8) {
-        this.container.css("zIndex",0);
+        this.container.css("display","none");
     } else {
-        this.container.css("zIndex",2);
+        this.container.css("display","block");
     }
 }
 
