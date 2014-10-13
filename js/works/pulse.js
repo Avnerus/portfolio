@@ -65,8 +65,8 @@ Pulse.prototype.fly = function() {
 
 //    TweenMax.to(this.sprite1.position, 20, {repeat: -1, yoyo: true, x:(this.opts.stageWidth + this.sprite1.width), ease:Power0.easeInOut});
   //  TweenMax.to(this.sprite2.position, 20, {repeat: -1, yoyo: true, x:(-this.sprite2.width), ease:Power0.easeInOut});
-    TweenMax.to(this.sprite1.position , 7, {ease: Linear.easeNone, repeat: -1, bezier:{curviness:1.5, values:[{x:750, y:200}, {x:650, y:300}, {x:550, y:100}, {x:650, y: 100}]}});
-    TweenMax.to(this.sprite2.position , 7, {ease: Linear.easeNone, repeat: -1, bezier:{curviness:1.5, values:[{x:550, y:200}, {x:650, y:300}, {x:750, y:100}, {x:650, y: 100}]}});
+    TweenMax.to(this.sprite1.position , 9, {ease: Linear.easeNone, repeat: -1, bezier:{curviness:1.5, values:[{x:750, y:200}, {x:650, y:300}, {x:550, y:100}, {x:650, y: 100}]}});
+    TweenMax.to(this.sprite2.position , 9, {ease: Linear.easeNone, repeat: -1, bezier:{curviness:1.5, values:[{x:550, y:200}, {x:650, y:300}, {x:750, y:100}, {x:650, y: 100}]}});
 //TweenMax.to([div1,div2,div3], 2, {bezier:{curviness:1.5, values:[{x:100, y:100}, {x:0, y:200}, {x:-100, y:100}, {x:0, y:0}]}
 }
 
@@ -74,6 +74,13 @@ Pulse.prototype.update = function () {
     if (this.loaded) {
         this.sprite1.rotation += 0.05;
         this.sprite2.rotation += 0.05;
+    }
+}
+
+Pulse.prototype.getData = function() {
+    return {
+        name: "The Pulse Project",
+        description: "This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project.  "
     }
 }
 

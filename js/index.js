@@ -58,7 +58,9 @@ var loader = new PIXI.AssetLoader([
     "assets/brain/bg.jpg",
     "assets/brain/tile_neurons.png",
     "assets/brain/displacement_map.png",
-    "assets/works/pulse.png"
+    "assets/works/pulse.png",
+    "assets/works/gamad.json",
+    "assets/works/gamad2.json"
 ]);
 loader.onComplete = function() {
     assetsLoaded = true;

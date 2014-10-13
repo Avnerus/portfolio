@@ -8,6 +8,8 @@ module.exports.BrainController = BrainController;
 
 var TWEEN = require('tween.js');
 var eventEmitter = require('./event_manager').getEmitter();
+var Vue = require('vue');
+
 
 function BrainController(videoController) {
     if (!(this instanceof BrainController)) return new BrainController(videoController)
@@ -28,12 +30,11 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
     this.workContainer = workContainer;
 
 	this.bgContainer = new PIXI.DisplayObjectContainer();
-    this.maskContainer = new PIXI.DisplayObjectContainer();
-    this.maskContainer.addChild(this.bgContainer);
+    this.showingWork = false;
 
     this.renderer = renderer;
 
-	stage.addChild(this.maskContainer);
+	stage.addChild(this.bgContainer);
 
 
 	var bg = PIXI.Sprite.fromFrame("assets/brain/bg.jpg");
@@ -56,10 +57,7 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
     this.twistFilter.offset.x = 0.5;
     this.twistFilter.offset.y = 0.25;
 
-
-    this.mask = new PIXI.Graphics();
     this.updateMaskbyVideoSize(1);
-//    this.maskContainer.mask = this.mask;
     this.maskUpdated = true;
 
     this.bgContainer.visible = true;
@@ -74,7 +72,6 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
 
     this.initWorks();
 
-
     this.loaded = true;
 
     var self = this;
@@ -86,20 +83,55 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
 
 
 BrainController.prototype.workClicked = function(work) {
-    console.log("Work clicked!", this,  work);
+    console.log("Work clicked!", work);
+    this.vm.$data = work.getData();
+    this.showWork();
+}
+
+
+BrainController.prototype.showWork = function() {
     this.workContainer.css("height", "600px");
     this.workContainer.css("opacity", 1);
+    this.showingWork = true;
+}
+
+BrainController.prototype.hideWork = function() {
+    this.workContainer.css("opacity", 0);
+    this.showingWork = false;
 }
 
 BrainController.prototype.initWorks = function() {
+    
+    var self = this;
+
+    this.vm = new Vue({
+        el: '#work-container',
+        data: {},
+        methods: {
+            closeWork: function(e) {
+                self.hideWork();
+            }
+        }
+    });
+
+    $("#work-container").on($.support.transition.end,
+    function() {
+        console.log("Transition done!", self.workContainer.css("opacity"))
+        if (self.workContainer.css("opacity") == 0) {
+            self.workContainer.css("height", "0px");
+        }
+    });
+
     this.works = [
-        new (require('./works/pulse'))()
+        new (require('./works/pulse'))(),
+        new (require('./works/gamad'))()
     ]
 
+     $('.flexslider').flexslider();
 
     for (var i = 0; i < this.works.length; i++) {
         var work = this.works[i];
-        work.init(this.opts, this.stage, this.workClicked);
+        work.init(this.opts, this.bgContainer, this.workClicked);
     }
 }
 
@@ -152,6 +184,9 @@ BrainController.prototype.setMaskByOffset = function() {
         this.updateMaskbyVideoSize(1);
         this.setTwist(1);
         this.maskUpdated = false;
+    }
+    if (multi < 8 && this.showingWork) {
+        this.hideWork();
     }
 }
 
