@@ -265,6 +265,7 @@ VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
 }
 
 VideoController.prototype.showVideoAt = function(video, offsetPercentage) {
+    this.container.css("height", "auto");
     if (this.nowPlaying && this.nowPlaying.id != video.id) {
         this.hideVideo(this.nowPlaying);
         this.showVideo(video);
