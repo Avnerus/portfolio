@@ -20,14 +20,23 @@ Train.prototype.init = function (opts, stage, clickHandler) {
     this.opts = opts;
     this.eventEmitter = require('../event_manager').getEmitter();
 
-    this.train = PIXI.Sprite.fromFrame("assets/works/train.png");
-    this.train.position.x = 0;
-    this.train.position.y = 632;
-    this.train.anchor.x = 0.5;
-    this.train.anchor.y = 0.5;
-    this.train.scale.x = 0.75;
-    this.train.scale.y = 0.75;
-    this.stage.addChild(this.train);
+    this.train1 = PIXI.Sprite.fromFrame("assets/works/train.png");
+    this.train1.position.x = 0;
+    this.train1.position.y = 632;
+    this.train1.anchor.x = 0.5;
+    this.train1.anchor.y = 0.5;
+    this.train1.scale.x = 0.7;
+    this.train1.scale.y = 0.7;
+    this.stage.addChild(this.train1);
+
+    this.train2 = PIXI.Sprite.fromFrame("assets/works/train.png");
+    this.train2.position.x = 0 - this.train1.width;
+    this.train2.position.y = 632;
+    this.train2.anchor.x = 0.5;
+    this.train2.anchor.y = 0.5;
+    this.train2.scale.x = 0.7;
+    this.train2.scale.y = 0.7;
+    this.stage.addChild(this.train2);
 
     this.run();
 }
@@ -40,8 +49,26 @@ Train.prototype.update = function() {
 Train.prototype.run = function() {
     var self = this;
 
+    var trainSpeed = 230;
+
     var t1 = new TimelineMax({repeat: -1});
-    t1.to(this.train.position, 5, {x: 600, ease: Linear.easeNone});
+    t1.to(this.train1.position, 780 / trainSpeed, {x: 780, ease: Linear.easeNone});
+    t1.to(this.train1.position,1, {x: 868, y:540, ease: Linear.easeNone});
+    t1.to(this.train1, 1 ,{ease: Power2.easeOut, rotation: MathUtil.toRadians(-55)} , "-=1");
+    t1.to(this.train1.position , 7.5 , {ease: Linear.easeNone, bezier:{curviness:1.5, values:[{x:1010, y:425}, {x:1215, y:450}, {x: 1450, y: 900}]}});
+    t1.to(this.train1, 6.8 ,{ease: Linear.easeNone, rotation: MathUtil.toRadians(128)} , "-=7.3");
+    //t1.to(this.train1.position,2, {x: 1370, y:560, ease: Power2.easeIn});
+   // t1.to(this.train1, 2 ,{ease: Power2.easeOut, rotation: MathUtil.toRadians(45)} , "-=1.5");
+   /* t1.to(this.train1.position , 2 , {ease: Linear.easeNone, bezier:{curviness:1.5, values:[{x:1100, y:400}]}});
+    /*t1.to(this.train1, 0.75 ,{ease: Power2.easeIn, rotation: MathUtil.toRadians(0)} , "-=2");
+
+    /*var t2 = new TimelineMax({repeat: -1});
+    t2.to(this.train2.position, (780 + this.train1.width) / trainSpeed, {x: 780, ease: Linear.easeNone});
+    t2.to(this.train2.position , 3, {ease: Linear.easeNone, bezier:{curviness:0.5, values:[{x:900, y:500}, {x:930, y:470}]}});
+    t2.to(this.train2, 3,{ease: Power2.easeOut, rotation: MathUtil.toRadians(-40)} , "-=3");
+
+    t2.play();*/
+
     t1.play();
 
 
