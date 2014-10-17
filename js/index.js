@@ -33,12 +33,17 @@ var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHe
 var container = new PIXI.DisplayObjectContainer();
 
 var ratio = { x: window.innerWidth / gameOpts.stageWidth, y : window.innerHeight / gameOpts.stageHeight};
+var wasScrolled = false;
 
 stage.addChild(container);
 
 
 window.onscroll = function(event) {
     brainController.pageScroll(window.pageYOffset);
+    if (window.pageYOffset > 0 && !wasScrolled) {
+        wasScrolled = true;
+        hideDownArrow();
+    }
 }
 
 var videosLoaded = false
@@ -77,9 +82,22 @@ loader.load();
 function start() {
    brainController.init(gameOpts, container, ratio, renderer, $('#work-container'));
    $('#loading-container').hide();
-   $('#pixi-container').append(renderer.view);
    videoContoller.playWaiting();
+   $('#pixi-container').append(renderer.view);
+   setTimeout(showDownArrow, 5000);
+
    requestAnimationFrame(animate);
+}
+
+function showDownArrow() {
+    if (!wasScrolled) {
+        $('#arrow-container').css('opacity', 1);
+    }
+}
+
+function hideDownArrow() {
+    console.log("Hide down arrow!");
+    $('#arrow-container').hide();
 }
 
 
