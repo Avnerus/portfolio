@@ -73,7 +73,7 @@ loader.onComplete = function() {
     console.log("Assets loaded!");
 
     if (videosLoaded) {
-        start();
+       start();
     }
 };
 loader.load();
