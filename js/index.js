@@ -14,7 +14,6 @@ var eventEmitter = require('./event_manager').getEmitter();
 
 window.onload = function() {
     window.scroll(0, 0);
-    gameOpts.scrollHeight = $('#main-container').height();
 }
 
 // GAME PART
@@ -70,6 +69,7 @@ var loader = new PIXI.AssetLoader([
 loader.onComplete = function() {
     assetsLoaded = true;
     console.log("Assets loaded!");
+    gameOpts.scrollHeight = $('#main-container').height();
 
     if (videosLoaded) {
        start();
