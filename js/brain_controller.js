@@ -20,7 +20,7 @@ function BrainController(videoController) {
     console.log("Brain Controller started");
 }
 
-BrainController.prototype.init = function (opts, stage, ratio, renderer, workContainer) {
+BrainController.prototype.init = function (opts, stage, ratio, renderer, workContainer, infoContainer) {
 
     console.log("Brain Controller initializing with opts", opts);
 
@@ -28,9 +28,11 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
     this.ratio = ratio; 
     this.opts = opts;
     this.workContainer = workContainer;
+    this.infoContainer = infoContainer;
 
 	this.bgContainer = new PIXI.DisplayObjectContainer();
     this.showingWork = false;
+    this.showingInfo = false;
 
     this.renderer = renderer;
 
@@ -79,6 +81,10 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
     eventEmitter.on('work_clicked', function(work) {
         self.workClicked(work);
     });
+
+    eventEmitter.on('info_clicked', function() {
+        self.infoClicked();
+    });
 }
 
 
@@ -100,39 +106,67 @@ BrainController.prototype.hideWork = function() {
     this.showingWork = false;
 }
 
+BrainController.prototype.infoClicked = function() {
+    console.log("Info clicked!");
+    this.showInfo();
+}
+
+
+BrainController.prototype.showInfo = function() {
+    this.infoContainer.css("height", "600px");
+    this.infoContainer.css("opacity", 1);
+    this.showingInfo = true;
+}
+
+BrainController.prototype.hideInfo = function() {
+    this.infoContainer.css("opacity", 0);
+    this.showingInfo = false;
+}
+
+
 BrainController.prototype.initWorks = function() {
     
     var self = this;
 
     this.vm = new Vue({
-        el: '#work-container',
+        el: '#main-container',
         data: {},
         methods: {
             closeWork: function(e) {
                 self.hideWork();
+            },
+            closeInfo: function(e) {
+                self.hideInfo();
             }
         }
     });
 
     $("#work-container").on($.support.transition.end,
     function() {
-        console.log("Transition done!", self.workContainer.css("opacity"))
         if (self.workContainer.css("opacity") == 0) {
             self.workContainer.css("height", "0px");
+        }
+    });
+
+    $("#info-container").on($.support.transition.end,
+    function() {
+        if (self.infoContainer.css("opacity") == 0) {
+            self.infoContainer.css("height", "0px");
         }
     });
 
     this.works = [
         new (require('./works/pulse'))(),
         new (require('./works/gamad'))(),
-        new (require('./works/train'))()
+        new (require('./works/train'))(),
+        new (require('./works/info'))()
     ]
 
      $('.flexslider').flexslider();
 
     for (var i = 0; i < this.works.length; i++) {
         var work = this.works[i];
-        work.init(this.opts, this.bgContainer, this.workClicked);
+        work.init(this.opts, this.bgContainer);
     }
 }
 
@@ -188,6 +222,9 @@ BrainController.prototype.setMaskByOffset = function() {
     }
     if (multi < 8 && this.showingWork) {
         this.hideWork();
+    }
+    if (multi < 8 && this.showingInfo) {
+        this.hideInfo();
     }
 }
 

@@ -38,7 +38,7 @@ stage.addChild(container);
 
 window.onscroll = function(event) {
     brainController.pageScroll(window.pageYOffset);
-    if (window.pageYOffset > 0 && !wasScrolled) {
+    if (window.pageYOffset > 200 && !wasScrolled) {
         wasScrolled = true;
         hideDownArrow();
     }
@@ -64,7 +64,8 @@ var loader = new PIXI.AssetLoader([
     "assets/works/pulse.png",
     "assets/works/gamad.json",
     "assets/works/gamad2.json",
-    "assets/works/train.png"
+    "assets/works/train.png",
+    "assets/works/question_block.png"
 ]);
 loader.onComplete = function() {
     assetsLoaded = true;
@@ -80,7 +81,7 @@ loader.load();
 
 
 function start() {
-   brainController.init(gameOpts, container, ratio, renderer, $('#work-container'));
+   brainController.init(gameOpts, container, ratio, renderer, $('#work-container'), $('#info-container'));
    $('#loading-container').hide();
    videoContoller.playWaiting();
    $('#pixi-container').append(renderer.view);

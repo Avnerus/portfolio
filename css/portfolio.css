@@ -92,13 +92,28 @@
     overflow: hidden;
 }
 
-#infoֿ-container {
+.work-title {
+    height: 60px;
+    display: inline-block;
+    margin-left: 50px;
+    margin-top: 20px;
+}
+
+.work-description {
+    line-height: 1.6;
+    font-size: 16px;
+    margin-left: 50px;
+    height: 415px;
+    overflow: auto;
+}
+
+#info-container {
     z-index: 5;
     position: fixed;
-    width: 1000px;
+    width: 800px;
     height: 0px;
     left: 50%;
-    margin-left: -500px;
+    margin-left: -400px;
     background-color: #383836; 
     top: 25%;
     margin-top: -150px;
@@ -117,20 +132,21 @@
     overflow: hidden;
 }
 
-.work-title {
+.info-title {
     height: 60px;
     display: inline-block;
     margin-left: 50px;
     margin-top: 20px;
 }
 
-.work-description {
+.info-description {
     line-height: 1.6;
-    font-size: 16px;
+    font-size: 20px;
     margin-left: 50px;
     height: 415px;
     overflow: auto;
 }
+
 
 .flexslider {
     height: 415px;
