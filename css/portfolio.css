@@ -170,12 +170,16 @@
     font-size: 30px;
     position: relative;
     left: 20px;
-    top: 10px;
+    top: 20px;
     margin-right: 30px;
     color: white;
     cursor: pointer;
     width: 40px;    
     height: 40px;
+}
+
+#info-container .close-button {
+    top: 10px;
 }
 
 canvas {
