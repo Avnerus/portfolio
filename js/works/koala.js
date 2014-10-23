@@ -38,7 +38,7 @@ Koala.prototype.loadAnimations = function(name, frames) {
     this.walkLeft.anchor.x = 0.5;
     this.walkLeft.anchor.y = 0.5;
     this.walkLeft.position.x =  1200;
-    this.walkLeft.position.y = 570;
+    this.walkLeft.position.y = 573;
     //dance.scale = {x: 0.25, y: 0.25};
     this.walkLeft.loop = true;
     this.walkLeft.animationSpeed = 0.25;
@@ -62,7 +62,7 @@ Koala.prototype.loadAnimations = function(name, frames) {
     this.turnRight.anchor.x = 0.5;
     this.turnRight.anchor.y = 0.5;
     this.turnRight.position.x =  900;
-    this.turnRight.position.y = 570;
+    this.turnRight.position.y = 573;
     this.turnRight.animationSpeed = 0.25;
     this.turnRight.buttonMode = true;
     this.turnRight.setInteractive(true);
@@ -79,7 +79,7 @@ Koala.prototype.loadAnimations = function(name, frames) {
     this.walkRight.anchor.x = 0.5;
     this.walkRight.anchor.y = 0.5;
     this.walkRight.position.x =  900;
-    this.walkRight.position.y = 570;
+    this.walkRight.position.y = 573;
     this.walkRight.loop = true;
     this.walkRight.animationSpeed = 0.25;
 
@@ -102,7 +102,7 @@ Koala.prototype.loadAnimations = function(name, frames) {
     this.turnLeft.anchor.x = 0.5;
     this.turnLeft.anchor.y = 0.5;
     this.turnLeft.position.x =  1200;
-    this.turnLeft.position.y = 570;
+    this.turnLeft.position.y = 573;
     this.turnLeft.animationSpeed = 0.25;
     this.turnLeft.buttonMode = true;
     this.turnLeft.setInteractive(true);
