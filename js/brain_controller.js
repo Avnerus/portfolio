@@ -163,7 +163,7 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/koala'))()
     ]
 
-     $('.flexslider').flexslider();
+     $('.flexslider').flexslider({slideshow: false});
 
     for (var i = 0; i < this.works.length; i++) {
         var work = this.works[i];
