@@ -159,7 +159,8 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/pulse'))(),
         new (require('./works/gamad'))(),
         new (require('./works/train'))(),
-        new (require('./works/info'))()
+        new (require('./works/info'))(),
+        new (require('./works/koala'))()
     ]
 
      $('.flexslider').flexslider();

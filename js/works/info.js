@@ -37,6 +37,8 @@ Info.prototype.init = function (opts, stage, clickHandler) {
       self.eventEmitter.emit('info_clicked', self);
     }
 
+    TweenMax.to(this.questionBlock.position , 1, {ease: Power2.easeIn, repeat: -1, yoyo: true, y: 504});
+
     this.stage.addChild(this.questionBlock);
 
 }
