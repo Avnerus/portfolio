@@ -66,7 +66,10 @@ var loader = new PIXI.AssetLoader([
     "assets/works/gamad2.json",
     "assets/works/train.png",
     "assets/works/question_block.png",
-    "assets/works/Koala.json"
+    "assets/works/Koala.json",
+    "assets/works/headphones.png",
+    "assets/works/lightning.png",
+    "assets/works/lightning_f.png"
 ]);
 loader.onComplete = function() {
     assetsLoaded = true;
