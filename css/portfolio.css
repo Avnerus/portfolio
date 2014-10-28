@@ -12,6 +12,13 @@
 
 }
 
+.scroll-text {
+    font-size: 16px;
+    position: relative;
+    left: 620px;
+    bottom: 15px;
+}
+
 #arrow-container {
     width: 1280px;
     position: fixed;
@@ -36,7 +43,7 @@
 .shirt-arrow {
     position: relative;
     left: 629px;
-    bottom: 30px;
+    bottom: 0px;
 }
 
 

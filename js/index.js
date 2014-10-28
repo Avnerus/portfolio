@@ -69,7 +69,8 @@ var loader = new PIXI.AssetLoader([
     "assets/works/Koala.json",
     "assets/works/headphones.png",
     "assets/works/lightning.png",
-    "assets/works/lightning_f.png"
+    "assets/works/lightning_f.png",
+    "assets/works/dove.png"
 ]);
 loader.onComplete = function() {
     assetsLoaded = true;
