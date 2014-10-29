@@ -70,8 +70,14 @@ var loader = new PIXI.AssetLoader([
     "assets/works/headphones.png",
     "assets/works/lightning.png",
     "assets/works/lightning_f.png",
-    "assets/works/dove.png"
+    "assets/works/dove.png",
+    "assets/works/face.png",
+    "assets/works/cog.png",
+    "assets/works/keyhole.png",
+    "assets/works/can.png",
+    "assets/works/tripod.png"
 ]);
+
 loader.onComplete = function() {
     assetsLoaded = true;
     console.log("Assets loaded!");

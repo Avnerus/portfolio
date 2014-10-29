@@ -162,7 +162,10 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/info'))(),
         new (require('./works/koala'))(),
         new (require('./works/equala'))(),
-        new (require('./works/peace'))()
+        new (require('./works/peace'))(),
+        new (require('./works/brain'))(),
+        new (require('./works/security'))(),
+        new (require('./works/cantenna'))()
     ]
 
      $('.flexslider').flexslider({slideshow: false});
@@ -184,10 +187,12 @@ BrainController.prototype.update = function () {
     /*	this.displacementFilter.offset.x = this.counter * 10;
         this.displacementFilter.offset.y = this.counter * 10;*/
 
-        for (var i = 0; i < this.works.length; i++) {
+      /*  for (var i = 0; i < this.works.length; i++) {
             var work = this.works[i];
             work.update();
-        }
+        }*/
+    
+       this.works[8].update(); // Security
 
     }
 }
