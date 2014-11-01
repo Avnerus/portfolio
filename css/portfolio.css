@@ -1,3 +1,7 @@
+html {
+    overflow-y: scroll !important;
+}
+
 #video-container {
     width: 1280px;
     height: 720px;
@@ -13,10 +17,10 @@
 }
 
 .scroll-text {
-    font-size: 16px;
+    font-size: 20px;
     position: relative;
-    left: 6px;
-    bottom: 15px;
+    left: 575px;
+    bottom: 30px;
 }
 
 #arrow-container {
@@ -44,6 +48,31 @@
     position: relative;
     left: 629px;
     bottom: 0px;
+}
+
+.nav-arrows {
+    color: lightgray;
+    font-size: 20px;
+    position: relative;
+    bottom: 20px;
+}
+
+.arrow-text {
+    display:inline;
+    cursor: pointer;
+}
+
+.left-arrow {
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+.right-arrow {
+    cursor: pointer;
+}
+
+.next-text {
+   margin-left: 750px; 
 }
 
 

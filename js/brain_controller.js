@@ -91,12 +91,13 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
 BrainController.prototype.workClicked = function(work) {
     console.log("Work clicked!", work);
     this.vm.$data = work.getData();
+    this.currentWorkIndex = _.indexOf(this.works, work);
     this.showWork();
 }
 
 
 BrainController.prototype.showWork = function() {
-    this.workContainer.css("height", "600px");
+    this.workContainer.css("height", "620px");
     this.workContainer.css("opacity", 1);
     this.showingWork = true;
 }
@@ -105,15 +106,29 @@ BrainController.prototype.hideWork = function() {
     this.workContainer.css("opacity", 0);
     this.showingWork = false;
 }
+BrainController.prototype.nextWork = function() {
+    console.log("NEXT WORK! Current Index", this.currentWorkIndex);
+    this.currentWorkIndex++;
+    if (this.currentWorkIndex > this.works.length -1) {
+        this.currentWorkIndex = 0;
+    }
+    this.workClicked(this.works[this.currentWorkIndex]);
+}
 
+BrainController.prototype.prevWork = function() {
+    console.log("PREV WORK!");
+    this.currentWorkIndex--;
+    if (this.currentWorkIndex < 0) {
+        this.currentWorkIndex = this.works.length - 1;
+    }
+    this.workClicked(this.works[this.currentWorkIndex]);
+}
 BrainController.prototype.infoClicked = function() {
     console.log("Info clicked!");
     this.showInfo();
 }
-
-
 BrainController.prototype.showInfo = function() {
-    this.infoContainer.css("height", "600px");
+    this.infoContainer.css("height", "620px");
     this.infoContainer.css("opacity", 1);
     this.showingInfo = true;
 }
@@ -137,6 +152,12 @@ BrainController.prototype.initWorks = function() {
             },
             closeInfo: function(e) {
                 self.hideInfo();
+            },
+            prevWork: function(e) {
+                self.prevWork();
+            },
+            nextWork: function(e) {
+                self.nextWork();
             }
         }
     });
@@ -155,17 +176,22 @@ BrainController.prototype.initWorks = function() {
         }
     });
 
+    this.info = require('./works/info')();
+    this.info.init(this.opts, this.bgContainer);
+
+
+
     this.works = [
         new (require('./works/pulse'))(),
         new (require('./works/gamad'))(),
         new (require('./works/train'))(),
-        new (require('./works/info'))(),
         new (require('./works/koala'))(),
         new (require('./works/equala'))(),
         new (require('./works/peace'))(),
         new (require('./works/brain'))(),
         new (require('./works/security'))(),
-        new (require('./works/cantenna'))()
+        new (require('./works/cantenna'))(),
+        new (require('./works/japan'))()
     ]
 
      $('.flexslider').flexslider({slideshow: false});
@@ -183,17 +209,8 @@ BrainController.prototype.update = function () {
 
         this.counter += 0.1;
         this.overlay.tilePosition.x = this.counter * -3;
-//        this.overlay.tilePosition.y = this.counter * -10;
-    /*	this.displacementFilter.offset.x = this.counter * 10;
-        this.displacementFilter.offset.y = this.counter * 10;*/
-
-      /*  for (var i = 0; i < this.works.length; i++) {
-            var work = this.works[i];
-            work.update();
-        }*/
     
-       this.works[8].update(); // Security
-
+        this.works[7].update(); // Security
     }
 }
 

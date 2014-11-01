@@ -76,7 +76,8 @@ var loader = new PIXI.AssetLoader([
     "assets/works/cog.png",
     "assets/works/keyhole.png",
     "assets/works/can.png",
-    "assets/works/tripod.png"
+    "assets/works/tripod.png",
+    "assets/works/japan.png"
 ]);
 
 loader.onComplete = function() {

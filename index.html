@@ -21,6 +21,7 @@
   <body>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
+    <script src="js/underscore-min.js"></script>
     <script src="js/jquery.flexslider-min.js"></script>
 
     <script src="js/MathUtil.js"></script>
@@ -39,8 +40,8 @@
             <div class="row">
                 <div class="col-md-12">
                     <!--i class="fa fa-arrow-circle-down shirt-arrow"></i-->
-                    <div class="scroll-text">SCROLL</div>
-                    <div class="arrow animated bounce shirt-arrow"></div>
+                    <div class="scroll-text">SCROLL DOWN</div>
+                    <!--div class="arrow animated bounce shirt-arrow"></div-->
                 </div>
             </div>
         </div>
@@ -78,6 +79,14 @@
                         </li>
                         </ul>
                         </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 nav-arrows">
+                    <i class="fa fa-arrow-left left-arrow" v-on="click:prevWork"></i>
+                    <p class="arrow-text" v-on="click:prevWork"> Prev Idea </p>
+                    <p class="arrow-text next-text" v-on="click:nextWork"> Next Idea </p>
+                    <i class="fa fa-arrow-right right-arrow" v-on="click:nextWork"></i>
                 </div>
             </div>
         </div>
