@@ -76,6 +76,11 @@ Gamad.prototype.getData = function() {
                 url: "https://github.com/Avnerus/gamadanak",
                 description: "View the source code"
             }
+        ],
+        images: [
+            {path: "images/works/gamadanak1.png"},
+            {path: "images/works/gamadanak2.png"},
+            {path: "images/works/gamadanak3.png"}
         ]
     }
 }

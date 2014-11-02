@@ -91,6 +91,10 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
 BrainController.prototype.workClicked = function(work) {
     console.log("Work clicked!", work);
     this.vm.$data = work.getData();
+    setTimeout(function() {
+        $('#flexslider').removeData("flexslider");
+        $('.flexslider').flexslider({slideshow: false});
+    }, 1000);
     this.currentWorkIndex = _.indexOf(this.works, work);
     this.showWork();
 }
@@ -195,7 +199,6 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/bass'))()
     ]
 
-     $('.flexslider').flexslider({slideshow: false});
 
     for (var i = 0; i < this.works.length; i++) {
         var work = this.works[i];
