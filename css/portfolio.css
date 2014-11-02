@@ -53,8 +53,6 @@ html {
 .nav-arrows {
     color: lightgray;
     font-size: 20px;
-    position: relative;
-    bottom: 20px;
 }
 
 .arrow-text {
@@ -75,7 +73,12 @@ html {
    margin-left: 750px; 
 }
 
-
+.work-links {
+    font-size: 17px;
+    line-height: 1.6;
+    margin-left: 50px;
+    overflow: auto;
+}
 #loading-container {
   margin: auto;
   position: absolute;
@@ -139,7 +142,12 @@ html {
     line-height: 1.6;
     font-size: 17px;
     margin-left: 50px;
-    height: 415px;
+    height: auto;
+    overflow: auto;
+}
+
+.work-data {
+    height: 400px;
     overflow: auto;
 }
 
@@ -185,10 +193,11 @@ html {
 
 
 .flexslider {
-    height: 415px;
+    height: 400px;
     width: 450px;
     margin-left: 40px;
     background: none;
+    margin-bottom: 50px;
 }
 
 .flex-direction-nav a {
