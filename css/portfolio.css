@@ -53,6 +53,7 @@ html {
 .nav-arrows {
     color: lightgray;
     font-size: 20px;
+    margin-top: 55px;
 }
 
 .arrow-text {
@@ -62,7 +63,7 @@ html {
 
 .left-arrow {
     cursor: pointer;
-    margin-left: 10px;
+    margin-left: 430px;
 }
 
 .right-arrow {
@@ -70,7 +71,7 @@ html {
 }
 
 .next-text {
-   margin-left: 750px; 
+   margin-left: 20px; 
 }
 
 .work-links {
@@ -109,10 +110,10 @@ html {
 #work-container {
     z-index: 5;
     position: fixed;
-    width: 1000px;
+    width: 1100px;
     height: 0px;
     left: 50%;
-    margin-left: -500px;
+    margin-left: -550px;
     background-color: #383836; 
     top: 25%;
     margin-top: -150px;
@@ -193,11 +194,10 @@ html {
 
 
 .flexslider {
-    height: 400px;
-    width: 450px;
-    margin-left: 40px;
+    width: 600px;
+    height: 375px;
+    margin: 0;
     background: none;
-    margin-bottom: 50px;
 }
 
 .flex-direction-nav a {
