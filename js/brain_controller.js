@@ -114,11 +114,6 @@ BrainController.prototype.showWork = function() {
 BrainController.prototype.hideWork = function() {
     this.workContainer.css("opacity", 0);
     this.showingWork = false;
-    if($('#work-media').hasClass('flexslider')){
-        console.log("Remove and destroy flexslider!!");
-        $('#work-media').removeClass('flexslider')
-            .flexslider('destroy');
-    }
     
 }
 BrainController.prototype.nextWork = function() {
@@ -127,7 +122,16 @@ BrainController.prototype.nextWork = function() {
     if (this.currentWorkIndex > this.works.length -1) {
         this.currentWorkIndex = 0;
     }
+    this.resetSlider();
     this.workClicked(this.works[this.currentWorkIndex]);
+}
+
+BrainController.prototype.resetSlider = function() {
+    if($('#work-media').hasClass('flexslider')){
+        console.log("Remove and destroy flexslider!!");
+        $('#work-media').removeClass('flexslider')
+            .flexslider('destroy');
+    }
 }
 
 BrainController.prototype.prevWork = function() {
@@ -136,6 +140,7 @@ BrainController.prototype.prevWork = function() {
     if (this.currentWorkIndex < 0) {
         this.currentWorkIndex = this.works.length - 1;
     }
+    this.resetSlider();
     this.workClicked(this.works[this.currentWorkIndex]);
 }
 BrainController.prototype.infoClicked = function() {
@@ -181,6 +186,7 @@ BrainController.prototype.initWorks = function() {
     function() {
         if (self.workContainer.css("opacity") == 0) {
             self.workContainer.css("height", "0px");
+            self.resetSlider();
         }
     });
 
