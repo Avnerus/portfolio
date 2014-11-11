@@ -78,9 +78,9 @@ Gamad.prototype.getData = function() {
             }
         ],
         images: [
-            {path: "images/works/gamadanak1.png"},
-            {path: "images/works/gamadanak2.png"},
-            {path: "images/works/gamadanak3.png"}
+            {type: "image", path: "images/works/gamadanak1.png"},
+            {type: "image", path: "images/works/gamadanak2.png"},
+            {type: "image", path: "images/works/gamadanak3.png"}
         ]
     }
 }

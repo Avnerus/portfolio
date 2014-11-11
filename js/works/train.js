@@ -114,8 +114,8 @@ Train.prototype.getData = function() {
             }
         ],
         images: [
-            {path: "images/works/train1.jpg"},
-            {path: "images/works/train2.png"}
+            {type: "image", path: "images/works/train1.jpg"},
+            {type: "image", path: "images/works/train2.png"}
         ]
     }
 }

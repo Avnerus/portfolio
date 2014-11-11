@@ -77,11 +77,8 @@
                     <div id="work-media">
                         <ul class="slides">
                             <li v-repeat="image : images">
-                                <img src='{{image.path}}'></img>
+                                <img v-attr="src: image.path"></img>
                             </li>
-                            <!--li>
-                                <img src="images/works/gamadanak1.png"></img>
-                            </li-->
                         </ul>
                         </div>
                 </div>
