@@ -85,8 +85,6 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
     eventEmitter.on('info_clicked', function() {
         self.infoClicked();
     });
-
-    
 }
 
 

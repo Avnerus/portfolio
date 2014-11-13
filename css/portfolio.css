@@ -51,7 +51,7 @@ html {
 }
 
 .nav-arrows {
-    color: lightgray;
+    color: white;
     font-size: 20px;
     margin-top: 55px;
 }
@@ -114,7 +114,8 @@ html {
     height: 0px;
     left: 50%;
     margin-left: -550px;
-    background-color: #383836; 
+    background-color: rgba(140, 0, 220, 0.7);
+    /*background-color: #383836; */
     top: 25%;
     margin-top: -150px;
     box-shadow: 0 0 30px white;
@@ -130,6 +131,14 @@ html {
     opacity: 0;
     color: white;
     overflow: hidden;
+}
+
+.work-links a {
+    color: #DFDAF5;
+}
+
+.work-links a:hover {
+    color: #DFDAF5;
 }
 
 .work-title {
@@ -159,7 +168,8 @@ html {
     height: 0px;
     left: 50%;
     margin-left: -400px;
-    background-color: #383836; 
+    background-color: rgba(140, 0, 220, 0.7);
+    /* background-color: #383836; */
     top: 25%;
     margin-top: -150px;
     box-shadow: 0 0 30px white;
@@ -190,6 +200,14 @@ html {
     margin-left: 50px;
     height: 415px;
     overflow: auto;
+}
+
+.info-description a {
+    color: #DFDAF5;
+}
+
+.info-description a:hover {
+    color: white;
 }
 
 
