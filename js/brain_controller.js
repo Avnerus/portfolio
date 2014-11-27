@@ -226,7 +226,8 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/security'))(),
         new (require('./works/cantenna'))(),
         new (require('./works/japan'))(),
-        new (require('./works/bass'))()
+        new (require('./works/bass'))(),
+        new (require('./works/biology'))()
     ]
 
 

@@ -75,7 +75,22 @@ EQuala.prototype.update = function() {
 EQuala.prototype.getData = function() {
     return {
         name: "EQuala & Feature.FM",
-        description:["Page1", "Page2"]
+        description:["Page1", "Page2"],
+        images: [
+            {type: "image", path: "images/works/equala1.png"},
+            {type: "image", path: "images/works/equala2.png"},
+            {type: "image", path: "images/works/equala3.png"}
+        ],
+        links: [
+            {
+                url: "https://www.equala.fm",
+                description: "EQuala Official Page"
+            },
+            {
+                url: "https://www.feature.fm",
+                description: "Feature.FM Official Page"
+            }
+        ],
     }
 }
 
