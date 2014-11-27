@@ -96,6 +96,12 @@ BrainController.prototype.workClicked = function(work) {
         console.log("Load flexslider!!");
         $('#work-media.flexslider').flexslider({
             slideshow: false,
+            start: function(slider) {
+               $('.slides li img').click(function(event){
+                   event.preventDefault();
+                   slider.flexAnimate(slider.getTarget("next"));
+               });
+            }
         });
     })
     this.currentWorkIndex = _.indexOf(this.works, work);

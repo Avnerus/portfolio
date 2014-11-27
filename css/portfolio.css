@@ -313,4 +313,12 @@ canvas {
   -webkit-animation: bounce 2s infinite;
   animation: bounce 2s infinite;
 }
-
+.flexslider .slides img {
+    cursor: pointer;
+    -moz-user-select: none; 
+    -webkit-user-select: none;
+    -ms-user-select: none;
+     user-select: none;
+    -webkit-user-drag: none; 
+     user-drag: none;
+}
