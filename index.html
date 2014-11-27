@@ -79,6 +79,9 @@
                             <li v-repeat="image : images">
                                 <img v-attr="src: image.path"></img>
                             </li>
+                            <li v-repeat="video : videos">
+                                <iframe id="player_1" v-attr="src: video.url" width="595" height="370" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                            </li>
                         </ul>
                         </div>
                 </div>
