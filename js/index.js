@@ -98,6 +98,7 @@ function start() {
    brainController.init(gameOpts, container, ratio, renderer, $('#work-container'), $('#info-container'));
    $('#loading-container').hide();
    videoContoller.playWaiting();
+   renderer.view.id = "pixi-view";
    $('#pixi-container').append(renderer.view);
    setTimeout(showDownArrow, 5000);
 

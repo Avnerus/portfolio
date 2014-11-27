@@ -8855,11 +8855,9 @@ PIXI.FilterTexture = function(gl, width, height, scaleMode)
     gl.framebufferTexture2D(gl.FRAMEBUFFER, gl.COLOR_ATTACHMENT0, gl.TEXTURE_2D, this.texture, 0);
 
     // required for masking a mask??
-    // REMOVED BY AVNER
-    // https://github.com/GoodBoyDigital/pixi.js/issues/843
-/*    this.renderBuffer = gl.createRenderbuffer();
+    this.renderBuffer = gl.createRenderbuffer();
     gl.bindRenderbuffer(gl.RENDERBUFFER, this.renderBuffer);
-    gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, this.renderBuffer);*/
+    gl.framebufferRenderbuffer(gl.FRAMEBUFFER, gl.DEPTH_STENCIL_ATTACHMENT, gl.RENDERBUFFER, this.renderBuffer);
   
     this.resize(width, height);
 };

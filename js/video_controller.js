@@ -16,6 +16,7 @@ function VideoController(opts) {
     this.stageHeight = opts.stageHeight;
     this.zoomMultiplyer = 1;
     this.previousZoomMultiplyer = 1;
+    this.frameCounter = 0;
 
     console.log("Video Controller started", opts);
 }
@@ -25,14 +26,15 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
     this.container = container;
     this.VIDEOS = {
         waiting: { 
-            'tired_blink': { paths : ['final/tired_blink.webm'] },
+          /*  'tired_blink': { paths : ['final/tired_blink.webm'] },
             'shrink_lip': {paths: ['final/shrink_lip.webm']},
             'rollingEyes_openMouth': {paths: [ 'final/rollingEyes_openMouth.webm' ]},
             'rollingEyes_blink': {paths: [ 'final/rollingEyes_blink.webm' ]},
             'open_mouth': {paths: [ 'final/open_mouth.webm' ]},
             'neutral': {paths: [ 'final/neutral.webm' ]},
             'blink02': {paths: [ 'final/blink02.webm' ]},
-            'blink01': {paths: [ 'final/blink01.webm' ]}
+            'blink01': {paths: [ 'final/blink01.webm' ]}*/
+            '01': {paths: ['final/rollingEyes_blink.webm' , 'final/02.mp4' ]}
         },
         enter: {
             frames: {
@@ -66,8 +68,8 @@ VideoController.prototype.loadVideo = function (id, video, container) {
 
     if (video.frames) {
         console.log("Loading " + video.id + "(Regular video element)");
-        var FF = (typeof window.mozInnerScreenX != 'undefined');
-        console.log("Running on FF?", FF);
+        this.FF = (typeof window.mozInnerScreenX != 'undefined');
+        this.SAFARI = (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0);
         video.frames.images = [];
         video.frames.loaded = 0;
         for (var i = 0; i < video.frames.count; i++) {
@@ -78,12 +80,12 @@ VideoController.prototype.loadVideo = function (id, video, container) {
             image.name = video.id + "_" + i;
             image.id = video.id + "_" + i;
             image.style.position = "fixed";
-            if (FF) {
+            if (this.FF) {
                 image.style.left = "-75em";
+                image.style.display = "block !important";
             } else {
                 image.style.display = "none";
             }
-            image.style.display = "block !important";
             image.style.zIndex = 0;
             video.frames.images.push(image);
             container.parent().append(image);
@@ -92,11 +94,13 @@ VideoController.prototype.loadVideo = function (id, video, container) {
 
         // Place holder image
         var placeholderImage = new Image();
-        placeholderImage.src ="images/blank.jpg";
+        //placeholderImage.src ="images/blank.jpg";
+        placeholderImage.src = video.frames.images[0].src;
         placeholderImage.alt = "";
         placeholderImage.id = video.id;
         placeholderImage.name = video.id;
         placeholderImage.style.position = "relative";
+        placeholderImage.style.display = "none";
 //        placeholderImage.style.top = "0px";
   //      placeholderImage.style.bottom = "0px";
         container.append(placeholderImage);
@@ -212,6 +216,15 @@ VideoController.prototype.loop = function() {
     if (!this.VIDEOS) {
         return;
     }
+    if (this.SAFARI) {
+        this.frameCounter++;
+        if (this.frameCounter >= 10 && this.pendingHideVideo) {
+            console.log("hide!!", this.pendingHideVideo);
+            this.pendingHideVideo.element.style.display = "none";
+            this.pendingHideVideo = null;
+            this.frameCounter = 0;
+        }
+    }
     var offset = window.pageYOffset;
     var zoomStart = this.scrollHeight - this.zoomHeight;
 
@@ -239,7 +252,7 @@ VideoController.prototype.loop = function() {
 
 VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
     var video = this.nowPlaying;
-    console.log("Zoom : " + zoomMultiplyer);
+    //console.log("Zoom : " + zoomMultiplyer);
     video.rect = {
         width: this.stageWidth * zoomMultiplyer ,
         height: this.stageHeight * zoomMultiplyer
@@ -267,15 +280,15 @@ VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
 VideoController.prototype.showVideoAt = function(video, offsetPercentage) {
     this.container.css("height", "auto");
     if (this.nowPlaying && this.nowPlaying.id != video.id) {
-        this.hideVideo(this.nowPlaying);
         this.showVideo(video);
+        this.hideVideo(this.nowPlaying);
         this.nowPlaying = video;
     }
     var time;
     if (video.frames) {
         // It's a frames video - show the appropiate frame
         var frameNumber =  Math.min(Math.max( Math.round( offsetPercentage * video.frames.count), 1),video.frames.count);
-        if (frameNumber != video.frames.current) {
+        if (frameNumber != video.frames.current && frameNumber >= 2) {
             video.element.src = video.frames.images[frameNumber - 1].src;
             video.element.style.width = this.stageWidth;
             video.element.style.height = this.stageHeight;
@@ -290,7 +303,15 @@ VideoController.prototype.showVideoAt = function(video, offsetPercentage) {
 
 
 VideoController.prototype.hideVideo = function (video) {
-  video.element.style.display = "none";
+  if (this.SAFARI) {
+    this.pendingHideVideo = video;
+    if (video.id == 'enter') {
+      video.element.src = video.frames.images[0].src;
+      console.log("Back to ", video.element.src);
+    }
+  } else {
+    video.element.style.display = "none";
+  }
 }
 VideoController.prototype.showVideo = function (video) {
   video.element.style.display = "block";  
