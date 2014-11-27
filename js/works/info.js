@@ -52,7 +52,7 @@ Info.prototype.update = function() {
 Info.prototype.getData = function() {
     return {
         name: "Info",
-        description: ""
+        description: [""]
     }
 }
 

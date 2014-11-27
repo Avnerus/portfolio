@@ -91,7 +91,9 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
 BrainController.prototype.workClicked = function(work) {
     console.log("Work clicked!", work);
     this.vm.$data = work.getData();
+    this.vm.$data.currentIndex = 0;
     $('#work-media').addClass('flexslider');
+    var self = this;
     Vue.nextTick(function() {
         console.log("Load flexslider!!");
         $('#work-media.flexslider').flexslider({
@@ -101,6 +103,13 @@ BrainController.prototype.workClicked = function(work) {
                    event.preventDefault();
                    slider.flexAnimate(slider.getTarget("next"));
                });
+            },
+            after: function(slider) {
+                console.log("Current Slide ", slider.currentSlide);
+                var index = slider.currentSlide;
+                if (self.vm.$data.description[index]) {
+                    self.vm.$data.currentIndex = index;
+                }
             }
         });
     })
@@ -169,7 +178,7 @@ BrainController.prototype.initWorks = function() {
 
     this.vm = new Vue({
         el: '#main-container',
-        data: {},
+        data: {currentIndex: 0, description: ""},
         methods: {
             closeWork: function(e) {
                 self.hideWork();
