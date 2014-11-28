@@ -19,11 +19,16 @@ function VideoController(opts) {
     this.frameCounter = 0;
 
     console.log("Video Controller started", opts);
+
+    this.FF = (typeof window.mozInnerScreenX != 'undefined');
+    this.SAFARI = (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0);
 }
 
-VideoController.prototype.loadVideos = function (container, scrollHeight) {
+VideoController.prototype.loadVideos = function (container, scrollHeight, neutralContainer) {
 
     this.container = container;
+    this.neutralContainer = neutralContainer;
+
     this.VIDEOS = {
         waiting: { 
             'tired_blink': { paths : ['final/tired_blink.webm','final/tired_blink.mp4'] },
@@ -32,7 +37,7 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
             'rollingEyes_blink': {paths: [ 'final/rollingEyes_blink.webm', 'final/rollingEyes_blink.mp4'  ]},
             'open_mouth': {paths: [ 'final/open_mouth.webm', 'final/open_mouth.mp4'  ]},
             'neutral': {paths: [ 'final/neutral.webm', 'final/neutral.mp4'  ]},
-//            'blink02': {paths: [ 'final/blink02.webm', 'final/blink02.mp4'  ]},
+            //'blink02': {paths: [ 'final/blink02.webm', 'final/blink02.mp4'  ]},
             'blink01': {paths: [ 'final/blink01.webm', 'final/blink01.mp4'  ]}
         },
         enter: {
@@ -57,6 +62,7 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
     this.loadVideo('enter', this.VIDEOS.enter, container);
 
     this.nowPlaying = null;
+
 }
 
 VideoController.prototype.loadVideo = function (id, video, container) {
@@ -67,8 +73,6 @@ VideoController.prototype.loadVideo = function (id, video, container) {
 
     if (video.frames) {
         console.log("Loading " + video.id + "(Regular video element)");
-        this.FF = (typeof window.mozInnerScreenX != 'undefined');
-        this.SAFARI = (navigator.userAgent.search("Safari") >= 0 && navigator.userAgent.search("Chrome") < 0);
         video.frames.images = [];
         video.frames.loaded = 0;
         for (var i = 0; i < video.frames.count; i++) {
@@ -123,10 +127,6 @@ VideoController.prototype.loadVideo = function (id, video, container) {
         }
 
 
-        /*videoElement.oncanplaythrough = function(event) {
-            self.videoCanPlayThrough(event.target);
-        }*/
-
         videoElement.addEventListener("canplaythrough",function(event) {self.videoCanPlayThrough(event.target)}, false);
         videoElement.addEventListener("ended",function(event) {self.videoEnded(event.target)}, false);
 
@@ -175,6 +175,9 @@ VideoController.prototype.checkLoaded = function() {
     }
     if (allLoaded && this.VIDEOS.enter.loaded) {
         console.log("All videos are loaded!");
+        if (this.SAFARI) {
+            this.neutralContainer.show();
+        }
         this.eventEmitter.emit('videos_loaded');
     }
 }
@@ -188,19 +191,23 @@ VideoController.prototype.playRandomWaiting = function() {
     var keys = Object.keys(this.VIDEOS.waiting);
     var index = Math.floor(Math.random() * (keys.length)); 
     var video = this.VIDEOS.waiting[keys[index]];
+    if (video.loaded) {
 
-    console.log("Playing ", video);
-    
-    if (this.nowPlaying && video.id != this.nowPlaying.id) {
-        this.hideVideo(this.nowPlaying);
+        console.log("Playing ", video);
+        
+        this.showVideo(video);
+
+        if (this.nowPlaying && video.id != this.nowPlaying.id) {
+            this.hideVideo(this.nowPlaying);
+        }
+
+        video.element.pause();
+        video.element.currentTime = 0;
+        video.element.play();
+
+        this.nowPlaying = video;
     }
 
-    this.showVideo(video);
-    video.element.pause();
-    video.element.currentTime = 0;
-    video.element.play();
-
-    this.nowPlaying = video;
 }
 
 VideoController.prototype.videoEnded = function(video) {
@@ -215,15 +222,6 @@ VideoController.prototype.loop = function() {
     if (!this.VIDEOS) {
         return;
     }
-    if (this.SAFARI) {
-        this.frameCounter++;
-        if (this.frameCounter >= 10 && this.pendingHideVideo) {
-            console.log("hide!!", this.pendingHideVideo);
-            this.pendingHideVideo.element.style.display = "none";
-            this.pendingHideVideo = null;
-            this.frameCounter = 0;
-        }
-    }
     var offset = window.pageYOffset;
     var zoomStart = this.scrollHeight - this.zoomHeight;
 
@@ -237,6 +235,9 @@ VideoController.prototype.loop = function() {
         this.zoomMultiplyer = 1 + ((offset - zoomStart) / this.zoomHeight  * 15);
     }
     else {
+        if (this.SAFARI) {
+            this.neutralContainer.show();
+        }
         if (this.nowPlaying && this.nowPlaying.id == this.VIDEOS.enter.id) {
             this.playRandomWaiting();
         }
@@ -281,13 +282,16 @@ VideoController.prototype.showVideoAt = function(video, offsetPercentage) {
     if (this.nowPlaying && this.nowPlaying.id != video.id) {
         this.showVideo(video);
         this.hideVideo(this.nowPlaying);
+        if (this.SAFARI) {
+            this.neutralContainer.hide();
+        }
         this.nowPlaying = video;
     }
     var time;
     if (video.frames) {
         // It's a frames video - show the appropiate frame
         var frameNumber =  Math.min(Math.max( Math.round( offsetPercentage * video.frames.count), 1),video.frames.count);
-        if (frameNumber != video.frames.current && frameNumber >= 2) {
+        if (frameNumber != video.frames.current && (!this.SAFARI || frameNumber >= 2)) {
             video.element.src = video.frames.images[frameNumber - 1].src;
             video.element.style.width = this.stageWidth;
             video.element.style.height = this.stageHeight;
@@ -302,15 +306,7 @@ VideoController.prototype.showVideoAt = function(video, offsetPercentage) {
 
 
 VideoController.prototype.hideVideo = function (video) {
-  if (this.SAFARI) {
-    this.pendingHideVideo = video;
-    if (video.id == 'enter') {
-      video.element.src = video.frames.images[0].src;
-      console.log("Back to ", video.element.src);
-    }
-  } else {
     video.element.style.display = "none";
-  }
 }
 VideoController.prototype.showVideo = function (video) {
   video.element.style.display = "block";  

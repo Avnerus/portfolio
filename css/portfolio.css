@@ -2,6 +2,28 @@ html {
     overflow-y: scroll !important;
 }
 
+body {
+  -webkit-transform: translate3d(0, 0, 0);
+    
+}
+
+video {
+    -webkit-transform-style: preserve-3d;
+}
+
+#neutral-container {
+    width: 1280px;
+    height: 720px;
+    position: fixed;
+    left: 50%;
+    margin-left: -640px;
+    z-index: 2;
+    bottom: -1px;
+    display: none;
+    font-size: 0px;
+    padding: 0;
+}
+
 #video-container {
     width: 1280px;
     height: 720px;

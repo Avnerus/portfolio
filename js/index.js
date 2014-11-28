@@ -90,7 +90,7 @@ loader.onComplete = function() {
     if (videosLoaded) {
        start();
     }
-    videoContoller.loadVideos($('#video-container'), gameOpts.scrollHeight);
+    videoContoller.loadVideos($('#video-container'), gameOpts.scrollHeight, $('#neutral-container'));
 };
 loader.load();
 
