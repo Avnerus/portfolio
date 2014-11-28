@@ -26,15 +26,14 @@ VideoController.prototype.loadVideos = function (container, scrollHeight) {
     this.container = container;
     this.VIDEOS = {
         waiting: { 
-          /*  'tired_blink': { paths : ['final/tired_blink.webm'] },
-            'shrink_lip': {paths: ['final/shrink_lip.webm']},
-            'rollingEyes_openMouth': {paths: [ 'final/rollingEyes_openMouth.webm' ]},
-            'rollingEyes_blink': {paths: [ 'final/rollingEyes_blink.webm' ]},
-            'open_mouth': {paths: [ 'final/open_mouth.webm' ]},
-            'neutral': {paths: [ 'final/neutral.webm' ]},
-            'blink02': {paths: [ 'final/blink02.webm' ]},
-            'blink01': {paths: [ 'final/blink01.webm' ]}*/
-            '01': {paths: ['final/rollingEyes_blink.webm' , 'final/02.mp4' ]}
+            'tired_blink': { paths : ['final/tired_blink.webm','final/tired_blink.mp4'] },
+            'shrink_lip': {paths: ['final/shrink_lip.webm', 'final/shrink_lip.mp4']},
+            'rollingEyes_openMouth': {paths: [ 'final/rollingEyes_openMouth.webm', 'final/rollingEyes_openMouth.mp4'  ]},
+            'rollingEyes_blink': {paths: [ 'final/rollingEyes_blink.webm', 'final/rollingEyes_blink.mp4'  ]},
+            'open_mouth': {paths: [ 'final/open_mouth.webm', 'final/open_mouth.mp4'  ]},
+            'neutral': {paths: [ 'final/neutral.webm', 'final/neutral.mp4'  ]},
+//            'blink02': {paths: [ 'final/blink02.webm', 'final/blink02.mp4'  ]},
+            'blink01': {paths: [ 'final/blink01.webm', 'final/blink01.mp4'  ]}
         },
         enter: {
             frames: {
