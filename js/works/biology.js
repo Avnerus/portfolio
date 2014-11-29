@@ -43,6 +43,17 @@ Biology.prototype.loadSprite = function() {
       self.eventEmitter.emit('work_clicked', self);
     }
 
+    var bacteria = new PIXI.Sprite.fromFrame("assets/works/bacteria.png");
+    bacteria.anchor.x = 0.5;
+    bacteria.anchor.y = 0.5;
+    bacteria.position.x = 20;
+    bacteria.position.y = 40;
+    bacteria.scale = {x: 0.75, y: 0.75};
+
+
+    TweenMax.to(bacteria.scale, 1, {ease: Linear.easeNone, repeat: -1, yoyo: true, x: 1, y: 0.5});
+
+    biology.addChild(bacteria);
     this.stage.addChild(biology);
 }
 Biology.prototype.update = function() {

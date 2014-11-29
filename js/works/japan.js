@@ -52,7 +52,10 @@ Japan.prototype.update = function() {
 Japan.prototype.getData = function() {
     return {
         name: "Japan",
-        description: ["Japan"]
+        description: ["Japan1"],
+        images: [
+            {type: "image", path: "images/works/japan1.jpg"}
+        ],
     }
 }
 

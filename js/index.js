@@ -79,7 +79,8 @@ var loader = new PIXI.AssetLoader([
     "assets/works/tripod.png",
     "assets/works/japan.png",
     "assets/works/bass.png",
-    "assets/works/biology.png"
+    "assets/works/biology.png",
+    "assets/works/bacteria.png"
 ]);
 
 loader.onComplete = function() {
