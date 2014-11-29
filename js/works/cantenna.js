@@ -67,7 +67,24 @@ Cantenna.prototype.update = function() {
 Cantenna.prototype.getData = function() {
     return {
         name: "Cantenna Mesh",
-        description: ["This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project. This is a very nice project.  "]
+        description: [
+            'I started out my volunteer in ASSAF\'s refugee youth center as a computer teacher. Later on, I was introduced to the TAMI hackerspace and the "Arig" mesh project. The idea is simple and is used all around the world: use cheap home equipment such as personal WiFi routers and tin cans, to form a community based WiFi network, that does not rely on any corporate or government infrastrucure. I saw the need for such a network in the refugee community of south Tel Aviv, because they don\'t get support from our government and are genrally unable to own a 3G internet connection. I also saw this as a great educational opportunity for the kids in ASSAF.',
+            "Together we hack our routers, drill out tin cans and make them into antennas, and then climb roofs to install them all over south Tel Aviv. Here we are testing the signal strength from one roof to the next."
+        ],
+        links: [
+            {
+                url: "http://telavivmakers.org/index.php/Main_Page",
+                description: "TAMI - Tel Aviv Makers Hackerspace"
+            },
+            {
+                url: "http://arig.org.il",
+                description: "ARIG - Israeli Mesh Project"
+            }
+        ],
+        images: [
+            {type: "image", path: "images/works/cantenna1.jpg"},
+            {type: "image", path: "images/works/cantenna2.jpg"}
+        ],
     }
 }
 
