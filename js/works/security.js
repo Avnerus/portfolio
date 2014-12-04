@@ -66,7 +66,11 @@ Security.prototype.update = function() {
 Security.prototype.getData = function() {
     return {
         name: "IT Security",
-        description: ["IT Security description"]
+        description:  [ 
+            {
+                text: "Security project"
+            }
+        ]
     }
 }
 

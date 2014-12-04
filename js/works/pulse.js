@@ -82,12 +82,15 @@ Pulse.prototype.getData = function() {
             }
         ],
         name: "The Pulse Project",
-        description: ["My first projet that had purely artistic motives. Inspired by the bio-musical work of Daito Manabe, and fueled by my own interest in exposing human interaction using an audio-visual representation of their heartbeats. In this project I combine the heartbeats of 4 people into one electronic music composition and a space-gravitational scene of orbiting creatures. I tried to reflect the relations between the heartbeats using audio and visuals. The work was displayed in the Israeli Burning-Man festival (Midburn) and the Tel Aviv White-Night festival", "Here I am testing the project, with my ASSAF computer class. Location: Tel Aviv Makers Hackerspace - TAMI"],
-        images: [
-            {type: "image", path: "images/works/pulse1.png"}
-        ],
-        videos: [
-            {type: "vimeo", url: "https://player.vimeo.com/video/113006896??api=1&player_id=player_1"}
+        description: [
+            {
+                text: "My first projet that had purely artistic motives. Inspired by the bio-musical work of Daito Manabe, and fueled by my own interest in exposing human interaction using an audio-visual representation of their heartbeats. In this project I combine the heartbeats of 4 people into one electronic music composition and a space-gravitational scene of orbiting creatures. I tried to reflect the relations between the heartbeats using audio and visuals. The work was displayed in the Israeli Burning-Man festival (Midburn) and the Tel Aviv White-Night festival",
+                image: "images/works/pulse1.png"
+            },
+            {
+                text: "Here I am testing the project, with my ASSAF computer class. Location: Tel Aviv Makers Hackerspace - TAMI", 
+                video: "https://player.vimeo.com/video/113006896??api=1&player_id=player_1"
+            }
         ]
     }
 }

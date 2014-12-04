@@ -66,7 +66,16 @@ Gamad.prototype.update = function() {
 Gamad.prototype.getData = function() {
     return {
         name: "Gamad Anak",
-        description:[ 'Hebrew for "Gnome-Giant": a gift-giving game traditionaly held in Israel during Purim holiday. In my gift I came up with a new way to share music - using a "Mixtape Game". Press Space-Bar along with the beat, to match the Hamman ears in their place - and crazy things start happening.'],
+        description:[ 
+            {
+                text: 'Hebrew for "Gnome-Giant": a gift-giving game traditionaly held in Israel during Purim holiday. In my gift I came up with a new way to share music - using a "Mixtape Game". Press Space-Bar along with the beat, to match the Hamman ears in their place - and crazy things start happening.',
+                image: "images/works/gamadanak1.png",
+
+            },
+            {
+                image: "images/works/gamadanak3.png"
+            }
+        ],
         links: [
             {
                 url: "http://avnerus.github.io/gamadanak",
@@ -76,11 +85,6 @@ Gamad.prototype.getData = function() {
                 url: "https://github.com/Avnerus/gamadanak",
                 description: "View the source code"
             }
-        ],
-        images: [
-            {type: "image", path: "images/works/gamadanak1.png"},
-            {type: "image", path: "images/works/gamadanak2.png"},
-            {type: "image", path: "images/works/gamadanak3.png"}
         ]
     }
 }

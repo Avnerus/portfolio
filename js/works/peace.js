@@ -64,7 +64,11 @@ Peace.prototype.update = function() {
 Peace.prototype.getData = function() {
     return {
         name: "The Conflict",
-        description: ["Conflict description"]
+        description:  [ 
+            {
+                text: "Conflict project"
+            }
+        ]
     }
 }
 

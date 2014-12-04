@@ -102,7 +102,15 @@ Train.prototype.run = function() {
 Train.prototype.getData = function() {
     return {
         name: "Railroad Island",
-        description: ["During my student exchange in Tokyo, I met Alex, an Australian animator who used to work for Tacticsoft, an Israeli game company that hired my freelance services. Alex was just forming his own game start-up, and when I came back to Israel he offered me to co-develop this railroad simulation mobile game for a Tokyo based publisher. I have developed the train and railroad components using Unity game engine"],
+        description: [
+            {
+                text: "During my student exchange in Tokyo, I met Alex, an Australian animator who used to work for Tacticsoft, an Israeli game company that hired my freelance services. Alex was just forming his own game start-up, and when I came back to Israel he offered me to co-develop this railroad simulation mobile game for a Tokyo based publisher. I have developed the train and railroad components using Unity game engine",
+                image: "images/works/train1.jpg",
+            }, 
+            {
+              image: "images/works/train2.png"
+            }
+        ],
         links: [
             {
                 url: "https://play.google.com/store/apps/details?id=jp.colopl.entrain",
@@ -112,10 +120,6 @@ Train.prototype.getData = function() {
                 url: "https://itunes.apple.com/us/app/railroad-island!/id647758295?mt=8",
                 description: "iTunes App Store"
             }
-        ],
-        images: [
-            {type: "image", path: "images/works/train1.jpg"},
-            {type: "image", path: "images/works/train2.png"}
         ]
     }
 }

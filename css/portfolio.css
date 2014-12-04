@@ -76,6 +76,7 @@ video {
     color: white;
     font-size: 20px;
     margin-top: 55px;
+    text-align: center;
 }
 
 .arrow-text {
@@ -85,7 +86,6 @@ video {
 
 .left-arrow {
     cursor: pointer;
-    margin-left: 430px;
 }
 
 .right-arrow {
@@ -131,17 +131,9 @@ video {
 
 #work-container {
     z-index: 5;
-    position: fixed;
-    width: 1100px;
-    height: 0px;
-    left: 50%;
-    margin-left: -550px;
-    background-color: rgba(100, 0, 160, 0.7);
+    height: 0;
+    width: 100%;
     /*background-color: #383836; */
-    top: 25%;
-    margin-top: -150px;
-    box-shadow: 0 0 30px white;
-    border: 2px solid white;
    /* For Safari 3.1 to 6.0 */
     -webkit-transition-property: opacity;
     -webkit-transition-duration: 0.5s;
@@ -150,9 +142,20 @@ video {
     transition-property: opacity;
     transition-duration: 0.5s;
     transition-timing-function: linear;
+    background-color: rgba(0, 0, 0, 0.8);
     opacity: 0;
-    color: white;
     overflow: hidden;
+    position: fixed;
+}
+
+#work-content {
+    background-color: rgba(100, 0, 160, 0.7);
+    box-shadow: 0 0 30px white;
+    border: 2px solid white;
+    color: white;
+    height: 92%;
+    overflow: auto;
+    
 }
 
 .work-links a {

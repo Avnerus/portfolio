@@ -50,51 +50,55 @@
         </div>
         <div id="pixi-container">
         </div>
-        <div id="work-container">
+        <div id="work-container" v-on="click: containerClick">
             <div class="row"> 
                 <div class="col-md-12">
                     <span><a><i class="fa fa-close close-button" v-on="click: closeWork"></i></a></span>
                 </div>
             </div>
-            <div class="row"> 
-                <div class="col-md-12">
-                    <h1 class="work-title">{{name}}</h1>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-md-5 work-data">
-                    <div class="work-links" v-if="links.length > 0">
-                        <div> Links:
-                        <ul>
-                            <li v-repeat="link : links">
-                                <a target="_blank" href='{{link.url}}'>{{link.description}}</a>
-                            </li>
-                        </ul>
-                        </div>
-                    </div>
-                    <div class="work-description">
-                        {{description[currentIndex]}}
+            <div id="work-content" class="col-md-8 col-md-offset-2">
+                <div class="row"> 
+                    <div class="col-md-12">
+                        <h1 class="work-title">{{name}}</h1>
                     </div>
                 </div>
-                <div class="col-md-7">
-                    <div id="work-media">
-                        <ul class="slides">
-                            <li v-repeat="image : images">
-                                <img v-attr="src: image.path"></img>
-                            </li>
-                            <li v-repeat="video : videos">
-                                <iframe id="player_1" v-attr="src: video.url" width="595" height="370" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-                            </li>
-                        </ul>
+                <div class="row" v-repeat="item : description">
+                    <div class="col-md-6 work-data">
+                        <div class="work-links" v-if="links.length > 0 && $index == 0">
+                            <div> Links:
+                            <ul>
+                                <li v-repeat="link : links">
+                                    <a target="_blank" href='{{link.url}}'>{{link.description}}</a>
+                                </li>
+                            </ul>
+                            </div>
                         </div>
+                        <div v-if="item.text" class="work-description">
+                            {{item.text}}
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div id="work-media">
+                            <iframe id="player_1" v-if="item.video" v-attr="src: item.video" width="600" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                            <img v-if="item.image" v-attr="src: item.image"></img>
+                            <!--ul class="slides">
+                                <li v-repeat="image : images">
+                                    <img v-attr="src: image.path"></img>
+                                </li>
+                                <li v-repeat="video : videos">
+                                    <iframe id="player_1" v-attr="src: video.url" width="595" height="370" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                                </li>
+                            </ul-->
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-md-12 nav-arrows">
-                    <i class="fa fa-arrow-left left-arrow" v-on="click:prevWork"></i>
-                    <p class="arrow-text" v-on="click:prevWork"> Prev Idea </p>
-                    <p class="arrow-text next-text" v-on="click:nextWork"> Next Idea </p>
-                    <i class="fa fa-arrow-right right-arrow" v-on="click:nextWork"></i>
+                <div class="row">
+                    <div class="col-md-12 nav-arrows center-block">
+                        <i class="fa fa-arrow-left left-arrow" v-on="click:prevWork"></i>
+                        <p class="arrow-text" v-on="click:prevWork"> Prev Idea </p>
+                        <p class="arrow-text next-text" v-on="click:nextWork"> Next Idea </p>
+                        <i class="fa fa-arrow-right right-arrow" v-on="click:nextWork"></i>
+                    </div>
                 </div>
             </div>
         </div>
