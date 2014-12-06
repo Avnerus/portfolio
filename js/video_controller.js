@@ -270,7 +270,7 @@ VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
     video.element.style.left = video.rect.left + "px";
     video.element.style.bottom = video.rect.bottom + "px";
 
-    if (zoomMultiplyer > 8) {
+    if (zoomMultiplyer > 7) {
         this.container.css("display","none");
     } else {
         this.container.css("display","block");

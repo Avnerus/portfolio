@@ -181,11 +181,6 @@ video {
     overflow: auto;
 }
 
-.work-data {
-    height: 400px;
-    overflow: auto;
-}
-
 #info-container {
     z-index: 5;
     position: fixed;

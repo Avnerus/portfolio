@@ -79,7 +79,11 @@
                     </div>
                     <div class="col-md-6">
                         <div id="work-media">
-                            <iframe id="player_1" v-if="item.video" v-attr="src: item.video" width="600" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                            <div class="embed-responsive embed-responsive-4by3">
+                            
+                            <div class="embed-responsive embed-responsive-16by9" v-if="item.video">
+                                <iframe id="player_1" class="embed-responsive-item" v-attr="src: item.video" width="600" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                            </div>
                             <img class="img-responsive" v-if="item.image" v-attr="src: item.image"></img>
                             <!--ul class="slides">
                                 <li v-repeat="image : images">
