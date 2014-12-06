@@ -62,7 +62,7 @@
                         <h1 class="work-title">{{name}}</h1>
                     </div>
                 </div>
-                <div class="row" v-repeat="item : description">
+                <div class="row item-row" v-repeat="item : description">
                     <div class="col-md-6 work-data">
                         <div class="work-links" v-if="links.length > 0 && $index == 0">
                             <div> Links:
@@ -80,7 +80,7 @@
                     <div class="col-md-6">
                         <div id="work-media">
                             <iframe id="player_1" v-if="item.video" v-attr="src: item.video" width="600" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
-                            <img v-if="item.image" v-attr="src: item.image"></img>
+                            <img class="img-responsive" v-if="item.image" v-attr="src: item.image"></img>
                             <!--ul class="slides">
                                 <li v-repeat="image : images">
                                     <img v-attr="src: image.path"></img>

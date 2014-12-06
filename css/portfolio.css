@@ -347,3 +347,8 @@ canvas {
     -webkit-user-drag: none; 
      user-drag: none;
 }
+
+
+.item-row {
+    margin-bottom: 20px;
+}
