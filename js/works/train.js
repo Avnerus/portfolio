@@ -104,7 +104,7 @@ Train.prototype.getData = function() {
         name: "Railroad Island",
         description: [
             {
-                text: "During my student exchange in Tokyo, I met Alex, an Australian animator who used to work for Tacticsoft, an Israeli game company that hired my freelance services. Alex was just forming his own game start-up, and when I came back to Israel he offered me to co-develop this railroad simulation mobile game for a Tokyo based publisher. I have developed the train and railroad components using Unity game engine",
+                text: "I railroad simulation mobile game, co-developed with two Austrlians, for a Tokyo based publisher. I have developed the train and railroad components using Unity game engine",
                 image: "images/works/train1.jpg",
             }, 
             {

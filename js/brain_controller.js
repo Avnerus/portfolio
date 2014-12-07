@@ -181,6 +181,7 @@ BrainController.prototype.initWorks = function() {
         data: {currentIndex: 0, description: ""},
         methods: {
             containerClick: function(e) {
+                console.log("BOO");
                 if (e.target == e.currentTarget) {
                     self.hideWork();
                 }

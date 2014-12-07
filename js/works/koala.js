@@ -156,8 +156,23 @@ Koala.prototype.update = function() {
 
 Koala.prototype.getData = function() {
     return {
-        name: "Koala",
-        description: ["Koala description"]
+        name: "Koala (WIP)",
+        description: [
+            {
+
+                text: "A mobile game about a Koala that is sick of only sleeping and eating and dreams about becoming an office worker. The concept was created by me and I've started developing this along with my friend Ilan Aminoff. The game is currently on hold.",
+                image: "images/works/koala1.png"
+            },
+            {
+                text: "In the game mechanics, the screen is split between the tree habitat and the office. Office actions that the Koala is doing in her sleep, affect her tree in the real world. ",
+                image: "images/works/koala2.png"
+            },
+            {
+                text: "Developed in C++ using Cocos2D-X",
+                image: "images/works/koala3.png"
+            }
+        ],
+        links: []
     }
 }
 
