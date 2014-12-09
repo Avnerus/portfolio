@@ -74,8 +74,16 @@ Brain.prototype.getData = function() {
         name: "The Problem of Consciousness",
         description:  [ 
             {
-                text: "Consciousness project"
+                text: "In Tel Aviv university's \"Consciousness Studies\" course, we tried to solve 'the hard problem of consciousness'. In the picture: \"Mary's Room\" - a famous thought experiment by Frank Jacskson (1982).",
+                image: "images/works/brain1.jpg",
             }
+        ],
+        links: [
+            {
+                url: "/docs/creation_of_meaning.pdf",
+                description: "Creation of Meaning - From our Brain to Society: Final paper for Prof. Hiroshi Sakurai, Waseda University."
+            },
+
         ]
     }
 }

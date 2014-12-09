@@ -94,8 +94,10 @@ BrainController.prototype.workClicked = function(work) {
     this.vm.$data.currentIndex = 0;
     $('#work-media').addClass('flexslider');
     var self = this;
-/*    Vue.nextTick(function() {
-        console.log("Load flexslider!!");
+    Vue.nextTick(function() {
+        $('.magnify-image').magnificPopup({type:'image', closeOnContentClick: true});
+        
+        /*console.log("Load flexslider!!");
         $('#work-media.flexslider').flexslider({
             slideshow: false,
             start: function(slider) {
@@ -111,8 +113,8 @@ BrainController.prototype.workClicked = function(work) {
                     self.vm.$data.currentIndex = index;
                 }
             }
-        });
-    })*/
+        });*/
+    })
     this.currentWorkIndex = _.indexOf(this.works, work);
     this.showWork();
 }

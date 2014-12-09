@@ -54,15 +54,26 @@ Japan.prototype.getData = function() {
         name: "Japan",
         description: [
             {
-                text: "Japan!",
-                image: "images/works/japan1.jpg"
+                text: "Japan has a place in my soul since early childhood. It started with Okinawa Goju Karate at the age of 12, moved on to being an anime otaku in highschool and at the age of 24, after being discharged from the army, I went on a 4 month cross country trip. 2.5 months of that trip were spent in Okinawa. I studied Karate with the Higaona Sensei, the Goju Ryu master and learned to play the Sanshin. I also went diving in the islands on weekends.",
+                image: "images/works/japan1.jpg",
+                imageBig: "images/works/japan1_big.jpg"
 
             },
             {
-                text: "Japan 2!",
-                image: "images/works/japan2.png"
+                text: "Finally in 2010 I was ready to see what is it like to actually live in Japan. I was accepted to a student exchange program in Waseda university and lived in Japan for a full year.",
+                image: "images/works/japan2.jpg",
+                imageBig: "images/works/japan2_big.jpg"
 
             },
+            {
+                text: "Now I can speak the language and Japan still resides in my mind. It is apparent in everying aspect of my life and character.",
+                image: "images/works/japan3.jpg",
+                imageBig: "images/works/japan3_big.jpg"
+
+            },
+            {
+                youtube: "http://www.youtube.com/embed/7TrUsnLMt1k"
+            }
         ],
         links: []
     }

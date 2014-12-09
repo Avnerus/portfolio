@@ -68,8 +68,16 @@ Security.prototype.getData = function() {
         name: "IT Security",
         description:  [ 
             {
-                text: "Security project"
+                text: "There is not much that I can disclose from 7 years of being a security researcher for the Israeli Army and government, but I know that \"hacking\", in the broad sense of the word, is a lifestyle that I will always maintain. Whether it\'s comuters, the brain or life.",
+                image: "images/works/security1.png",
             }
+        ],
+        links: [
+            {
+                url: "http://seclists.org/fulldisclosure/2005/Dec/659",
+                description: "Another Checkpoint SecureClient NGX SCV Bypass - My report on Full-Disclosure mailing list"
+            },
+
         ]
     }
 }

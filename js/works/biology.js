@@ -62,12 +62,15 @@ Biology.prototype.update = function() {
 
 Biology.prototype.getData = function() {
     return {
-        name: "Biology",
+        name: "Biology - Cell Signal Simulation",
         description:  [ 
             {
-                text: "Biology project"
+                text: "For my final project in my biology B.Sc studies, I worked with Prof. Eshel Ben Jacob and built a cell signaling simulation for cancer cells during wound healing.",
+                image: "images/works/biology1.jpg",
+                imageBig: "images/works/biology1_big.jpg"
             }
-        ]
+        ],
+        links: []
     }
 }
 

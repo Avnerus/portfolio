@@ -347,3 +347,13 @@ canvas {
 .item-row {
     margin-bottom: 20px;
 }
+
+.magnify-image {
+    cursor: -webkit-zoom-in;
+    cursor: -moz-zoom-in;
+    cursor: zoom-in;
+}
+
+#nav-row {
+    
+}

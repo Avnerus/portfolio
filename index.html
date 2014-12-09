@@ -17,12 +17,19 @@
 	<link rel="stylesheet" href="css/flexslider.css" type="text/css" media="screen" />
 
     <link rel="stylesheet" href="css/portfolio.css">
+
+    <!-- Magnific Popup core CSS file -->
+    <link rel="stylesheet" href="css/magnific-popup.css"> 
+
   </head>
   <body>
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
     <script src="js/underscore-min.js"></script>
     <script src="js/jquery.flexslider-destroy.js"></script>
+
+    <!-- Magnific Popup core JS file -->
+    <script src="js/jquery.magnific-popup.js"></script> 
 
     <script src="js/MathUtil.js"></script>
     <script src="js/pixi_dist.js"></script>
@@ -79,10 +86,16 @@
                     </div>
                     <div class="col-md-6">
                         <div id="work-media">
-                            <div class="embed-responsive embed-responsive-16by9" v-if="item.video">
-                                <iframe id="player_1" class="embed-responsive-item" v-attr="src: item.video" width="600" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                            <div class="embed-responsive embed-responsive-16by9" v-if="item.vimeo">
+                                <iframe id="player_1" class="embed-responsive-item" v-attr="src: item.vimeo" width="600" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                             </div>
-                            <img class="img-responsive" v-if="item.image" v-attr="src: item.image"></img>
+                            <div class="embed-responsive embed-responsive-16by9" v-if="item.youtube">
+                                <iframe id="player_2" class="embed-responsive-item" v-attr="src: item.youtube" width="600" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
+                            </div>
+                            <a v-if="item.imageBig " class="magnify-image" v-attr="href: item.imageBig">
+                                <img class="img-responsive center-block" v-attr="src: item.image"></img>
+                            </a>
+                            <img v-if="item.image && !item.imageBig" class="img-responsive center-block" v-attr="src: item.image"></img>
                             <!--ul class="slides">
                                 <li v-repeat="image : images">
                                     <img v-attr="src: image.path"></img>
@@ -94,7 +107,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="row">
+                <div id="nav-row" class="row">
                     <div class="col-md-12 nav-arrows center-block">
                         <i class="fa fa-arrow-left left-arrow" v-on="click:prevWork"></i>
                         <p class="arrow-text" v-on="click:prevWork"> Prev Idea </p>
@@ -121,7 +134,7 @@
                         <p> Hello traveler! </p>
                         <p>
                         You've been given a unique opportunity to get a glimpse into my head. <br>
-                        The section you are viewing now is my creative section. It is full of thoughts and ideas from various projects that I've worked on. Feel free to stick around and click on any thought to get a more detailed explanation.
+                        The section you are viewing now is my creative section. It is full of thoughts and ideas from various projects and ventures that I've worked on. Feel free to stick around and click on any thought to get a more detailed explanation.
                         </p>    
                         <p> 
                         Yours truly, <br>

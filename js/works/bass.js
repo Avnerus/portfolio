@@ -51,12 +51,21 @@ Bass.prototype.update = function() {
 
 Bass.prototype.getData = function() {
     return {
-        name: "Bass",
+        name: "Music",
         description:  [ 
             {
-                text: "Bass project"
+                text: "Music is more than a passion for me. It is my way to commnicate. I find it better than any langauge. My main instrument would be the electric Bass, but I also play accostic/electric guitar, Okinawa Sanshin, Synthesizer and Ukulele.",
+                youtube: "http://www.youtube.com/embed/E9sDCTB_peU"
+            },
+            {
+                image: "images/works/bass2.jpg",
+                imageBig: "images/works/bass2_big.jpg"
+            },
+            {
+                youtube: "http://www.youtube.com/embed/NFhuxUd05O0"
             }
-        ]
+        ],
+        links: []
     }
 }
 

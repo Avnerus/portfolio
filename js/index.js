@@ -97,16 +97,21 @@ loader.load();
 
 
 function start() {
-   brainController.init(gameOpts, container, ratio, renderer, $('#work-container'), $('#info-container'));
-   $('#loading-container').hide();
-   videoContoller.playWaiting();
-   renderer.view.id = "pixi-view";
-   $('#pixi-container').append(renderer.view);
-   setTimeout(showDownArrow, 5000);
+    brainController.init(gameOpts, container, ratio, renderer, $('#work-container'), $('#info-container'));
+    $('#loading-container').hide();
+    videoContoller.playWaiting();
+    renderer.view.id = "pixi-view";
+    $('#pixi-container').append(renderer.view);
+    setTimeout(showDownArrow, 5000);
 
-   parentScrollFix();
 
-   requestAnimationFrame(animate);
+    var FF = (typeof window.mozInnerScreenX != 'undefined');
+
+    if (!FF) {
+        parentScrollFix();
+    }
+
+    requestAnimationFrame(animate);
 }
 
 function showDownArrow() {

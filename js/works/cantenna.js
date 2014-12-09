@@ -71,11 +71,13 @@ Cantenna.prototype.getData = function() {
             {
 
                 text: 'Using cheap home equipment such as personal WiFi routers and tin cans, we form a community based WiFi networkthat does not rely on any corporate or government infrastrucure. I created this workshop for the kids at ASSAF youth center, where I volunteer with refugees in South Tel Aviv',
-                image: "images/works/cantenna1.jpg"
+                image: "images/works/cantenna1.jpg",
+                imageBig: "images/works/cantenna1_big.jpg"
             },
             {
                 text: "We hack our routers, drill out tin cans and make them into antennas, and then climb roofs to install them all over south Tel Aviv. Here we are testing the signal strength from one roof to the next.",
-                image: "images/works/cantenna2.jpg"
+                image: "images/works/cantenna2.jpg",
+                imageBig: "images/works/cantenna2_big.jpg"
             }
         ],
         links: [

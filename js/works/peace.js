@@ -66,9 +66,24 @@ Peace.prototype.getData = function() {
         name: "The Conflict",
         description:  [ 
             {
-                text: "Conflict project"
+                text: 'In 2012 I attened the "Vacation from War" seminar for Israelis and Palestinians that took place in Walberberg, Germany. Ever since, I try to give as much as I can for the resolution of our conflict. I believe this should be the main concern in Israel, and solved before anything else.',
+                image: "images/works/peace1.jpg",
+                imageBig: "images/works/peace1_big.jpg"
+            },
+            {
+                image: "images/works/peace2.jpg",
+                imageBig: "images/works/peace2_big.jpg"
+            },
+            {
+                image: "images/works/peace3.jpg",
+                imageBig: "images/works/peace3_big.jpg"
+            },
+            {
+                image: "images/works/peace4.jpg",
+                imageBig: "images/works/peace4_big.jpg"
             }
-        ]
+        ],
+        links: []
     }
 }
 
