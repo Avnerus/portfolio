@@ -57,8 +57,14 @@ Japan.prototype.getData = function() {
                 text: "Japan!",
                 image: "images/works/japan1.jpg"
 
-            }
-        ]
+            },
+            {
+                text: "Japan 2!",
+                image: "images/works/japan2.png"
+
+            },
+        ],
+        links: []
     }
 }
 
