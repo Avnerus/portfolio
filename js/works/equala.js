@@ -78,15 +78,18 @@ EQuala.prototype.getData = function() {
         description: [
             {
                 text: "The industry: Music. The crew: A group of lovely people carefully selected by Lior Aharoni, my old co-worker from the IDF.",
-                image: "images/works/equala1.png"
+                image: "images/works/equala1.png",
+                imageBig: "images/works/equala1_big.png"
             },
             {
                 text: 'EQuala.fm is a social radio app. We collect your friends\' listening habits, and tune them into a radio station controlled by our "Friends EQualizer". I wrote the iOS client and was involved in the product design.',
-                image: "images/works/equala2.png"
+                image: "images/works/equala2.png",
+                imageBig: "images/works/equala2_big.png"
             },
             {
                 text: 'In Feature.fm we work with online music streaming services who are looking for a way to monetize. Instead of playing ads, they play targeted featured songs from rising musicians, provided by us. To the artists, we provide analytics, management and a community. I wrote and designed a large part of the system, from the low database tier, to the server logic and the web client.',
-                image: "images/works/equala3.png"
+                image: "images/works/equala3.png",
+                imageBig: "images/works/equala3_big.png"
             }
         ],
         links: [

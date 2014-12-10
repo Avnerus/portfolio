@@ -108,7 +108,8 @@ Train.prototype.getData = function() {
                 image: "images/works/train1.jpg",
             }, 
             {
-              image: "images/works/train2.png"
+              image: "images/works/train2.png",
+              imageBig: "images/works/train2_big.png"
             }
         ],
         links: [

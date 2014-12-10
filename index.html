@@ -86,10 +86,10 @@
                     </div>
                     <div class="col-md-6">
                         <div id="work-media">
-                            <div class="embed-responsive embed-responsive-16by9" v-if="item.vimeo">
+                            <div class="embed-responsive embed-responsive-16by9 center-block" v-if="item.vimeo">
                                 <iframe id="player_1" class="embed-responsive-item" v-attr="src: item.vimeo" width="600" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                             </div>
-                            <div class="embed-responsive embed-responsive-16by9" v-if="item.youtube">
+                            <div class="embed-responsive embed-responsive-16by9 center-block" v-if="item.youtube">
                                 <iframe id="player_2" class="embed-responsive-item" v-attr="src: item.youtube" width="600" height="340" frameborder="0" webkitAllowFullScreen mozallowfullscreen allowFullScreen></iframe>
                             </div>
                             <a v-if="item.imageBig " class="magnify-image" v-attr="href: item.imageBig">
