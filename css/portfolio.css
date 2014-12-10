@@ -153,7 +153,7 @@ video {
     box-shadow: 0 0 30px white;
     border: 2px solid white;
     color: white;
-    height: 92%;
+    height: 90%;
     overflow: auto;
     margin-top: 20px;
     
@@ -355,5 +355,5 @@ canvas {
 }
 
 #nav-row {
-    
+    bottom: 5px;
 }
