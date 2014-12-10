@@ -59,6 +59,9 @@ eventEmitter.on('videos_loaded', function() {
 
 var loader = new PIXI.AssetLoader([
     "assets/brain/bg.jpg",
+    "assets/brain/speaker.png",
+    "assets/brain/nospeaker.png",
+    "assets/brain/kerokero.jpg",
     "assets/brain/tile_neurons.png",
     "assets/brain/displacement_map.png",
     //"assets/brain/talk_bubble.png",
@@ -97,7 +100,7 @@ loader.load();
 
 
 function start() {
-    brainController.init(gameOpts, container, ratio, renderer, $('#work-container'), $('#info-container'));
+    brainController.init(gameOpts, container, ratio, renderer, $('#work-container'), $('#info-container'), $('#nav-row'));
     $('#loading-container').hide();
     videoContoller.playWaiting();
     renderer.view.id = "pixi-view";

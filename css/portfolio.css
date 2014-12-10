@@ -73,7 +73,7 @@ video {
 }
 
 .nav-arrows {
-    color: white;
+    color: #ffff00;
     font-size: 20px;
     margin-top: 55px;
     text-align: center;
@@ -127,6 +127,16 @@ video {
     display: block;
     font-size: 0px;
     padding: 0;
+}
+
+#music-container {
+    position: fixed;
+    z-index:4;
+    width: 100%;
+    display: block;
+    padding: 0;
+    bottom: 0;
+    height: 0;
 }
 
 #work-container {
@@ -188,7 +198,7 @@ video {
     height: 0px;
     left: 50%;
     margin-left: -400px;
-    background-color: rgba(100, 0, 160, 0.7);
+    background-color: rgba(100, 0, 160, 0.9);
     /* background-color: #383836; */
     top: 25%;
     margin-top: -150px;
@@ -356,4 +366,5 @@ canvas {
 
 #nav-row {
     bottom: 5px;
+    height: 0;
 }
