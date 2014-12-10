@@ -87,6 +87,18 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
     eventEmitter.on('info_clicked', function() {
         self.infoClicked();
     });
+
+    // Detect ESC
+    $(document).keyup(function(e) {
+        if (e.keyCode == 27) { 
+            if (self.showingWork) {
+                self.hideWork();
+            }
+            if (self.showingInfo) {
+                self.hideInfo();
+            }
+        }   
+    });
 }
 
 

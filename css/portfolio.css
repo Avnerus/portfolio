@@ -102,12 +102,22 @@ video {
     margin-left: 50px;
     overflow: auto;
 }
+
 #loading-container {
   margin: auto;
   position: absolute;
   top: 200px; left: 0; right: 0;
   height: 272px;
   width: 259px;
+}
+
+#supported-container {
+  margin: auto;
+  position: absolute;
+  top: 200px; left: 0; right: 0;
+  display: none;
+  text-align: center;
+  z-index: 9;
 }
 
 
@@ -365,6 +375,6 @@ canvas {
 }
 
 #nav-row {
-    bottom: 5px;
+    bottom: 10px;
     height: 0;
 }
