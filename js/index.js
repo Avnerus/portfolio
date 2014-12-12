@@ -91,9 +91,14 @@ loader.onComplete = function() {
     console.log("Assets loaded!");
     gameOpts.scrollHeight = $('#main-container').height();
 
-    if (videosLoaded) {
+    // Support check
+    var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+    var msie = (window.navigator.userAgent.indexOf("MSIE ") != -1);
+
+    if (videosLoaded || mobile || msie) {
        start();
     }
+
     videoContoller.loadVideos($('#video-container'), gameOpts.scrollHeight, $('#neutral-container'));
 };
 loader.load();
