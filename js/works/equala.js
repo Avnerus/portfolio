@@ -98,8 +98,16 @@ EQuala.prototype.getData = function() {
                 description: "EQuala Official Page"
             },
             {
+                url: "http://techcrunch.com/2013/03/06/equala-launches-on-ios-and-android-to-bring-more-context-and-control-to-social-music-discovery/",
+                description: "EQuala on TechCrunch"
+            },
+            {
                 url: "https://www.feature.fm",
                 description: "Feature.FM Official Page"
+            },
+            {
+                url: "http://rainnews.com/native-advertising-in-8tracks-conversation-with-david-porter/",
+                description: "Interview about Feature.FM with 8tracks CEO David Porter (Streaming partner)"
             }
         ]
     }
