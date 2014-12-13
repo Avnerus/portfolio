@@ -63,6 +63,9 @@ Bass.prototype.getData = function() {
             },
             {
                 youtube: "http://www.youtube.com/embed/NFhuxUd05O0"
+            },
+            {
+                youtube: "http://www.youtube.com/embed/fdQaBR0eIBc"
             }
         ],
         links: []
