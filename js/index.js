@@ -1,137 +1,141 @@
-var gameOpts = {
-    stageWidth: 1280,
-    stageHeight: 720,
-    zoomHeight: 2500
-}
+// Support check
+var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
+var msie = (window.navigator.userAgent.indexOf("MSIE ") != -1);
 
+console.log("Mobile", mobile, "MSIE ", msie);
 
-// 
-// VIDEO PART
-//
-var VideoController = require('./video_controller');
-var videoContoller = new VideoController(gameOpts);
-var eventEmitter = require('./event_manager').getEmitter();
-
-window.onload = function() {
-    window.scroll(0, 0);
-}
-
-// GAME PART
-
-var TWEEN = require('tween.js');
-var BrainController = require('./brain_controller');
-var brainController = new BrainController(videoContoller);
-
-var stage = new PIXI.Stage(0xFFFFFF, true);
-var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHeight, null, true);
-//renderer.resize(window.innerWidth, window.innerHeight)
-//renderer.view.style.width = window.innerWidth + "px";
-//renderer.view.style.height = window.innerHeight + "px";
-
-var container = new PIXI.DisplayObjectContainer();
-
-var ratio = { x: window.innerWidth / gameOpts.stageWidth, y : window.innerHeight / gameOpts.stageHeight};
-var wasScrolled = false;
-
-stage.addChild(container);
-
-
-window.onscroll = function(event) {
-    brainController.pageScroll(window.pageYOffset);
-    if (window.pageYOffset > 200 && !wasScrolled) {
-        wasScrolled = true;
-        hideDownArrow();
+if (mobile || msie) {
+    window.onload = function() {
+        $('#loading-container').hide();
+        $('#supported-container').show();
     }
 }
-
-var videosLoaded = false
-var assetsLoaded = false;
-
-eventEmitter.on('videos_loaded', function() {
-    console.log("Videos loaded!");
-    videosLoaded = true;
-    if (assetsLoaded) {
-        start();
+else {
+    var gameOpts = {
+        stageWidth: 1280,
+        stageHeight: 720,
+        zoomHeight: 2500
     }
 
-});
 
+    // 
+    // VIDEO PART
+    //
+    var VideoController = require('./video_controller');
+    var videoContoller = new VideoController(gameOpts);
+    var eventEmitter = require('./event_manager').getEmitter();
 
-var loader = new PIXI.AssetLoader([
-    "assets/brain/bg.jpg",
-    "assets/brain/speaker.png",
-    "assets/brain/nospeaker.png",
-    "assets/brain/kerokero.jpg",
-    "assets/brain/tile_neurons.png",
-    "assets/brain/displacement_map.png",
-    //"assets/brain/talk_bubble.png",
-    "assets/works/pulse.png",
-    "assets/works/gamad.json",
-    "assets/works/gamad2.json",
-    "assets/works/train.png",
-    "assets/works/question_block.png",
-    "assets/works/Koala.json",
-    "assets/works/headphones.png",
-    "assets/works/lightning.png",
-    "assets/works/lightning_f.png",
-    "assets/works/dove.png",
-    "assets/works/face.png",
-    "assets/works/cog.png",
-    "assets/works/keyhole.png",
-    "assets/works/can.png",
-    "assets/works/tripod.png",
-    "assets/works/japan.png",
-    "assets/works/bass.png",
-    "assets/works/biology.png",
-    "assets/works/bacteria.png",
-    "assets/works/drone.png",
-    "assets/works/playbot.png"
-]);
-
-loader.onComplete = function() {
-    assetsLoaded = true;
-    console.log("Assets loaded!");
-    gameOpts.scrollHeight = $('#main-container').height();
-
-    // Support check
-    var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    var msie = (window.navigator.userAgent.indexOf("MSIE ") != -1);
-
-    if (videosLoaded || mobile || msie) {
-       start();
+    window.onload = function() {
+        window.scroll(0, 0);
     }
 
-    videoContoller.loadVideos($('#video-container'), gameOpts.scrollHeight, $('#neutral-container'));
-};
-loader.load();
+    // GAME PART
+
+    var TWEEN = require('tween.js');
+    var BrainController = require('./brain_controller');
+    var brainController = new BrainController(videoContoller);
+
+    var stage = new PIXI.Stage(0xFFFFFF, true);
+    var renderer = new PIXI.autoDetectRenderer(gameOpts.stageWidth, gameOpts.stageHeight, null, true);
+    //renderer.resize(window.innerWidth, window.innerHeight)
+    //renderer.view.style.width = window.innerWidth + "px";
+    //renderer.view.style.height = window.innerHeight + "px";
+
+    var container = new PIXI.DisplayObjectContainer();
+
+    var ratio = { x: window.innerWidth / gameOpts.stageWidth, y : window.innerHeight / gameOpts.stageHeight};
+    var wasScrolled = false;
+
+    stage.addChild(container);
+
+
+    window.onscroll = function(event) {
+        brainController.pageScroll(window.pageYOffset);
+        if (window.pageYOffset > 200 && !wasScrolled) {
+            wasScrolled = true;
+            hideDownArrow();
+        }
+    }
+
+    var videosLoaded = false
+    var assetsLoaded = false;
+
+    eventEmitter.on('videos_loaded', function() {
+        console.log("Videos loaded!");
+        videosLoaded = true;
+        if (assetsLoaded) {
+            start();
+        }
+
+    });
+
+
+    var loader = new PIXI.AssetLoader([
+        "assets/brain/bg.jpg",
+        "assets/brain/speaker.png",
+        "assets/brain/nospeaker.png",
+        "assets/brain/kerokero.jpg",
+        "assets/brain/tile_neurons.png",
+        "assets/brain/displacement_map.png",
+        //"assets/brain/talk_bubble.png",
+        "assets/works/pulse.png",
+        "assets/works/gamad.json",
+        "assets/works/gamad2.json",
+        "assets/works/train.png",
+        "assets/works/question_block.png",
+        "assets/works/Koala.json",
+        "assets/works/headphones.png",
+        "assets/works/lightning.png",
+        "assets/works/lightning_f.png",
+        "assets/works/dove.png",
+        "assets/works/face.png",
+        "assets/works/cog.png",
+        "assets/works/keyhole.png",
+        "assets/works/can.png",
+        "assets/works/tripod.png",
+        "assets/works/japan.png",
+        "assets/works/bass.png",
+        "assets/works/biology.png",
+        "assets/works/bacteria.png",
+        "assets/works/drone.png",
+        "assets/works/playbot.png"
+    ]);
+
+    loader.onComplete = function() {
+        assetsLoaded = true;
+        console.log("Assets loaded!");
+        gameOpts.scrollHeight = $('#main-container').height();
+
+        if (videosLoaded) {
+           start();
+        }
+
+        videoContoller.loadVideos($('#video-container'), gameOpts.scrollHeight, $('#neutral-container'));
+    };
+
+    loader.load();
+}
 
 
 function start() {
     $('#loading-container').hide();
 
     // Support check
-    var mobile = /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent);
-    var msie = (window.navigator.userAgent.indexOf("MSIE ") != -1);
     console.log("mobile", mobile, "msie", msie);
-    if (mobile || msie) {
-        $('#supported-container').show();
+    brainController.init(gameOpts, container, ratio, renderer, $('#work-container'), $('#info-container'), $('#nav-row'));
+    videoContoller.playWaiting();
+    renderer.view.id = "pixi-view";
+    $('#pixi-container').append(renderer.view);
+    setTimeout(showDownArrow, 5000);
+
+
+    var FF = (typeof window.mozInnerScreenX != 'undefined');
+
+    if (!FF) {
+        parentScrollFix();
     }
-    else {
-        brainController.init(gameOpts, container, ratio, renderer, $('#work-container'), $('#info-container'), $('#nav-row'));
-        videoContoller.playWaiting();
-        renderer.view.id = "pixi-view";
-        $('#pixi-container').append(renderer.view);
-        setTimeout(showDownArrow, 5000);
 
-
-        var FF = (typeof window.mozInnerScreenX != 'undefined');
-
-        if (!FF) {
-            parentScrollFix();
-        }
-
-        requestAnimationFrame(animate);
-    }
+    requestAnimationFrame(animate);
 }
 
 function showDownArrow() {
