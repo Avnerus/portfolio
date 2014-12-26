@@ -59,6 +59,11 @@ Playbot.prototype.getData = function() {
                 text: "Recently I've been thinking about ways to connect Israelis and Palestinians. I came up with this design for a play bot that can be placed in the public space, and connect to our neighbors beyond the wall (3D Figures by Noa Simhoni).",
                 image: "images/works/playbots.png",
                 imageBig: "images/works/playbots_big.png"
+            },
+            {
+                text: "I've started protoyping using the Intel Edison",
+                image: "images/works/playbots2.jpg",
+                imageBig: "images/works/playbots2_big.jpg"
             }
         ],
         links: [
