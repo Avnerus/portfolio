@@ -53,10 +53,10 @@ Playbot.prototype.update = function() {
 
 Playbot.prototype.getData = function() {
     return {
-        name: "Palestinian Playbot (WIP)",
+        name: "Separation Wall-E (WIP)",
         description:  [ 
             {
-                text: "Recently I've been thinking about ways to connect Israelis and Palestinians. I came up with this design for a play bot that can be placed in the public space, and connect to our neighbors beyond the wall (3D Figures by Noa Simhoni).",
+                text: "Recently I've been thinking about ways to connect Israelis and Palestinians. I came up with a design for a robot that can be placed in the public space, and connect to our neighbors beyond the wall (3D Figures by Noa Simhoni). The robot will have a 'flexible' identiy, automatic translation and an option for arcade gameplay.",
                 image: "images/works/playbots.png",
                 imageBig: "images/works/playbots_big.png"
             },
