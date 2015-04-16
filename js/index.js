@@ -98,7 +98,8 @@ else {
         "assets/works/biology.png",
         "assets/works/bacteria.png",
         "assets/works/drone.png",
-        "assets/works/playbot.png"
+        "assets/works/playbot.png",
+        "assets/works/black_hole.png"
     ]);
 
     loader.onComplete = function() {

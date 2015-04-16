@@ -237,8 +237,6 @@ BrainController.prototype.initWorks = function() {
     this.info = require('./works/info')();
     this.info.init(this.opts, this.bgContainer);
 
-
-
     this.works = [
         new (require('./works/pulse'))(),
         new (require('./works/gamad'))(),
@@ -253,7 +251,8 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/bass'))(),
         new (require('./works/biology'))(),
         new (require('./works/drone'))(),
-        new (require('./works/playbot'))()
+        new (require('./works/playbot'))(),
+        new (require('./works/tpv'))()
     ]
 
 

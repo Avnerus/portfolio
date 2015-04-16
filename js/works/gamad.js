@@ -65,10 +65,10 @@ Gamad.prototype.update = function() {
 
 Gamad.prototype.getData = function() {
     return {
-        name: "Gamad Anak",
+        name: "Secret Santa",
         description:[ 
             {
-                text: 'Hebrew for "Gnome-Giant": a gift-giving game traditionaly held in Israel during Purim holiday. In my gift I came up with a new way to share music - using a "Mixtape Game". Press Space-Bar along with the beat, to match the Hamman ears in their place - and crazy things start happening.',
+                text: 'A gift-giving game traditionaly held in Israel during Purim holiday. In my gift I came up with a new way to share music - using a "Mixtape Game". Press Space-Bar along with the beat, to match the Hamman ears in their place - and crazy things start happening.',
                 image: "images/works/gamadanak1.png",
 
             },
