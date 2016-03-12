@@ -21,6 +21,9 @@ Koala.prototype.init = function (opts, stage, clickHandler) {
     this.eventEmitter = require('../event_manager').getEmitter();
 
     this.loadAnimations();
+
+    this.hashURL = "koala";
+
     this.routine();
 }
 

@@ -130,6 +130,7 @@ BrainController.prototype.workClicked = function(work) {
         });*/
     })
     this.currentWorkIndex = _.indexOf(this.works, work);
+    window.location.hash = "#" + work.hashURL;
     this.showWork();
 }
 
@@ -145,6 +146,7 @@ BrainController.prototype.hideWork = function() {
     this.workContainer.css("opacity", 0);
     this.navRow.css("height", "0px");
     this.showingWork = false;
+    history.replaceState({}, document.title, "/");
     
 }
 BrainController.prototype.nextWork = function() {
@@ -237,6 +239,8 @@ BrainController.prototype.initWorks = function() {
     this.info = require('./works/info')();
     this.info.init(this.opts, this.bgContainer);
 
+    this.workHashes = {};
+
     this.works = [
         new (require('./works/pulse'))(),
         new (require('./works/gamad'))(),
@@ -259,6 +263,7 @@ BrainController.prototype.initWorks = function() {
     for (var i = 0; i < this.works.length; i++) {
         var work = this.works[i];
         work.init(this.opts, this.bgContainer);
+        this.workHashes[work.hashURL] = work;
     }
 }
 

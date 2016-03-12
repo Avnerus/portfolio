@@ -47,6 +47,8 @@ Train.prototype.init = function (opts, stage, clickHandler) {
 
     this.stage.addChild(this.train2);
 
+    this.hashURL = "train";
+
     this.run();
 }
 
