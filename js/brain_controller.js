@@ -20,7 +20,7 @@ function BrainController(videoController) {
     console.log("Brain Controller started");
 }
 
-BrainController.prototype.init = function (opts, stage, ratio, renderer, workContainer, infoContainer, navRow) {
+BrainController.prototype.init = function (opts, stage, ratio, renderer, workContainer, infoContainer, moneyContainer, navRow) {
 
     console.log("Brain Controller initializing with opts", opts);
 
@@ -29,11 +29,13 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
     this.opts = opts;
     this.workContainer = workContainer;
     this.infoContainer = infoContainer;
+    this.moneyContainer = moneyContainer;
     this.navRow = navRow;
 
 	this.bgContainer = new PIXI.DisplayObjectContainer();
     this.showingWork = false;
     this.showingInfo = false;
+    this.showingMoney = false;
 
     this.renderer = renderer;
 
@@ -88,6 +90,10 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
         self.infoClicked();
     });
 
+    eventEmitter.on('money_clicked', function() {
+        self.moneyClicked();
+    });
+
     // Detect ESC
     $(document).keyup(function(e) {
         if (e.keyCode == 27) { 
@@ -96,6 +102,9 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
             }
             if (self.showingInfo) {
                 self.hideInfo();
+            }
+            if (self.showingMoney) {
+                self.hideMoney();
             }
         }   
     });
@@ -180,15 +189,30 @@ BrainController.prototype.infoClicked = function() {
     console.log("Info clicked!");
     this.showInfo();
 }
+BrainController.prototype.moneyClicked = function() {
+    console.log("Money clicked!");
+    this.money.clicked();
+    this.showMoney();
+}
 BrainController.prototype.showInfo = function() {
     this.infoContainer.css("height", "620px");
     this.infoContainer.css("opacity", 1);
     this.showingInfo = true;
 }
 
+BrainController.prototype.showMoney = function() {
+    this.moneyContainer.css("height", "620px");
+    this.moneyContainer.css("opacity", 1);
+    this.showingMoney = true;
+}
+
 BrainController.prototype.hideInfo = function() {
     this.infoContainer.css("opacity", 0);
     this.showingInfo = false;
+}
+BrainController.prototype.hideMoney = function() {
+    this.moneyContainer.css("opacity", 0);
+    this.showingMoney = false;
 }
 
 
@@ -211,6 +235,9 @@ BrainController.prototype.initWorks = function() {
             },
             closeInfo: function(e) {
                 self.hideInfo();
+            },
+            closeMoney: function(e) {
+                self.hideMoney();
             },
             prevWork: function(e) {
                 self.prevWork();
@@ -235,9 +262,18 @@ BrainController.prototype.initWorks = function() {
             self.infoContainer.css("height", "0px");
         }
     });
+    $("#money-container").on($.support.transition.end,
+    function() {
+        if (self.moneyContainer.css("opacity") == 0) {
+            self.moneyContainer.css("height", "0px");
+        }
+    });
 
     this.info = require('./works/info')();
     this.info.init(this.opts, this.bgContainer);
+
+    this.money = require('./works/money')();
+    this.money.init(this.opts, this.bgContainer, $("#money-container"));
 
     this.workHashes = {};
 
@@ -265,6 +301,8 @@ BrainController.prototype.initWorks = function() {
         work.init(this.opts, this.bgContainer);
         this.workHashes[work.hashURL] = work;
     }
+    this.workHashes["money"] = {};
+    this.workHashes["info"] = {};
 }
 
 
@@ -389,11 +427,16 @@ BrainController.prototype.setMaskByOffset = function() {
         this.setTwist(1);
         this.maskUpdated = false;
     }
-    if (multi < 7 && this.showingWork) {
-        this.hideWork();
-    }
-    if (multi < 7 && this.showingInfo) {
-        this.hideInfo();
+    if (multi < 7) {
+        if(this.showingWork) {
+            this.hideWork();
+        }
+        if (this.showingInfo) {
+            this.hideInfo();
+        }
+        if (this.showingMoney) {
+            this.hideMoney();
+        }
     }
 }
 

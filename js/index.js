@@ -124,7 +124,7 @@ function start() {
 
     // Support check
     console.log("mobile", mobile, "msie", msie);
-    brainController.init(gameOpts, container, ratio, renderer, $('#work-container'), $('#info-container'), $('#nav-row'));
+    brainController.init(gameOpts, container, ratio, renderer, $('#work-container'), $('#info-container'), $('#money-container'),$('#nav-row'));
     videoContoller.playWaiting();
     renderer.view.id = "pixi-view";
     $('#pixi-container').append(renderer.view);
@@ -151,7 +151,13 @@ function start() {
                       height: "easeInQuint"
                     },
                     complete: function() {
-                      brainController.workClicked(brainController.workHashes[workHash]);
+                        if (workHash == "money") {
+                            brainController.moneyClicked();
+                        } else if (workHash == "info") {
+                            brainController.infoClicked();
+                        } else{
+                            brainController.workClicked(brainController.workHashes[workHash]);
+                        }
                     }
                   });
                 },1000);

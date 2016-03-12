@@ -8,6 +8,7 @@
     "browserify": "*"
   },
   "dependencies": {
+    "node-fetch": "^1.3.3",
     "tween.js": "*",
     "vue": "~0.10.6"
   },
