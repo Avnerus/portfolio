@@ -61,9 +61,13 @@ Playbot.prototype.getData = function() {
                 imageBig: "images/works/playbots_big.png"
             },
             {
-                text: "I've started protoyping using the Intel Edison",
+                text: "I've started protoyping using the Raspberry Pi2",
                 image: "images/works/playbots2.jpg",
                 imageBig: "images/works/playbots2_big.jpg"
+            },
+            {
+                image: "images/works/playbots3.jpg",
+                imageBig: "images/works/playbots3_big.jpg"
             }
         ],
         links: [
