@@ -130,6 +130,7 @@ BrainController.prototype.workClicked = function(work) {
         });*/
     })
     this.currentWorkIndex = _.indexOf(this.works, work);
+    window.location.hash = "#" + work.hashURL;
     this.showWork();
 }
 
@@ -145,6 +146,7 @@ BrainController.prototype.hideWork = function() {
     this.workContainer.css("opacity", 0);
     this.navRow.css("height", "0px");
     this.showingWork = false;
+    history.replaceState({}, document.title, "/");
     
 }
 BrainController.prototype.nextWork = function() {
