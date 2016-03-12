@@ -13,7 +13,7 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "beefy js/index.js:js/bundle.js 8080"
+    "start": "budo js/index.js:js/bundle.js"
   },
   "repository": {
     "type": "git",

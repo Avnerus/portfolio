@@ -19,6 +19,8 @@ Bass.prototype.init = function (opts, stage, clickHandler) {
     this.stage = stage;
     this.opts = opts;
     this.eventEmitter = require('../event_manager').getEmitter();
+    this.hashURL = "music";
+
 
     this.loadSprite();
 }

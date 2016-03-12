@@ -20,6 +20,8 @@ Brain.prototype.init = function (opts, stage, clickHandler) {
     this.opts = opts;
     this.eventEmitter = require('../event_manager').getEmitter();
 
+    this.hashURL = "brain";
+
     this.loadSprite();
 }
 

@@ -55,6 +55,7 @@ Pulse.prototype.init = function (opts, stage, clickHandler) {
     this.stage.addChild(this.sprite2);
     this.loaded = true;
 
+    this.hashURL = "pulse";
 
     this.fly();
 }

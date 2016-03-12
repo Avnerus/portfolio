@@ -211,7 +211,6 @@ VideoController.prototype.playRandomWaiting = function() {
 }
 
 VideoController.prototype.videoEnded = function(video) {
-    console.log("Video ended!");
     if (this.nowPlaying.id != 'enter') {
         this.eventEmitter.emit('video_ended');
         this.playRandomWaiting();
@@ -252,28 +251,30 @@ VideoController.prototype.loop = function() {
 
 VideoController.prototype.zoomVideo = function(zoomMultiplyer) {
     var video = this.nowPlaying;
-    //console.log("Zoom : " + zoomMultiplyer);
-    video.rect = {
-        width: this.stageWidth * zoomMultiplyer ,
-        height: this.stageHeight * zoomMultiplyer
-    }
-    if (zoomMultiplyer > 1) {
-        video.rect.bottom = ((this.stageHeight / 2 - (this.stageHeight) * zoomMultiplyer / 2) + 15 *  zoomMultiplyer * zoomMultiplyer - 20);
-        video.rect.left = (this.stageWidth / 2 - this.stageWidth * zoomMultiplyer / 2);
-    } else {
-        video.rect.bottom = 0;
-        video.rect.left = 0;
-    }
+    if (video) {
+        //console.log("Zoom : " + zoomMultiplyer);
+        video.rect = {
+            width: this.stageWidth * zoomMultiplyer ,
+            height: this.stageHeight * zoomMultiplyer
+        }
+        if (zoomMultiplyer > 1) {
+            video.rect.bottom = ((this.stageHeight / 2 - (this.stageHeight) * zoomMultiplyer / 2) + 15 *  zoomMultiplyer * zoomMultiplyer - 20);
+            video.rect.left = (this.stageWidth / 2 - this.stageWidth * zoomMultiplyer / 2);
+        } else {
+            video.rect.bottom = 0;
+            video.rect.left = 0;
+        }
 
-    video.element.style.height = video.rect.height + "px";
-    video.element.style.width = video.rect.width + "px";
-    video.element.style.left = video.rect.left + "px";
-    video.element.style.bottom = video.rect.bottom + "px";
+        video.element.style.height = video.rect.height + "px";
+        video.element.style.width = video.rect.width + "px";
+        video.element.style.left = video.rect.left + "px";
+        video.element.style.bottom = video.rect.bottom + "px";
 
-    if (zoomMultiplyer >= 7) {
-        this.container.css("display","none");
-    } else {
-        this.container.css("display","block");
+        if (zoomMultiplyer >= 7) {
+            this.container.css("display","none");
+        } else {
+            this.container.css("display","block");
+        }
     }
 }
 

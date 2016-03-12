@@ -20,6 +20,8 @@ Gamad.prototype.init = function (opts, stage, clickHandler) {
     this.opts = opts;
     this.eventEmitter = require('../event_manager').getEmitter();
 
+    this.hashURL = "secretsanta";
+
     this.loadAnim("gnome_dance", 23);
 }
 

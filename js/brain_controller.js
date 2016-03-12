@@ -237,6 +237,8 @@ BrainController.prototype.initWorks = function() {
     this.info = require('./works/info')();
     this.info.init(this.opts, this.bgContainer);
 
+    this.workHashes = {};
+
     this.works = [
         new (require('./works/pulse'))(),
         new (require('./works/gamad'))(),
@@ -259,6 +261,7 @@ BrainController.prototype.initWorks = function() {
     for (var i = 0; i < this.works.length; i++) {
         var work = this.works[i];
         work.init(this.opts, this.bgContainer);
+        this.workHashes[work.hashURL] = work;
     }
 }
 

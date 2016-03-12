@@ -109,9 +109,10 @@ else {
 
         if (videosLoaded) {
            start();
+        } else {
+            videoContoller.loadVideos($('#video-container'), gameOpts.scrollHeight, $('#neutral-container'));
         }
 
-        videoContoller.loadVideos($('#video-container'), gameOpts.scrollHeight, $('#neutral-container'));
     };
 
     loader.load();
@@ -134,6 +135,27 @@ function start() {
 
     if (!FF) {
         parentScrollFix();
+    }
+
+    
+    // Check hash
+    var workHash = null;
+    if (window.location.hash && window.location.hash.length > 0) {
+        workHash = window.location.hash.substring(1, window.location.hash.length);
+        if (brainController.workHashes[workHash]) {
+            setTimeout(function() {
+                $("html, body").animate({ scrollTop: $(document).height() }, {
+                    duration: 1000,
+                    specialEasing: {
+                      width: "linear",
+                      height: "easeInQuint"
+                    },
+                    complete: function() {
+                      brainController.workClicked(brainController.workHashes[workHash]);
+                    }
+                  });
+                },1000);
+        }
     }
 
     requestAnimationFrame(animate);
