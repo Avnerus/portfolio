@@ -33,7 +33,7 @@ Money.prototype.clicked = function () {
     var self = this;
 
     console.log("Update account balance!");
-    fetch('https://dl.dropboxusercontent.com/s/qawpeqy0v44agrz/balance.json?dl=1')
+    fetch('https://dl.dropboxusercontent.com/s/qawpeqy0v44agrz/balance.json?dl=1',{compress: false})
     .then(function(res) {
         return res.json(); 
     })

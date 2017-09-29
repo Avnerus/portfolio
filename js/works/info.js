@@ -34,8 +34,17 @@ Info.prototype.init = function (opts, stage, clickHandler) {
 
     this.questionBlock.click = function(mouseData){
       console.log("INFO CLICK");
+      console.log("Update account balance!");
       self.eventEmitter.emit('info_clicked', self);
-    }
+      fetch('https://dl.dropboxusercontent.com/s/qawpeqy0v44agrz/balance.json?dl=1',{compress: false})
+        .then(function(res) {
+            return res.json(); 
+        })
+        .then(function(json) {
+            $('#money-balance').text(json.balance + " EUR");
+        })
+          self.eventEmitter.emit('info_clicked', self);
+        }
 
     TweenMax.to(this.questionBlock.position , 1, {ease: Power2.easeIn, repeat: -1, yoyo: true, y: 504});
 
