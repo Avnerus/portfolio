@@ -310,6 +310,7 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/biology'))(),
         new (require('./works/social_bonds'))(),
         new (require('./works/soft_robotics'))(),
+        new (require('./works/stir'))(),
         new (require('./works/drone'))(),
         new (require('./works/playbot'))(),
         new (require('./works/tpv'))(),
