@@ -407,3 +407,7 @@ canvas {
     bottom: 10px;
     height: 0;
 }
+
+.dg.ac {
+    z-index: 2 !important;
+}

@@ -33,3 +33,5 @@ RAW
 *.swn
 
 bundle.js
+
+.DS_Store

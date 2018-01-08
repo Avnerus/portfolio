@@ -99,7 +99,14 @@ else {
         "assets/works/bacteria.png",
         "assets/works/drone.png",
         "assets/works/playbot.png",
-        "assets/works/black_hole.png"
+        "assets/works/black_hole.png",
+        "assets/works/tzina.json",
+        "assets/works/electrode.png",
+        "assets/works/facebook.png",
+        "assets/works/soft_robotics_1.png",
+        "assets/works/soft_robotics_2.png",
+        "assets/works/soft_robotics_3.png",
+        "assets/works/bed.png"
     ]);
 
     loader.onComplete = function() {
