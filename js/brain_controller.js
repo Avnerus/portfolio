@@ -9,7 +9,9 @@ module.exports.BrainController = BrainController;
 var TWEEN = require('tween.js');
 var eventEmitter = require('./event_manager').getEmitter();
 var Vue = require('vue');
+//var gui = new dat.GUI();
 
+var self;
 
 function BrainController(videoController) {
     if (!(this instanceof BrainController)) return new BrainController(videoController)
@@ -18,7 +20,21 @@ function BrainController(videoController) {
     this.works = [];
 
     console.log("Brain Controller started");
+
+    self = this;
 }
+
+BrainController.prototype.localize = function (name, object) {
+
+    console.log("GUI Localize object!", object);
+    var folder = gui.addFolder(name);
+    folder.add(object.position, 'x', 0, self.opts.stageWidth);
+    folder.add(object.position, 'y', 0, self.opts.stageHeight);
+    folder.add(object.scale, 'x', 0, 1);
+    folder.add(object.scale, 'y', 0, 1);
+    folder.open();
+}
+
 
 BrainController.prototype.init = function (opts, stage, ratio, renderer, workContainer, infoContainer, moneyContainer, navRow) {
 
@@ -74,7 +90,9 @@ BrainController.prototype.init = function (opts, stage, ratio, renderer, workCon
 
     this.counter = 0;
 
-
+    this.opts.util = {
+        localize: this.localize
+    }
     this.initWorks();
     this.initMusic();
 
@@ -292,7 +310,8 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/biology'))(),
         new (require('./works/drone'))(),
         new (require('./works/playbot'))(),
-        new (require('./works/tpv'))()
+        new (require('./works/tpv'))(),
+        new (require('./works/tzina'))()
     ]
 
 

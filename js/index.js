@@ -99,7 +99,8 @@ else {
         "assets/works/bacteria.png",
         "assets/works/drone.png",
         "assets/works/playbot.png",
-        "assets/works/black_hole.png"
+        "assets/works/black_hole.png",
+        "assets/works/tzina.json"
     ]);
 
     loader.onComplete = function() {
