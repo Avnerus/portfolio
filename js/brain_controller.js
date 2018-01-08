@@ -9,7 +9,7 @@ module.exports.BrainController = BrainController;
 var TWEEN = require('tween.js');
 var eventEmitter = require('./event_manager').getEmitter();
 var Vue = require('vue');
-//var gui = new dat.GUI();
+var gui = new dat.GUI();
 
 var self;
 
@@ -28,10 +28,10 @@ BrainController.prototype.localize = function (name, object) {
 
     console.log("GUI Localize object!", object);
     var folder = gui.addFolder(name);
-    folder.add(object.position, 'x', 0, self.opts.stageWidth);
-    folder.add(object.position, 'y', 0, self.opts.stageHeight);
-    folder.add(object.scale, 'x', 0, 1);
-    folder.add(object.scale, 'y', 0, 1);
+    folder.add(object.position, 'x', -250, self.opts.stageWidth);
+    folder.add(object.position, 'y', -250, self.opts.stageHeight);
+    folder.add(object.scale, 'x', 0, 2);
+    folder.add(object.scale, 'y', 0, 2);
     folder.open();
 }
 
@@ -308,6 +308,8 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/japan'))(),
         new (require('./works/bass'))(),
         new (require('./works/biology'))(),
+        new (require('./works/social_bonds'))(),
+        new (require('./works/soft_robotics'))(),
         new (require('./works/drone'))(),
         new (require('./works/playbot'))(),
         new (require('./works/tpv'))(),
