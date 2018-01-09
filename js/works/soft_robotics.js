@@ -80,16 +80,37 @@ SoftRobotics.prototype.getData = function() {
         name: "Soft Robotics",
         description:  [ 
             {
-                text: "In Tel Aviv university's \"Consciousness Studies\" course, we tried to solve 'the hard problem of consciousness'. In the picture: \"Mary's Room\" - a famous thought experiment by Frank Jacskson (1982).",
-                image: "images/works/brain1.jpg",
+                text: "After facing the harsh reality of over-heating robots and uncanny movement, I discovered the world of Soft. My first serious involvement with the field was the Soft Robotics workshop I organized in Aalto University with my colleague Kilian Kottmeier",
+                vimeo: "https://player.vimeo.com/video/210919628?api=1&player_id=player_1"
+            },
+            {
+                text: "During a semester in Japan in 2017 I was able to meet the pioneers of Soft Robotics and research the uses for Telepresence.",
+                vimeo: "https://www.youtube.com/embed/Am_UXkqsaZ8"
+            },
+            {
+                text: "I am now working on my Master's Thesis about Soft Robotic Telepresence as political art.",
+                vimeo: "https://www.youtube.com/embed/fKkyfRtSTFA"
             }
         ],
         links: [
             {
-                url: "http://socialbonds.org",
-                description: "Social Bonds website"
+                url: "https://www.youtube.com/playlist?list=PL530jd0zZ9Epp9r5ZpmqXw8wshI9edvJq",
+                description: "My Soft Robotics Youtube channel"
             },
 
+            {
+                url: "https://cloud.avner.us/index.php/s/cj1eDoS8bRHMFFc",
+                description: "Paper - Soft Robotics for Telepresence and Human Interaction"
+            },
+
+            {
+                url: "http://wiki.avner.us/doku.php?id=soft-robotics:start",
+                description: "My Soft Robotics Wiki"
+            },
+            {
+                url: "https://chat.avner.us/channel/soft-robotics",
+                description: "My Soft Robotics Chat Server"
+            },
         ]
     }
 }

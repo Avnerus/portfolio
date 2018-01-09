@@ -1,0 +1,28 @@
+{"frames": {
+
+"good-luck-cat-1.png":
+{
+	"frame": {"x":0,"y":0,"w":194,"h":270},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":194,"h":270},
+	"sourceSize": {"w":194,"h":270}
+},
+"good-luck-cat-2.png":
+{
+	"frame": {"x":0,"y":270,"w":194,"h":270},
+	"rotated": false,
+	"trimmed": false,
+	"spriteSourceSize": {"x":0,"y":0,"w":194,"h":270},
+	"sourceSize": {"w":194,"h":270}
+}},
+"meta": {
+	"app": "http://www.codeandweb.com/texturepacker",
+	"version": "1.0",
+	"image": "luckycat.png",
+	"format": "RGBA8888",
+	"size": {"w":194,"h":540},
+	"scale": "1",
+	"smartupdate": "$TexturePacker:SmartUpdate:bd93d12461645ab8ec335cfc3a82b3d2:b9fcc7424c2b925edbc15d80e3ea133d:383050e1531c7b214c608772cf03a7fc$"
+}
+}

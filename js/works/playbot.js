@@ -58,21 +58,26 @@ Playbot.prototype.getData = function() {
         name: "Separation Wall-E (WIP)",
         description:  [ 
             {
-                text: "Recently I've been thinking about ways to connect Israelis and Palestinians. I came up with a design for a robot that can be placed in the public space, and connect to our neighbors beyond the wall (3D Figures by Noa Simhoni). The robot will have a 'flexible' identiy, automatic translation and an option for arcade gameplay.",
+                text: "I've been thinking about ways to connect Israelis and Palestinians through Robot Telepresence across the Separation Barrier. The first design concept (3D Figures by Noa Simhoni) was a playful bot through which you can play beach Ping-Pong from remote locations. ",
                 image: "images/works/playbots.png",
                 imageBig: "images/works/playbots_big.png"
             },
             {
-                text: "I've started protoyping using the Raspberry Pi2",
+                text: "I also started protoyping using the Raspberry Pi and experimented in the Israeli Burning Man Festival.",
                 image: "images/works/playbots2.jpg",
                 imageBig: "images/works/playbots2_big.jpg"
             },
             {
-                image: "images/works/playbots3.jpg",
-                imageBig: "images/works/playbots3_big.jpg"
+                text: "In Aalto University I experimented with puppeteering a (Muslim) Nao robot using the Kinect Depth Sensor.",
+                image: "images/works/nao_kafia.jpg",
+                imageBig: "images/works/nao_kafia_big.jpg"
+            },
+            {
+                youtube: "https://www.youtube.com/embed/3aWOL2dsPxY"
             }
         ],
         links: [
+
         ]
     }
 }

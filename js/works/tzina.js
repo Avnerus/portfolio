@@ -67,21 +67,24 @@ Tzina.prototype.update = function() {
 
 Tzina.prototype.getData = function() {
     return {
-        name: "Tzina",
+        name: "Tzina : Symphony of Longing",
         description:[ 
             {
-                text: 'A gift-giving game traditionaly held in Israel during Purim holiday. In my gift I came up with a new way to share music - using a "Mixtape Game". Press Space-Bar along with the beat, to match the Hamman ears in their place - and crazy things start happening.',
-                image: "images/works/gamadanak1.png",
-
+                text: 'Tzina : Symphony of Longing is a WebVR documentary for the HTC Vive. I was the lead developer of this project, directed by Shirin Anlen. It premiered at IDFA Doclab of 2016 and was later on featured in plenty of other international festivals.',
+                image: "images/works/Tzina_poster_docaviv_web4_670.jpg"
             },
             {
-                image: "images/works/gamadanak3.png"
+                text: 'In January 2017, Tzina Dizengoff square, one of Tel Aviv’s emblematic sites, was demolished. The square became a home for the lonely and marginalized characters of the area. This project tells the story of the people who gravitated toward the square and spent their days in it. In this interactive webVR documentary, they talk about their lives and the square. Together, they form a poetic musing on lost loves and things that have passed. TZINA invites you to physically explore the virtual square, combining elements of fantasy, while experiencing the square in different times of the day.',
+                image: "images/works/Tzina-symphony-of-longing.jpg"
+            },
+            {
+                youtube: "https://www.youtube.com/embed/tkLO9YHtnUo"
             }
         ],
         links: [
             {
                 url: "http://tzina.space",
-                description: "View the experience"
+                description: "Launch the experience"
             }
         ]
     }

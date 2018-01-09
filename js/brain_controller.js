@@ -9,7 +9,7 @@ module.exports.BrainController = BrainController;
 var TWEEN = require('tween.js');
 var eventEmitter = require('./event_manager').getEmitter();
 var Vue = require('vue');
-var gui = new dat.GUI();
+//var gui = new dat.GUI();
 
 var self;
 
@@ -137,24 +137,6 @@ BrainController.prototype.workClicked = function(work) {
     var self = this;
     Vue.nextTick(function() {
         $('.magnify-image').magnificPopup({type:'image', closeOnContentClick: true});
-        
-        /*console.log("Load flexslider!!");
-        $('#work-media.flexslider').flexslider({
-            slideshow: false,
-            start: function(slider) {
-               $('.slides li img').click(function(event){
-                   event.preventDefault();
-                   slider.flexAnimate(slider.getTarget("next"));
-               });
-            },
-            after: function(slider) {
-                console.log("Current Slide ", slider.currentSlide);
-                var index = slider.currentSlide;
-                if (self.vm.$data.description[index]) {
-                    self.vm.$data.currentIndex = index;
-                }
-            }
-        });*/
     })
     this.currentWorkIndex = _.indexOf(this.works, work);
     window.location.hash = "#" + work.hashURL;
@@ -314,7 +296,9 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/drone'))(),
         new (require('./works/playbot'))(),
         new (require('./works/tpv'))(),
-        new (require('./works/tzina'))()
+        new (require('./works/tzina'))(),
+        new (require('./works/freedom_cat'))(),
+        new (require('./works/jewish_roots'))()
     ]
 
 

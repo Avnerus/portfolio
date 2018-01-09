@@ -58,14 +58,14 @@ Stir.prototype.getData = function() {
         name: "Stir",
         description:  [ 
             {
-                text: "In Tel Aviv university's \"Consciousness Studies\" course, we tried to solve 'the hard problem of consciousness'. In the picture: \"Mary's Room\" - a famous thought experiment by Frank Jacskson (1982).",
-                image: "images/works/brain1.jpg",
+                text: "Stir is a personalized wake-up service that brings people gently into the new day. It was co-created by Rebecca Lieberman and Julia Irwin. It is part of the 'Veryveryshort' project of the National Film Bord Canada and premiered on IDFA Doclab 2017.",
+                image: "images/works/stir.png",
             }
         ],
         links: [
             {
                 url: "http://stir.veryveryshort.com",
-                description: "Stir Mobile App"
+                description: "Launch the mobile app"
             },
 
         ]

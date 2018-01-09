@@ -57,7 +57,7 @@ Drone.prototype.getData = function() {
         name: "Drone Pigeon (WIP)",
         description:  [ 
             {
-                text: "Will UAV's (Drones) ever become such an integral part of our life, that we'll be feeding them in the city square like pigeons? Recently I've been thinking about this concept for an installation.",
+                text: "Will UAV's (Drones) ever become such an integral part of our life, that we'll be feeding them in the city square like pigeons?",
                 image: "images/works/pigeon.png"
             }
         ],
