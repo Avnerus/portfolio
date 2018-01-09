@@ -286,6 +286,7 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/peace'))(),
         new (require('./works/brain'))(),
         new (require('./works/security'))(),
+        new (require('./works/wallsim'))(),
         new (require('./works/cantenna'))(),
         new (require('./works/japan'))(),
         new (require('./works/bass'))(),
@@ -399,6 +400,7 @@ BrainController.prototype.update = function () {
         this.overlay.tilePosition.x = this.counter * -3;
     
         this.works[7].update(); // Security
+        this.works[8].update(); // WallSim
     }
 }
 

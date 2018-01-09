@@ -85,11 +85,11 @@ SoftRobotics.prototype.getData = function() {
             },
             {
                 text: "During a semester in Japan in 2017 I was able to meet the pioneers of Soft Robotics and research the uses for Telepresence.",
-                vimeo: "https://www.youtube.com/embed/Am_UXkqsaZ8"
+                youtube: "https://www.youtube.com/embed/Am_UXkqsaZ8"
             },
             {
                 text: "I am now working on my Master's Thesis about Soft Robotic Telepresence as political art.",
-                vimeo: "https://www.youtube.com/embed/fKkyfRtSTFA"
+                youtube: "https://www.youtube.com/embed/fKkyfRtSTFA"
             }
         ],
         links: [

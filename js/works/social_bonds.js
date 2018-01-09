@@ -68,14 +68,22 @@ SocialBonds.prototype.getData = function() {
         name: "Social Bonds",
         description:  [ 
             {
-                text: "In Tel Aviv university's \"Consciousness Studies\" course, we tried to solve 'the hard problem of consciousness'. In the picture: \"Mary's Room\" - a famous thought experiment by Frank Jacskson (1982).",
-                image: "images/works/brain1.jpg",
+                text: "How would Facebook make use of emerging technologies that combine businesses with modern science?  It is widely known that Facebook is collecting and analyzing our online behavior in order to optimize the website’s experience, which in turn increases exposure to ads and generates profit. Corporate use of NeuroImaging devices enabled “Neuromarketing”, the measuring of our brain’s activity in response to ads and web content.",
+                image: "images/works/social_bonds.png",
+            },
+            {
+                text: "We therefore speculate on what’s happening behind closed doors at Facebook’s lab, with access to the latest brain imaging devices. Cooperating with ABL – Aalto’s Neuro-Behavioral Lab, we conducted an experiment, measuring a subject’s brain activity and eye tracking during a 45 minute long Facebook session. We then ran this data through a common algorithm that analyzes emotional regulation activity, namely LPP analysis.The result is a glimpse of a probable scenario, in which Facebook directly derives financial bonds from our emotional investment in social media.",
+                vimeo: "https://player.vimeo.com/video/250355484?api=1&player_id=player_1"
             }
         ],
         links: [
             {
                 url: "http://socialbonds.org",
                 description: "Social Bonds website"
+            },
+            {
+                url: "http://we-make-money-not-art.com/open-fields-big-and-small-data-reinvented-by-flies-weeds-and-kisses/",
+                description: "RIXC Open Fields exhibition"
             },
 
         ]
