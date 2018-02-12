@@ -20,7 +20,7 @@ WallSim.prototype.init = function (opts, stage, clickHandler) {
     this.opts = opts;
     this.eventEmitter = require('../event_manager').getEmitter();
 
-    this.hashURL = "jewish-roots";
+    this.hashURL = "wallsim";
 
     this.frameCount = 0;
     this.reds = [];
