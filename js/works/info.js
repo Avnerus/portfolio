@@ -36,7 +36,7 @@ Info.prototype.init = function (opts, stage, clickHandler) {
 
     this.questionBlock.click = function(mouseData){
           self.eventEmitter.emit('info_clicked', self);
-          this.updateMoney();
+          self.updateMoney();
     }
 
     TweenMax.to(this.questionBlock.position , 1, {ease: Power2.easeIn, repeat: -1, yoyo: true, y: 504});
@@ -54,7 +54,7 @@ Info.prototype.update = function() {
 
 Info.prototype.updateMoney = function() {
     console.log("Update account balance!");
-    fetch('https://dl.dropboxusercontent.com/s/qawpeqy0v44agrz/balance.json?dl=1',{compress: false})
+    fetch('https://cloud.avner.us/index.php/s/kidGLOyro0YTh7Q/download',{compress: false})
       .then(function(res) {
           return res.json(); 
       })
