@@ -1426,11 +1426,11 @@ Drone.prototype.update = function() {
 
 Drone.prototype.getData = function() {
     return {
-        name: "Drone Pigeon (WIP)",
+        name: "Democratic Drone (Speculative Design)",
         description:  [ 
             {
-                text: "Will UAV's (Drones) ever become such an integral part of our life, that we'll be feeding them in the city square like pigeons?",
-                image: "images/works/pigeon.png"
+                text: "How would war look like in a technolog based direct democracy system? Can the citizens be collectively and individually accountable for drone strikes? This democratic drone is fully automatic. It is connected to an online voting system where the citizens get to read about the target and the risks of collateral damage, so they can decide whether to launch the attack or not. As an added bonus, the target gets to see the results in real time.",
+                image: "images/works/democratic_drone.png"
             }
         ],
         links: []
