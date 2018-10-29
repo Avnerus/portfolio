@@ -299,7 +299,8 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/tpv'))(),
         new (require('./works/tzina'))(),
         new (require('./works/freedom_cat'))(),
-        new (require('./works/jewish_roots'))()
+        new (require('./works/jewish_roots'))(),
+        new (require('./works/moduland'))()
     ]
 
 

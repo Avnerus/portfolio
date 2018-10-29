@@ -108,7 +108,8 @@ else {
         "assets/works/soft_robotics_3.png",
         "assets/works/bed.png",
         "assets/works/luckycat.json",
-        "assets/works/rutabaga.png"
+        "assets/works/rutabaga.png",
+        "assets/works/moduland.png"
     ]);
 
     loader.onComplete = function() {
