@@ -88,8 +88,11 @@ SoftRobotics.prototype.getData = function() {
                 youtube: "https://www.youtube.com/embed/Am_UXkqsaZ8"
             },
             {
-                text: "I am now working on my Master's Thesis about Soft Robotic Telepresence as political art.",
-                youtube: "https://www.youtube.com/embed/fKkyfRtSTFA"
+                text: "My Master's thesis in Aalto university focused on the fabircation of a soft robotic arm for my telepresence robot, Hitodama",
+                youtube: "https://www.youtube.com/embed/EGhW1B1sjnU"
+            },
+            {
+                youtube: "https://www.youtube.com/embed/ouPlm0X_K5Y"
             }
         ],
         links: [

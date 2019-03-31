@@ -82,13 +82,14 @@ Playbot.prototype.getData = function() {
             },
             {
                 text: "In Kyushu university I started working on my Soft Telepresence, Hitodama; soon to be presented in my final thesis.",
+                youtube: "https://www.youtube.com/embed/ouPlm0X_K5Y"
+            },
+            {
                 youtube: "https://www.youtube.com/embed/fKkyfRtSTFA"
             },
             {
-                text: "This is a concept drawing for an Israel-Gaza remote beach playbot (Drawing by Noa Simhoni).",
-                image: "images/works/playbots.png",
-                imageBig: "images/works/playbots_big.png"
-            }
+                youtube: "https://www.youtube.com/embed/nQ5kCrI5pfU"
+            },
         ],
         links: [
             {
