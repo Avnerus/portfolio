@@ -81,7 +81,7 @@ Playbot.prototype.getData = function() {
                 youtube: "https://www.youtube.com/embed/3aWOL2dsPxY"
             },
             {
-                text: "In Kyushu university I started working on my Soft Telepresence, Hitodama; soon to be presented in my final thesis.",
+                text: "The work on the Soft Telepresence \"HITODAMA\" wwas started in Kyushu university and finished as my MA thesis in Aalto university.",
                 youtube: "https://www.youtube.com/embed/ouPlm0X_K5Y"
             },
             {
@@ -93,10 +93,13 @@ Playbot.prototype.getData = function() {
         ],
         links: [
             {
+                url: "https://aaltodoc.aalto.fi/handle/123456789/41408",
+                description: "MA Thesis at Aalto University: Soft Robotic Incarnation"
+            },
+            {
                 url: "https://elinorsalomon.net/Screen-Reality-For-Dreams",
                 description: "Screen Reality for Dreams"
-            },
-
+            }
         ]
     }
 }
