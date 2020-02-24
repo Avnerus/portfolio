@@ -21714,6 +21714,10 @@ Peace.prototype.getData = function() {
                 imageBig: "images/works/peace1_big.jpg"
             },
             {
+                text: "In Aalto University I am trying to use my knowledge in science and technology to do something meaningful for my home country.", 
+                vimeo: "https://player.vimeo.com/video/370821209?api=1&player_id=player_1"
+            },
+            {
                 image: "images/works/peace2.jpg",
                 imageBig: "images/works/peace2_big.jpg"
             },
@@ -21791,6 +21795,10 @@ Playbot.prototype.getData = function() {
     return {
         name: "Telepresence Robots",
         description:  [ 
+            {
+                text: "", 
+                vimeo: "https://player.vimeo.com/video/370821209?api=1&player_id=player_1"
+            },
             {
                 text: 'Telepresence robots, or "Re-Embodiments" can be a form of civic action against prejudice and fearmongering. I am using them to create physical cross-border encounters. They serve as the foundation of my thesis work.',
                 image: "images/works/playbots2.jpg",

@@ -58,6 +58,10 @@ Playbot.prototype.getData = function() {
         name: "Telepresence Robots",
         description:  [ 
             {
+                text: "", 
+                vimeo: "https://player.vimeo.com/video/370821209?api=1&player_id=player_1"
+            },
+            {
                 text: 'Telepresence robots, or "Re-Embodiments" can be a form of civic action against prejudice and fearmongering. I am using them to create physical cross-border encounters. They serve as the foundation of my thesis work.',
                 image: "images/works/playbots2.jpg",
                 imageBig: "images/works/playbots2_big.jpg"
