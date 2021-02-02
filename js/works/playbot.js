@@ -62,12 +62,22 @@ Playbot.prototype.getData = function() {
                 vimeo: "https://player.vimeo.com/video/370821209?api=1&player_id=player_1"
             },
             {
-                text: 'Telepresence robots, or "Re-Embodiments" can be a form of civic action against prejudice and fearmongering. I am using them to create physical cross-border encounters. They serve as the foundation of my thesis work.',
+                text: 'Telepresence robots can be a form of civic action against prejudice and fearmongering. I am using them to create physical cross-border, intergroup contact. They serve as the foundation of my academic work.',
+                image: "images/works/hitodama_interact2.gif",
+                imageBig: "images/works/hitodama_interact2.gif"
+            },
+            {
+                text: '',
+                image: "images/works/hitodama_control.gif",
+                imageBig: "images/works/hitodama_control.gif"
+            },
+            {
+                text: "I started protoyping at the Israeli Burning Man Festival, where I remotely danced with the festival participants from my desert control tent.",
                 image: "images/works/playbots2.jpg",
                 imageBig: "images/works/playbots2_big.jpg"
             },
             {
-                text: "I started protoyping at the Israeli Burning Man Festival, where I remotely danced with the festival participants from my desert control tent.",
+                text: "", 
                 image: "images/works/playbots4.jpg",
                 imageBig: "images/works/playbots4_big.jpg"
             },

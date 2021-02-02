@@ -109,7 +109,8 @@ else {
         "assets/works/bed.png",
         "assets/works/luckycat.json",
         "assets/works/rutabaga.png",
-        "assets/works/moduland.png"
+        "assets/works/moduland.png",
+        "assets/works/shadows.json"
     ]);
 
     loader.onComplete = function() {

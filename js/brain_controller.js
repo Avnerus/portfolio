@@ -300,7 +300,8 @@ BrainController.prototype.initWorks = function() {
         new (require('./works/tzina'))(),
         new (require('./works/freedom_cat'))(),
         new (require('./works/jewish_roots'))(),
-        new (require('./works/moduland'))()
+        new (require('./works/moduland'))(),
+        new (require('./works/marrow'))()
     ]
 
 
@@ -402,6 +403,7 @@ BrainController.prototype.update = function () {
     
         this.works[7].update(); // Security
         this.works[8].update(); // WallSim
+        this.works[23].update(); // Marrow
     }
 }
 

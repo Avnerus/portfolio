@@ -13636,7 +13636,8 @@ PIXI.Texture.prototype.setFrame = function(frame)
 
     if (!this.trim && (frame.x + frame.width > this.baseTexture.width || frame.y + frame.height > this.baseTexture.height))
     {
-        throw new Error('Texture Error: frame does not fit inside the base Texture dimensions ' + this);
+        console.log("Frame:",frame, "Base texture", this.baseTexture)
+        throw new Error('Texture Error: frame does not fit inside the base Texture dimensions ' , this);
     }
 
     this.valid = frame && frame.width && frame.height && this.baseTexture.source && this.baseTexture.hasLoaded;

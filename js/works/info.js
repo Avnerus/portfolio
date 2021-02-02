@@ -23,8 +23,8 @@ Info.prototype.init = function (opts, stage, clickHandler) {
     this.eventEmitter = require('../event_manager').getEmitter();
 
     this.questionBlock = PIXI.Sprite.fromFrame("assets/works/question_block.png");
-    this.questionBlock.position.x = 120
-    this.questionBlock.position.y = 544 
+    this.questionBlock.position.x = 270;
+    this.questionBlock.position.y = 618;
     this.questionBlock.anchor.x = 0.5;
     this.questionBlock.anchor.y = 0.5;
     this.questionBlock.scale.x = 0.5;
