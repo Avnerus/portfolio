@@ -11,6 +11,7 @@
     "budo": "^11.6.3",
     "node-fetch": "^1.3.3",
     "tween.js": "*",
+    "uglify-js": "^3.12.6",
     "vue": "~0.10.6"
   },
   "scripts": {
